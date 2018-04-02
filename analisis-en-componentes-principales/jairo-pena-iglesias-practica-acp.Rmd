@@ -1,0 +1,318 @@
+ Componentes principales con R
+==================================
+
+Nombre: Jairo Peña Iglesias
+
+En esta práctica, utilizaremos un paquete adicional de R, llamado rgl  que sirve para representaciones 3d. 
+
+## Instalar y cargar el paquete rgl
+
+```{r, echo=FALSE}
+library("rgl")
+library("dplyr")
+library("ggplot2")
+```
+
+##  Primer ejemplo ilustrativo: nube de datos 3d.
+Para entender la estructura de nubes de puntos a través de sus componentes principales, empezamos por estudiar un conjunto simulado de tres variables, que se encuentra en el fichero de datos: datos3d.txt, especificando que vamos a llamar sus variables X, Y,  y Z.
+
+```{r}
+## completar aquí
+datos3d <- read.table(file = "data/datos3d.txt", 
+                      header = FALSE, 
+                      sep = ";", 
+                      dec = ",", 
+                      stringsAsFactors = FALSE, 
+                      colClasses = "numeric")
+
+names(datos3d) <- c("X","Y","Z")
+
+```
+
+
+Representamos la nube de puntos tri-dimensionales con la instrucción plot3d de la libreria rgl. En la línea de comandos, o en nuestro editor R, escribimos
+
+```{r}
+## Nada que completar
+plot3d(datos3d$X, datos3d$Y, datos3d$Z)
+```
+
+Al mantener el botón izquierdo del ratón pulsado y moverlo, podemos ver la nube desde distintas perspectivas.
+Como siempre, la instrucción plot3d admite un gran número de opciones, de momento podemos aumentar el tamaño de los puntos con el argumento size, mientras que cambiamos el color con el argumento col.
+
+```{r, eval=FALSE}
+## Nada que completar
+plot3d(datos3d$X, datos3d$Y, datos3d$Z, size = 2, col = "red")
+```
+
+Observamos que la nube de puntos tridimensional tiene forma de tabla de surf: admite claramente una dirección con la mayor variabilidad (el eje principal de la tabla de surf), una segunda dirección con menos variabilidad (el ancho de la tabla), mientras que presenta muy poco variabilidad en la tercera dirección (lo grueso de la tabla). 
+
+Por consiguiente, al realizar un análisis en componentes principales, debemos encontrar estos ejes, dados por los vectores propios de la matriz de covarianza o de correlación (ver apéndice sobre cuándo usar la matriz de covarianzas y cuándo la matriz de correlación) con sus correspondientes valores propios que representan las varianzas de los componentes principales…
+
+Para llevar a cabo un análisis en componentes principales, usamos la instrucción prcomp, cuyo argumento principal es un dataframe.
+En su versión más simple usamos:
+
+```{r}
+datos3d.acp <- prcomp(datos3d)
+```
+
+(notad aquí que hemos escogido el nombre datos3d.acp, pero podría haber utilizado cualquier otro nombre para el objeto resultado del análisis en componentes principales.)
+
+ Para visualizar los resultados podemos utilizar la instrucción print:
+
+```{r}
+print(datos3d.acp)
+```
+
+obteniendo:
+
+Standard deviations:
+[1] 5.0267428 1.0438927 0.1005436
+
+Rotation:
+        PC1        PC2          PC3
+X 0.5045960  0.4933159  0.708535323
+Y 0.5033131  0.4987079 -0.705667378
+Z 0.7014691 -0.7126920 -0.003353648
+
+Deducimos que la expresión de los componentes principales son:
+
+PC1 = 0.50459X+0.5033131Y+0.701469Z
+PC2 = 0.4933159X+0.49870Y-0.71269Z
+PC3 = 0.7085353X-0.705667378Y-0.0033536Z
+
+Vamos a darles nombres a estos autovectores que corresponden a los componentes principales: (la matriz de cambio de base, también llamada de rotación, cuyas columnas corresponden a los autovectores se puede obtener como datos3d.acp$rotation)
+
+```{r}
+v1 <- datos3d.acp$rotation[ , 1]
+v2 <- datos3d.acp$rotation[ , 2]
+v3 <- datos3d.acp$rotation[ , 3]
+```
+
+Podemos comprobar que son vectores unitarios y que son mutuamente ortogonales, es decir que su producto escalar es 0:
+
+```{r}
+## completar aquí
+sum(v1 * v2)
+sum(v2 * v3)
+sum(v1 * v3)
+
+```
+
+Finalmente, también podemos extraer del objeto datos3d.acp las desviaciones típicas de los componentes principales (es decir de las coordenadas de los puntos en el nuevo sistema de coordenadas).
+
+```{r}
+datos3d.acp$sdev
+```
+
+¿Sabríais la relación entre estas desviaciones y los autovalores de la matriz de covarianza? 
+Autovalores = varianza.
+raiz cuadrada de autovalores = desviaciones.
+
+Si utilizamos la instrucción 
+
+```{r}
+summary(datos3d.acp)
+```
+
+Obtenemos además de las desviaciones típicas, la proporción de varianza explicada etc...
+
+Finalmente, mencionar que podemos pedir un diagrama de codo asociado al análisis en componentes principales, con la instrucción
+
+plot(datos3d.acp) que admite el argumento type=”line”
+
+```{r}
+plot(datos3d.acp)
+```
+
+La matriz x en datos3d.acp contiene las puntuaciones en las compontes principales (es decir las coordenadas en el nuevo sistema de coordenadas)
+
+¿Sabríais qué cálculo realiza R para encontrar los valores de la primera columna?
+
+Para encontrar los valores de la primera columna realiza el cuadrado de PC1.
+
+Representad en un plano las dos primeras componentes para todos los puntos.
+
+```{r}
+## Completad aquí, PC2 vs PC1, 
+x <- datos3d.acp$x
+PC1 <- x[ , 1]
+PC2 <- x[ , 2]
+PC3 <- x[ , 3]
+plot(PC1, PC2, col = "blue")
+
+```
+
+
+## Ejercicios:
+ 
+## Ejemplo: Encuesta de presupuestos familiares.
+
+En el fichero epf13.txt, La encuesta de presupuestos familiares en España para el año 2013, recoge los gastos medios por persona para las 17 comunidades autónomas (hemos quitamos Ceuta y Melilla) 
+
+```{r}
+## Completad aquí: para importar datos en el dataframe epf
+epf <- read.table(file = "data/epf13-persona.txt", 
+                  header = TRUE, 
+                  sep = ";", 
+                  dec = ".", 
+                  stringsAsFactors = FALSE, 
+                  fileEncoding = "utf8")
+
+```
+
+
+1. Empezamos por encontrar el ranking de las comunidades autónomas en cada grupo de gasto. Para ello, usamos la función mutate_each de dplyr, que permite aplicar una misma transformación a un grupo de columnas.
+
+```{r}
+## Nada que completar
+ranking <- epf %>% 
+  mutate_each(funs(18 - rank(.)), contains("Grupo"), Total) #si ponemos 18 las ordena de 1 a   #17, y no de 3 a 19 como cuando ponemos 20
+## aquí hemos aplicado con mutate_each la función 20 - rank,  a todas las 
+## columnas del conjunto cuyo nombre contiene "Grupo" y a la columna Total
+```
+
+En qué comunidades es mayor el gasto por persona?
+
+En el País Vasco, Madrid y Navarra.
+
+Vuestros comentarios sobre el ranking de Murcia:
+
+Se situa en la parte baja en los grupos: "Vivienda, agua, electricidad, gas y otros combustibles" y "Comunicaciones".
+Se situa en la parte media en los grupos:"Artículos de vestir y calzado" y "Transporte".
+
+
+2. Realizar el análisis en componentes principales para los logaritmos de las variables (para simetrizarlas), interpretar los coeficientes de los dos primeros componentes principales
+Para ello, usando los comandos de dplyr, tendréis que
+ - seleccionar sólamente las columnas que contengan "Grupo".
+ - aplicar el logaritmo a todas estas columnas usando mutate_each.
+Podréis hacer todo esto usando la sintaxis en cascada (%>%) y llamaréis el resultado final lepf.
+
+```{r}
+## Aplicar comandos de dplyr, para conseguir lepf
+lepf <- epf %>%
+  mutate_each(funs(log(.)), contains("Grupo"))
+
+```
+
+Ahora podemos calcular las componentes principales del objeto lepf. Lo haremos con la opción scale = TRUE.
+
+```{r}
+## Calculamos las componentes principales de lepf (con scale = TRUE), 
+## lo guardamos en el objeto  lepf.acp
+lepf.acp <- lepf %>% 
+  select(contains("Grupo")) %>% 
+    prcomp(scale = TRUE)
+
+```
+
+Obtenemos un resumen de lepf.acp
+
+```{r}
+## Obtened un resumen de lepf.acp
+summary(lepf.acp)
+```
+
+Observamos ahora la matriz de rotación (sus tres primeras columnas)
+
+```{r}
+## 
+v1 <- lepf.acp$rotation[ , 1]
+v2 <- lepf.acp$rotation[ , 2]
+v3 <- lepf.acp$rotation[ , 3]
+```
+
+
+3. Clasificar las provincias según la primera componente por orden decreciente (para ello, se puede usar la instrucción order)
+
+```{r}
+## Completad aquí para obtener las clasificaciones
+x <- lepf.acp$x
+PC1 <- x[ , 1]
+PC2 <- x[ , 2]
+clasificaciones <- order(PC1, decreasing = TRUE)
+lepf[clasificaciones, 2]
+
+```
+
+4. Representad las distintas comunidades en dos dimensiones, aprovechando las dos primeras componentes principales PC1 y PC2. Añadid a los puntos una etiqueta con el nombre de la comunidad.
+Nota: se podrá añadir al conjunto de datos inicial epf, las columnas correspondientes a las componentes principales.
+
+```{r}
+## Completad aquí, PC2 vs PC1,  con etiquetas
+epf <- epf %>%
+ mutate(PC1 = PC1, PC2 = PC2)
+
+ggplot(data = epf, aes(x = PC1, y = PC2))+
+  geom_point(color = "blue")+
+  geom_text(data = epf, aes(label = Comunidad), color = "blue", vjust = +1, size = 4)
+##vjust = +1 para que el punto salga encima y centrado con respecto a al etiqueta (nombre de la comunidad autonoma)
+
+
+```
+
+## Ejemplo: Medidas.
+
+En el fichero medidas.txt se encuentran las medidas en inches del pecho, cintura y caderas correspondientes a  20 personas. Vamos a intentar interpretar la variabilidad presente en los datos.
+
+1. Un primer paso consiste en examinar las inter-relaciones entre las variables utilizando la matriz de correlación. Calcular a continuación la matriz de covarianzas. Observamos que las varianzas son del mismo orden de magnitud, lo que, junto con el hecho de que las unidades de medidas de las tres variables son las mismas, nos lleva a realizar el análisis en componentes principales con la matriz de covarianzas.
+
+```{r}
+medidas <- read.table(file = "data/medidas.txt", 
+                      header = TRUE, 
+                      sep = ";", 
+                      dec = ".", 
+                      stringsAsFactors = FALSE, 
+                      fileEncoding = "utf8")
+
+cov(medidas)
+
+
+```
+
+2. Realizar un análisis en componentes principales. ¿Cómo podemos interpretar los componentes? ¿Cuántos componentes retendremos?
+
+```{r}
+medidas.acp <- medidas %>%
+            select(-ind) %>%
+            prcomp()
+
+summary(medidas.acp)
+medidas.acp
+
+```
+
+PC1: Promedio pecho, cintura y caderas. 
+PC2: Diferencia cadera y cintura.
+PC3: Diferencia cadera y cintura promediado con el pecho.
+  
+Con PC1 y PC2 tendremos ya toda la variabilidad estudiada, mientras que PC3 no nos servirá.
+
+## Ejemplo: Food Nutritional database (Opcional)
+
+La organización europea European Food Safety Authority impulsa una base de datos sobre patrones alimentarios en paises europeos  (ver http://www.efsa.europa.eu/en/datexfoodcdb/datexfooddb.htm).
+
+Desgraciadamente no está totalmente operativa, pero se puede descargar datos de un primer estudio de 2008, donde se encuentra el consumo promedio diario por persona de distintas categorías de alimentos en varios paises europeos, entre los que no está España :(
+
+Los datos se encuentran en el fichero fooddatabase.csv
+
+LLevad a cabo el análisis de componentes principales, para intentar entender las diferencias de patrones alimentarios entre paises.
+
+
+Primero tendréis que decidir si usais la matriz de covarianza o la matriz de correlación para el cálculo de los componentes principales.
+
+
+## Apéndice: Matriz de covarianzas o Matriz de correlaciones? scale=F o scale=T
+
+Uno de los argumentos de la instrucción prcomp es scale que puede tomar el valor T (true) o F (false).  
+En el caso en que las variables tengan ordenes de magnitud muy distintos, y en particular ordenes de dispersión muy distintos, las variables no aportan la misma contribución a la variabilidad total, y  esto nos puede llevar a descartar una variable importante en la estructura de variabilidad sólo porque su orden de magnitud es menor que el de otra. Las variables con una dispersión con orden de magnitud grande dominarían por completo el análisis. En particular, si cambiamos las unidades de variables por separado, los resultados podrían cambiar completamente: se trata de una característica muy poco afortunada del análisis en componentes principales. 
+En el caso en que las variables son de orden de magnitud distintos, podemos transformarlas para obtener nuevas variables que sí se puedan comparar.  Esto se consigue tipificando las variables, es decir restándoles su media y dividiéndoles por su desviación típica:
+
+Definición: Sea X una variable asociada a un conjunto de datos, se obtiene la versión tipificada de X a través de la transformación:
+Y=(X-media(X)/(Desv. Típica(X))
+La variable Y en el conjunto es centrada (de media cero) y tiene una desviación típica igual a 1.
+
+Si tipificamos todas las variables X1, X2, X3, … del conjunto y formamos las variables Y1, Y2, Y3,… es posible comprobar que la matriz de covarianza de Y1, Y2, Y3, … es igual a la matriz de correlación de X1, X2, X3, … Por lo tanto, realizar un análisis en componentes principales sobre la matriz de correlación de X1, X2, X3, … es equivalente a realizarlo con la  matriz de covarianzas de las variables tipificadas Y1, Y2, Y3…  
+
+Los argumentos center (cuyo defecto es T) y scale (cuyo defecto es F) permiten la tipificación de las variables del conjunto. 
+Seleccionamos en general analizar las variables tipificadas, indicando el argumento scale=T, en el caso en que sus desviaciones típicas son de ordenes de magnitud distintos.
