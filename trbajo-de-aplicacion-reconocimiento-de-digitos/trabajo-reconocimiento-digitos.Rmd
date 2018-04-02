@@ -1,0 +1,299 @@
+Trabajo Reconocimiento de dígitos.
+========================================================
+Nombre:
+
+Apellidos:
+
+```{r}
+## Cargamos los paquetes
+
+```
+
+Introducción
+--------------
+En este trabajo, implementaremos la clasificación usando regresión logística regularizada al problema de reconocimientos de dígitos escritos a mano a partir de imagénes de 20x20 píxeles en escala de gris...  
+
+Cargamos los datos
+------------
+
+El fichero que contiene los datos es digitos.csv que se puede descargar del Aula Virtual y guardar en la carpeta data del directorio asociado a nuestro nuevo proyecto.
+
+Cargar los datos en un dataframe llamado **digitos**, tendréis que usar la opción colClasses="numeric", para asegurar que R cargue los datos como números..
+
+```{r}
+## Completar aqui
+```
+
+Especificamos  los nombres de las columnas del data.frame **digitos**: para ello, usaremos la instrucción names, valiéndonos de **paste**:
+
+```{r}
+## nada que completar
+names(digitos) <- c("y", paste("x", 1:400, sep=""))
+```
+
+- La primera columna y contiene el dígito que está dibujado: cuando aparece un 10, 
+corresponde al dígito "0".
+- Las demás columnas x1 a x400 contienen la intensidad de gris de los 400 pixeles de la imagen (20x20).
+
+Encontrad, con la instrucción *table** la frecuencia de cada dígito en el conjunto..
+```{r}
+## completar aquí
+
+```
+
+Empecemos por visualizar las imagenes que están descritas por este conjunto. Para ello, usaremos la instrucción **image**, después de transformar las columnas que contienen la intensidad de gris de cada pixel (columna x1 a x400) en una matriz 20x20.
+```{r}
+## nada que completar
+rotate <- function(x) t(apply(x, 2, rev))
+m=matrix(as.numeric(digitos[1, 2:401]), nrow=20, ncol=20, byrow=FALSE)
+image(z = rotate(m), axes = FALSE, col = grey(seq(0, 1, length = 256)), asp = 1)
+```
+
+En el bloque anterior, hemos representado la primera imagen, es claramente un 0, por lo que el valor de la columna y es 10...
+
+En el siguiente código, representamos 16 de estas imágenes extraidas al azar de nuestro conjunto.
+
+```{r}
+## nada que completar
+iselect <- sample(1:dim(digitos)[1], size = 16, replace = FALSE)
+ncolumnas <- sqrt(length(iselect))
+nfilas <- ncolumnas
+m={}
+for (i in 1:nfilas){
+  mfila={}
+  for (j in 1:ncolumnas){
+    m.tmp <- 
+      matrix(as.vector(t(digitos[iselect[1 + (i - 1) * ncolumnas + j - 1],
+                                 2:401])), ncol = 20 , nrow = 20)
+    mfila <- cbind(mfila, m.tmp)
+    }
+ m <- rbind(m, mfila)
+}
+image(z = rotate(m), axes = FALSE, 
+      col = grey(seq(0, 1, length = 256)), asp = 1)
+```
+
+
+## Cargamos el fichero de funciones 
+Para evitar tener que volver a introducir funciones que ya definimos en el trabajo anterior, cargamos con la instrucción **source**, el fichero funciones-auxiliares-logistica-regularizada.R que habréis descargado del Aula Virtual y tiene que estar situado en vuestro directorio de trabajo.
+
+```{r}
+## nada que completar
+source('funciones-auxiliares-logistica-regularizada.R')
+```
+Como resultado de este source, tenemos definidas las funciones 
+- g(z): la función sigmoidal
+- Jreg(theta,lambda,x.mat,y): la función de coste regularizada para la regresión logística
+- gradJreg(theta,lambda,x.mat,y): el gradiente de la función de coste regularizada.
+
+## Los pasos que vamos a seguir
+
+Vamos a separar  los datos que disponemos en varios subconjuntos;  un conjunto de entrenamiento que nos permita entrenar nuestra regresión logística, un conjunto de validación que nos permita elegir el valor de $\lambda$ (en la función de coste regularizada) que mejores resultados dé, y finalmente un conjunto de test que nos permita comprobar la bondad del algoritmo
+
+En resumen, éstos son los pasos que seguiremos:
+
+1) Ajustaremos una regresión logística con función de coste regularizada sobre el conjunto de entrenamiento. Lo haremos con la modalidad de "One versus All", y definiremos una función que, para un valor de $\lambda$ dado, devolverá  como resultado un data.frame que llamaremos **theta.dat** que contenga 10 filas, (una para cada categoría en la que podemos clasificar) y 401 columnas: los valores estimados de $\theta_0,\theta_1,\ldots ,\theta_{400}$ como resultado del ajuste a nuestro conjunto de entrenamiento.
+
+
+
+2) Usaremos el data.frame $\theta.dat$ del apartado anterior, para clasificar cada una de las observaciones del conjunto de validación. Obtendremos, para cada observación, un valor predicho para cada valor de $\lambda$. Usaremos esos valores predichos para  calcular la tasa de error en la clasificación (dígitos clasificados erróneamente). Puesto que tendremos tantas columnas de valores predichos como valores de $\lambda$, tendremos un valor de la función coste sin regularizar para cada valor de $\lambda$. Nos quedaremos con el valor de $\lambda$ que lleve al menor coste (sin regularizar) para la clasificación del conjunto de validación.
+
+3) Probaremos la clasificación sobre el conjunto test, con el valor de $\lambda$ que hemos seleccionado en el apartado anterior.
+
+## Preparación de los tres subconjuntos: entrenamiento (60%), validación (20%), y test (20%)
+### Selección de los  conjuntos de entrenamiento.
+
+```{r}
+set.seed(seed = 1) # fijamos la semilla del algoritmo aleatorio para poder comparar
+                 # nuestros resultados con los de compañeros
+## completar aquí: para obtener el vector training.posiciones
+
+
+## completar aquí para construir el subconjunto digitos.training que corresponda
+## a los digitos escogidos 
+```
+
+Si no os habéis equivocado, tenéis que haber obtenido para los 6 primeras posiciones de training.posiciones, los siguientes valores:
+
+1328 1861 2864 4539 1008 4488
+
+### Selección de los  conjuntos de validación y  test.
+
+Debemos ahora construir el conjunto test que consistirá en los digitos que no han sido seleccionado para el conjunto training. Para ello, obtendremos  primero con la instrucción **setdiff** los indices que no han sido seleccionados para el conjunto test.
+
+```{r}
+## nada que completar, pero sí podéis comprobar que entendéis el código:
+posiciones.restantes <- setdiff(1:5000, training.posiciones)
+```
+Escogemos al azar la mitad de las posiciones restantes para el vector de posiciones que llamaremos **validation.posiciones** y la otra mitad para el vector de posiciones que llamaremos **test.posiciones**.
+
+Completad el bloque de código siguiente, podréis ayudaros del bloque anterior...
+
+```{r}
+## completar aquí
+```
+Construimos ahora los dos conjuntos **digitos.validation** y **digitos.test**
+
+```{r}
+## completar aquí
+```
+
+
+## Regresión logística sobre el conjunto de entrenamiento
+
+Puesto que tenemos que clasificar cada individuo en una de 10 categorías, usaremos la modalidad de "One versus All": entrenaremos 10 regresiones logísticas:
+
+- La primera para decidir si el digíto es un "1" o no, 
+- La segunda para decidir si el dígito es un "2" o no,
+etc...
+
+Para cada una de estas regresiones entrenadas, obtendremos la probabilidad de que cada individuo corresponda a un "1" o no, a un "2" o no etc... Clasificaremos el individuo en el 
+
+### Entrenamiento "One versus All" para un valor concreto de $\lambda$
+
+Empezamos, al igual que en el trabajo anterior, por crear las matrices pertinentes a partir del conjunto de entrenamiento.
+
+```{r}
+## nada que completar
+x.training.mat <- cbind(1, as.matrix(digitos.training[, 2:401]))
+y.training <- as.numeric(as.matrix((digitos.training[c("y")])))
+```
+
+Ahora, en un bucle sobre las 10 categorías  en las que podemos clasificar, entrenamos nuestros 10 algoritmos de regresión logística.
+
+Creamos una función que llamaremos  **onevsall** que devuela la matriz **theta.mat** 
+
+```{r}
+onevsall <- function(lambda,x.mat,y){
+  ## Empezamos por definir la matriz theta.mat vacio
+  theta.mat <- matrix(rep(NA, times = 10 * dim(x.mat)[2]), 
+                      nrow = 10, dim(x.mat)[2])
+  ## hacemos el bucle sobre las categorías posibles
+ for (i in 1:10){
+   ## completar aquí para crear una variable ycod que sea igual a 1 
+   ## si  y corresponde a la categoría considerada i, y 0 sino
+   ## (podeís usar as.numeric de un valor lógico)
+
+   ## completar aquí para, usando la función optim, al igual que en el trabajo anterior,
+   ## el resultado de la función optim se guarda en optim.results
+
+
+   ## completar aquí: guardar los parámetros ajustados en la fila número i de theta.mat
+
+
+
+ } 
+ return(theta.mat)
+}
+```
+
+Vamos a probar nuestra nueva función al obtener la matriz theta.mat para lambda =0 por ejemplo
+
+```{r}
+## completar aquí 
+
+```
+Aprovechamos **theta.mat** que acabamos de calcular para clasificar la primera imagen:
+
+```{r}
+## completar aquí; preparad x.mat1 la matriz que contenga las características de la primera fila de digitos
+
+
+## completar aquí, calcular las probabilidades que estimamos para cada una de las categorías
+
+```
+
+Y si queremos clasificar las tres primeras imágenes?
+
+```{r}
+## completar aquí, para clasificar las tres primera imágenes
+
+
+## completar aquí, calcular las probabilidades que estimamos para cada una de las categorías
+
+```
+
+
+## Elección del mejor valor de $\lambda$ usando el conjunto de validación.
+
+Ahora vamos a aprovechar la función onevsall que hemos construido en la sección anterior, para realizar el entrenamiento para varios valores de $\lambda$,  usando el conjunto de entranamiento y a continuación clasificaremos las observaciones del conjunto de validación.
+
+```{r}
+## Nada que completar
+lambdav <- c(0, 0.01*2^(0:10))
+theta.array <- array(data=NA, dim = c(10, dim(x.training.mat)[2], length(lambdav)))
+for (i in 1:length(lambdav))
+     {
+  theta.mat <- onevsall(lambda=lambdav[i],x.training.mat,y.training)
+  theta.array[, , i] <- theta.mat
+  print(paste("Valor lambda nº",i, " de ", length(lambdav)," hecho.",sep="" ))
+}
+```
+
+Podemos hacer la predicción sobre el conjunto de validación
+
+```{r}
+## Nada que completar
+x.validation.mat <- cbind(1, as.matrix(digitos.validation[, 2:401]))
+y.validation <- digitos.validation$y
+yfit <- data.frame(imagen = validation.posiciones,
+                   yreal = y.validation,
+                   yfit1 = rep(NA, length(y.validation)))
+for (i in 1:length(lambdav))
+     {
+  yfit[,i+2] <- apply(X = g(x.validation.mat %*% t(theta.array[,, i])),
+                      MARGIN=1, FUN=which.max)
+  names(yfit)[i+2]=paste("yfit", i, sep="")
+}
+```
+
+Queremos ahora calcular la tasa de errores en la clasificación para cada valor de $\lambda$:
+
+```{r}
+## Nada que completar
+misclassification.dat <- data.frame(lambda = rep(NA, length(lambdav)),
+                                    tasas = rep(NA, length(lambdav)))
+for (i in 1:length(lambdav))
+  {
+misclassification.dat[i,] <- 
+  c(lambdav[i], sum(yfit[, i+2] != yfit$yreal) / dim(yfit)[1])  
+  }
+  misclassification.dat
+```
+
+```{r}
+## completad para representar la tasa de misclasificación en  función de lambda
+
+```
+
+## Comprobación de la bondad de la clasificación sobre el conjunto de test
+
+Una vez que habéis escogido el mejor lambda en el apartado anterior,  y aprovechando  código que aparece previamente, construir un data.frame yfit que contenga la posición de la imagen en el conjunto inicial **digitos**, el digito real, y nuestra clasificación usando la regresión logística que hemos entrenado...
+
+```{r}
+### completar aquí
+
+```
+
+Obtener la tasa global de error: qué porcentaje de veces se ha clasificado mal un dígito..
+```{r}
+## completar aquí
+
+```
+
+
+Obtener la matriz de clasificación: es decir las frecuencias de clasificaciones de cada dígito: cuántas veces un "1" real se ha clasificado como 1, como 
+```{r}
+## Obtened la matriz de clasificación (podréis usar "table"")
+
+```
+
+En qué dígito cometemos menos errores de clasificación? En qué dígito nos equivocamos más a menudo?
+
+Usando el código del principio de este documento, representad las imágenes que corresponden al error de clasificación más común. 
+
+```{r}
+## completar aquí
+```
+
+
