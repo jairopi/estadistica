@@ -1,0 +1,379 @@
+Trabajo Regresión lineal: predicción de la nota media de los alumnos de grado de la ETSIT, UPCT. Primera parte.
+========================================================
+
+
+Nombre: Jairo
+
+Apellidos: Peña Iglesias
+
+
+```{r preliminares}
+## cargamos los paquetes dplyr, ggplot2
+library("dplyr") # Para manipular data.frames
+library("ggplot2") # Para hacer gráficas
+
+```
+
+# Introducción
+
+
+> En este trabajo, usamos datos asociados a todos los alumnos de Grado en Ingeniería Telemática y Grado en Ingeniería de Sistemas de Telecomunicación de la UPCT, que hayan superado 120 ECTS, que provengan de la Región de Murcia y que se hayan examinado de Física y Matemáticas_II en la Prueba de Acceso a la Universidad (PAU).
+
+# Objetivo:
+
+Nuestro objetivo es estudiar la posibilidad de predecir la nota media a partir de algunos datos en el ingreso del estudiante (calificación y ranking PAU, así como de Física y Matemáticas II) y de sus resultados en algunas de las asignaturas más exigentes de la titulación:
+
+1. Fundamentos de programación.
+2. Sistemas y circuitos
+3. Sistemas lineales
+4. Ondas electromagnéticas
+
+# Primer paso: conjunto simplificado
+
+Vamos a empezar con un conjunto simplificado donde sólo consideramos en cuanto a perfiles de ingreso, la nota y el ranking PAU (decil en el que se situa el alumno). El fichero que contiene los datos es notamediagradosETSIT-simple.csv que se puede descargar del Aula Virtual y guardar en la carpeta data del directorio asociado a nuestro nuevo proyecto.
+
+Cargar los datos en un dataframe llamado **GradosTelecoSimple**
+```{r}
+
+GradosTelecoSimple <- read.table(file = "data/notamediagradosETSIT-simple.csv", 
+                                 header=TRUE, 
+                                 sep=",", 
+                                 dec=".", 
+                                 stringsAsFactors = FALSE)
+```
+
+La nota media está calculada con las calificaciones de cada asignatura en una escala que va de 1 a 4 (1 es "Aprobado"", 2 "Notable", 3 "Sobresaliente", 4 "Matrícula de Honor")
+
+
+
+Llevar a cabo la representación gráfica de la nota media al egresar en función de la calificación PAU obtenida al ingresar. 
+
+```{r}
+#nota media al terminar la carrera en función de la calificación obtenida en PAU al ingresar en la ETSIT
+plot <- ggplot(data = GradosTelecoSimple, aes(x = PAU_CALIFICACION_NOTA_MATERIA, y = notamedia))
+
+plot + geom_point()
+```
+
+Llevar a cabo la representación gráfica de la nota media al egresar en función del ranking en cuanto a calificación PAU, expresado en decil.
+
+```{r}
+#nota media al terminar la carrera en función del ranking (expresado en decil) obtenido en PAU al ingresar en la ETSIT
+plot <- ggplot(data = GradosTelecoSimple, aes(x = PAU_CALIFICACION_NOTA_MATERIA_DECIL, y = notamedia))
+
+plot + geom_point()
+```
+
+## Ajuste de una recta, usando el algoritmo de gradiente
+
+
+En esta parte, vamos a ajustar una recta para intentar explicar la nota media en función del ranking del alumno en la  PAU. Aunque, sea mucho (muchísimo!) más sencillo usar la instrucción *lm* de R para realizar el ajuste, implementaremos el algoritmo del gradiente para ir encontrando el mínimo de la función coste. 
+
+Lo haremos en varias etapas...
+
+### Implementación de la función coste.
+
+Recordar que la función coste es (ver transparencias):
+$$J(\theta)=\frac{1}{n}\sum_{i=1}^n\left(y_i-x_{i\bullet}^T\theta\right)^2=\frac{1}{n}\lvert\lvert \mathbf{y}-\mathbf{X}\theta\rvert\rvert^2=\frac{1}{n}\left(\mathbf{y}-\mathbf{X}\theta\right)^T\cdot \left(\mathbf{y}-\mathbf{X}\theta\right),$$
+donde $\mathbf{y}$ es el vector que contiene todas las observaciones de la variable respuesta, y la matriz $\mathbf{X}$ la matriz de diseño.
+
+Definir una variable y que contenga los valores de notamedia, y la matrix X que sea la matriz de diseño asociada a la fórmula: 
+
+$$notamedia=\theta_0+\theta_1PAU\_CALIFICACION\_NOTA\_MATERIA$$
+
+```{r}
+#tomo la columna notamedia de la tabla GradosTelecoSimple
+y <- GradosTelecoSimple$notamedia
+#Matriz
+X <- as.matrix(cbind(1, GradosTelecoSimple$PAU_CALIFICACION_NOTA_MATERIA))
+# Variable X <- GradosTelecoSimple$PAU_CALIFICACION_NOTA_MATERIA
+
+```
+
+Vamos ahora a implementar la función coste que llamaremos J así como el gradiente de J, que llamaremos gradJ. De paso, aprenderemos a definir una función en R.
+
+```{r}
+J <- function(theta)
+  {
+  # teneís que calcular el coste aquí, esta explicado en la trasparencia 17
+  n = length(y)
+  coste = (1 / n) * t(y - X %*% theta) %*% (y - X %*% theta)
+  # producto matricial %*%
+  # t(X) = traspuesta de X
+  
+  # fin completar
+  return(coste)}
+```
+
+El gradiente de la función coste se puede escribir de manera compacta (ver transparencias) 
+$$\nabla J(\theta)=\frac{2}{n} \mathbf{X}^T\cdot \left(\mathbf{X}\theta-y\right).$$
+
+```{r}
+gradJ <- function(theta)
+  {
+  ## completar aquí para devolver el vector gradiente, trasparencia 54
+  n = length(y)
+  gradJ = (2 / n) * t(X) %*% (X %*% theta − y)
+  # producto matricial %*%
+  # t(X) = traspuesta de X
+  }
+```
+
+#### Comprobación implementación función coste:
+Si vuetra implementación es  correcta:
+
+Vuestra implementación | Valor correcto | Check
+--------------|-------------|-----------
+`r J(c(0,0.3))` | 0.5686| `r abs(J(c(0,0.3))-0.5686)<0.01`
+`r J(c(-0.5,0.5))` | 2.89| `r abs(J(c(-0.5,0.5))-2.89)<0.01`
+
+### Implementación del algoritmo del gradiente
+
+Una vez que tenemos implementada la función de coste, podemos escribir el código para el algoritmo iterativo del gradiente.
+
+Empezamos por fijar un valor inicial de theta, el valor de $\alpha$, el learning rate y también el número máximo de iteraciones que autorizaremos para el algoritmo.
+```{r}
+# nada que completar
+thetainicial <- c(1, 1)
+alpha <- 0.001
+maxiter <- 3000
+```
+
+Recordad que la etapa de actualización es: 
+$$\theta\leftarrow \theta-\alpha \nabla J(\theta).$$
+
+Usando un bucle (la instrucción **for** en R, podéis buscar en la ayuda), implementad el algoritmo del gradiente usando esta fórmula:
+
+```{r}
+## Completar aquí con un bucle el algoritmo del gradiente
+theta = thetainicial
+for (i in 1 : maxiter)
+  {
+    theta <- theta - alpha * gradJ(theta) # formula en trasparencia 54
+  }
+
+```
+El valor final de theta es `r theta`
+
+### Debemos monitorizar el algoritmo del gradiente
+
+Para comprobar cómo evoluciona el algoritmo del gradiente y en particular, si hemos escogido bien el valor de $\alpha$, es importante comprobar la evolución del valor de la función coste con las iteraciones.
+
+Para ello vamos a introducir un data.frame llamado monitor, que recoja los valores de theta, J(theta) y gradJ(theta) a medida que vamos iterando el algoritmo. 
+
+Empezamos por definir el dataframe monitor, para poder rellenar sus filas en el algoritmo, e inicializamos su primera fila con los valores iniciales.
+
+```{r, eval=FALSE}
+# nada que completar
+monitor <- data.frame(iter = NA, theta0 = NA,
+                      theta1 = NA, J = NA, gradJ0 = NA,
+                      gradJ1 = NA, alpha = alpha)
+monitor[1,]=c(0, thetainicial, J(thetainicial), gradJ(thetainicial), alpha)
+```
+
+Tenéis que modificar ahora vuestra implementación del algoritmo del gradiente para grabar en el data frame monitor, las cantidades que nos interesan.
+
+
+```{r}
+theta = thetainicial
+for (i in 1 : maxiter)
+  {
+    theta <- theta - alpha * gradJ(theta) # formula del algoritmo de descenso del gradiente en trasparencia 54
+    monitor[i,] = c(i, theta, J(theta), gradJ(theta), alpha) #actualización el data.frame monitor, para ver que el valor de theta va descendiendo
+  }
+
+```
+
+Podemos ahora representar gráficamente la evolución de la función coste en función de la iteración del algoritmo:
+```{r}
+iter = 1 : maxiter
+plot <- ggplot(monitor, aes(x = iter, y = J))
+plot + geom_line(color = "red")
+
+```
+
+
+Observamos un decrecimiento brusco de la función coste en las primeras iteraciones pero después parece decrecer muy lentamente. Quiere decir que hemos alcanzado el mínimo muy rápidamente?
+
+Para comprobarlo, tenéis que representar la evolución del coste pero entre la iteración 50 y la iteración 3000:
+
+```{r}
+#seleccionamos las iteraciones desde la 50 hasta la última (3000) en la tabla monitor
+monitor50_3000 <-  monitor %>%
+              filter(between(iter, 50, maxiter))
+
+iter = 50 : maxiter
+ggplot(data = monitor50_3000 , aes(x = iter, y = J)) + geom_line(color = "red")
+```
+
+Comprobamos así que no se ha alcanzado la convergencia, sino que el decrecimiento es muy lento. 
+
+Al comprobar las últimas filas del data.frame monitor, ¿podéis explicar por qué?
+Porque tenemos un valor pequeño de alpha, con un alpha mayor podría converger más rápido. Sin embargo, si utilizamos un alpha muy grande podriamos no converger nunca.
+
+### Variamos el learning rate.
+
+En las transparencias, vimos que era recomendable probar con distintos valores de $\alpha$. Concretamente, vamos a probar para empezar los valores 
+       $$\alpha=0.001\curvearrowright 0.003\curvearrowright0.01$$
+
+
+Añadir a vuestro algoritmo de gradiente que registraba la evolución en el dataframe monitor, un bucle adicional para explorar estos valores de $\alpha$. (no olvidar poner eval=FALSE en el chunk anterior del gradiente para no ejecutarlo dos veces...)
+
+```{r}
+# nada que completar
+monitor <- data.frame(iter = NA, theta0 = NA, theta1 = NA,
+                      J = NA, gradJ0 = NA,
+                      gradJ1 = NA, alpha = alpha)
+monitor[1,] <- c(0, thetainicial, J(thetainicial), gradJ(thetainicial), alpha)
+```
+
+```{r}
+## Completar aqui, bucle alpha para implementación gradiente
+#vamos a hacer un bucle para volver a calcular el gradiente con distintos valores de Alpha
+j = 1
+alpha <- c(0.001, 0.003, 0.01)
+for(a in alpha)
+  {
+  theta = thetainicial #tomo el algoritmo de descenso del gradiente con un solo Alpha
+  for (i in 1 : maxiter)
+    {
+      
+      theta <- theta - a * gradJ(theta)
+      monitor[j,] = c(i, theta, J(theta), gradJ(theta), a)
+      j <- j + 1
+    }
+}
+
+
+
+```
+
+Ahora vamos a representar solamente para iter superior a 50, tres líneas de evolución de J en función de la iteración, una para cada valor de $\alpha$.
+
+```{r}
+monitor$alpha = factor(monitor$alpha)
+## completar aquí, un ggplot de J en función de iter, (iter >50)
+plot <- monitor %>% 
+     filter(iter > 50) %>% 
+     ggplot(aes(x = iter, y = J)) # represento el valor que toma en cada una de las iteraciones
+plot + geom_line(aes(color = alpha))
+```
+
+Nos queda probar con alpha=0.03 por ejemplo, pero usaremos menos iteraciones..
+```{r}
+# nada que completar
+alpha <- 0.03
+maxiter <- 30
+monitor <- data.frame(iter = NA, theta0 = NA,
+                      theta1 = NA, J = NA, 
+                      gradJ0 = NA, gradJ1 = NA,
+                      alpha = alpha)
+monitor[1,] <- c(0, thetainicial, J(thetainicial), gradJ(thetainicial), alpha)
+```
+
+
+
+```{r}
+#
+theta = thetainicial
+for (i in 1:maxiter)
+  {
+    theta <- theta - alpha * gradJ(theta)
+    monitor[i,]=c(i, theta, J(theta), gradJ(theta), alpha)
+  }
+```
+Representar gráficamente la evolución del coste para estas 50 iteraciones...
+
+```{r}
+## Completar aquí: ggplot evolución del coste en función de iter...
+plot <- monitor  %>% 
+        ggplot(aes(x = iter, y = J))
+plot + geom_line()
+```
+
+### Parametros finales
+Vamos por lo tanto a quedarnos con alpha=0.01, pero aumentamos el número máximo de iteraciones posibles. Ponéis intentar con 30000 si vuestro ordenador es rápido y vuestra paciencia sólida...
+```{r}
+# nada que completar
+alpha <- 0.01
+maxiter <- 300
+monitor <- data.frame(iter = NA, theta0 = NA, theta1 = NA,
+                      J = NA, gradJ0 = NA,
+                      gradJ1 = NA,
+                      alpha = alpha)
+monitor[1,]=c(0, thetainicial, J(thetainicial), gradJ(thetainicial), alpha)
+```
+
+Para iterar el algoritmo incluyendo las condiciones que i debe ser inferior o igual a maxiter, y que deltaJ sea superior a 10^(-6), usamos la instrucción while (ver la ayuda)
+
+```{r}
+# Con un bucle For
+#theta = thetainicial
+#  for (i in 1 : maxiter)
+#    {
+#      theta <- theta - alpha * gradJ(theta)
+#      monitor[i,]=c(i, theta, J(theta), gradJ(theta), alpha)
+#    }
+
+# Con un bucle While
+theta <-  thetainicial
+i <-  1
+while (i < maxiter)
+  {
+  
+  theta <- theta - alpha * gradJ(theta)
+  monitor[i,] = c(i, theta, J(theta), gradJ(theta), alpha)
+  i <- i + 1
+}
+```
+
+
+
+Representamos la evolución a partir de la iteración 50:
+```{r}
+## Completar aquí: evolución de J en las 10000 últimas iteraciones..
+ggplot(subset(monitor, iter > 50 ) , aes(x = iter, y = J))+geom_line()
+```
+
+
+Nuestra estimación final es por lo tanto:
+Estimación de theta: `r monitor[maxiter,"theta0"]` y `r monitor[maxiter,"theta1"]`
+
+Coste mínimo alcanzado: `r monitor[maxiter,"J"]`
+
+## Ajuste de una recta, usando las ecuaciones normales (lm en R)
+
+Explicamos en clase que es muchísimo más sencillo usar las ecuaciones normales, implementadas en *R* por ejemplo con la instrucción lm. (aunque también vimos que hay situaciones en que no se puede usar)
+
+Basándose en las transparencias, introducir un objeto llamado notamediagrados.lm que corresponda al output de la instrucción lm, para nuestro problema:
+$$notamedia=\theta_0+\theta_1PAU\_CALIFICACION\_NOTA\_MATERIA$$
+
+```{r}
+## Completar aquí: notamediagrados.lm
+
+```
+
+Usando la instrucción summary, comparar los resultados obtenidos por lm y nuestra estimación final con el algoritmo del gradiente...
+
+```{r}
+## completar aquí: summary
+
+#summary(notamediagrados.lm)
+```
+
+
+Comentarios: completar aquí...
+
+
+
+Usando la instrucción residuals aplicada a notamediagrados.lm, calcular el mínimo de la función coste que podíamos perseguir con el algoritmo del gradiente... Comparar su valor con el que obtuvimos...
+
+```{r}
+## completar aquí
+
+```
+
+
+
+
+
