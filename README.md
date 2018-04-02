@@ -10,3 +10,7 @@ Este es el repositorio de github para estadistica aplicada a big data, con el pr
 #aprendiendo algoritmia básica
 
 Agradecer al profesor Mathieu Kessler las clases amenas y sus claras explicaciones, que sirvieron para comprender en profundidad la materia. Así mismo, al alumno adjunto Alberto Garre.
+
+UPCT, Universidad Politécnica de Cartagena.
+
+jairopi91@gmail.com
