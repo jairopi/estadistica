@@ -1,0 +1,14 @@
+Jairo, tienes un par de errores:
+
+(1) Al importar datos3, dices que el separador de decimales es la ",", cuando en realidad es el ".". Si te fijas con glimpse(datos3), R interpreta las columnas numéricas como carácteres.
+
+(2) lo mismo para mundodes.
+
+(3) al hacer las gráficas (x1,y1), (x2,y2)... tú sólo haces la gráfica de una variable.
+
+(4) al importar datos4, asignas TRUE al argumento header, cuando en realidad no lo hay.
+
+
+Una cosilla, Jairo. La manera "alternativa" de calcular el consumo diurno está mal:
+vivienda %>% filter(hora <= 23 | hora > 7). Al usar el OR, sólo estás omitiendo la hora 24. 
+La parte de la derecha no está haciendo nada.

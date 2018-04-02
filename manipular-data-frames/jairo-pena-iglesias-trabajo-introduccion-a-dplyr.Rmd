@@ -1,0 +1,247 @@
+Trabajo. Análisis exploratorio del consumo eléctrico de una casa (I): manipulaciones y resúmenes con dplyr.
+========================================================
+
+Nombre: Jairo Peña Iglesias
+
+En este trabajo, tenéis que completar algunos de los bloques de código para contestar a las preguntas que van apareciendo en el documento. 
+
+El conjunto de datos que analizaremos en este trabajo  coresponden a mediciones del consumo eléctrico de una vivienda, obtenido de [https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption#], el UCI Machine Learning Repository (Lichman, M. (2013). UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California, School of Information and Computer Science.)
+
+El conjunto de datos inicial es mucho más grande, se ha agregado los valores por hora haciendo promedios, para hacerlo más manejable.
+
+
+```{r, message = FALSE}
+## completar aquí: empezamos por cargar el paquete "dplyr"
+library(dplyr)
+```
+
+## Primer paso: cargamos los datos
+
+El fichero household-hourly-power-consumption.txt contiene los datos. 
+
+```{r}
+## cargamos los datos 
+vivienda <- read.table(file = "data/household-hourly-power-consumption.txt",
+                       header=TRUE, 
+                       sep=";", 
+                       dec=".", 
+                       stringsAsFactors = FALSE) #cargamos el fichero de 
+
+```
+
+
+La primera tarea que tenéis que hacer consiste en importar los paquetes en un data.frame que se llamará vivienda. Para ello, recordad que habéis tenido que descargar los datos del aula virtual y guardado en la subcarpeta data.
+
+Según la descripción del conjunto de datos:
+
+Attribute Information:
+
+1. Date: Date in format dd/mm/yyyy
+2. Time: time in format hh:mm:ss
+3. Global_active_power: household global minute-averaged active power (in kilowatt)
+4. Global_reactive_power: household global minute-averaged reactive power (in kilowatt)
+5. Voltage: minute-averaged voltage (in volt)
+6. Global_intensity: household global minute-averaged current intensity (in ampere)
+7. Sub_metering_1: energy sub-metering No. 1 (in watt-hour of active energy). It corresponds to the kitchen, containing mainly a dishwasher, an oven and a microwave (hot plates are not electric but gas powered).
+8. Sub_metering_2: energy sub-metering No. 2 (in watt-hour of active energy). It corresponds to the laundry room, containing a washing-machine, a tumble-drier, a refrigerator and a light.
+9. Sub_metering_3: energy sub-metering No. 3 (in watt-hour of active energy). It corresponds to an electric water-heater and an air-conditioner.
+
+Contestar a las preguntas siguientes entre líneas (podéis utilizar código R directamente, como lo explican en el párrafo “Embedding inline R code” en http://www.rstudio.com/ide/docs/authoring/using_markdown
+
+1. Cuántas filas tiene el conjunto vivienda? ¿y cuántas columnas?
+```{r}
+#nº de filas = individuo y nº de columnas = variable
+dim(vivienda)
+```
+2.¿De qué tipo son cada columna del conjunto? (numérico, character, etc…)
+```{r}
+#tipo de columna del conjunto (numérico, character, etc…)
+#numerico
+```
+3. Cuál el valor mínimo de la potencia global activa que se puede encontrar en el conjunto?  ¿Cuál es el valor máximo? ¿En qué fechas y hora se dieron? 
+```{r}
+#¿valor mínimo de la potencia global activa que se puede encontrar en el conjunto?
+power_min <- vivienda %>% filter(Global_active_power == min(vivienda$Global_active_power, na.rm = TRUE))
+power_min$DateHour
+#¿valor máximo? 
+power_max <- vivienda %>% filter(Global_active_power == max(vivienda$Global_active_power, na.rm = TRUE)) 
+power_max$DateHour
+#Ya hemos aclarado en qué fechas y hora se dieron.
+```
+4. Cuál es el valor promedio de la intensidad global en el conjunto?
+```{r}
+#¿valor promedio de la intensidad global en el conjunto?
+mean(vivienda$Global_intensity, na.rm = TRUE)
+```
+
+## Manipulaciones
+
+### Añadimos una columna *Sub_metering_resto*
+
+Las columnas Sub_metering_1, Sub_metering_2 y Sub_metering_3 miden la energía activa en tres zonas de la vivienda. Para calcular la energía activa en el resto de la vivienda, debemos substraerlas de la columna global_active_power, (despúes de multiplicar está última por 60/1000 para pasar de kW por minuto  a W por hora), según la fórmula
+
+> (global_active_power*1000/60 - Sub_metering_1 - Sub_metering_2 - Sub_metering_3) 
+
+Tenéis que usar el verbo correcto de *dplyr* para añadir esta columna que llamaréis Sub_metering_resto al dataframe *vivienda*
+
+```{r}
+## calcular Sub_metering_resto
+vivienda <- vivienda %>% 
+  mutate(Sub_metering_resto = Global_active_power*1000/60 - Sub_metering_1 - Sub_metering_2 - Sub_metering_3)
+```
+
+### Añadimos una columna que contenga la proporción de energía dedicada a la cocina.
+
+Queremos añadir una columna que contenga el porcentaje que representa la energía dedicada a la cocina respecto a la energía global activa (despúes de multiplicar está última por 1000/60 para pasar de kW por minuto  a W por hora).
+
+Llamaremos esta columna *Prop.cocina*.
+
+```{r}
+## cocina = Sub_metering_1
+#(energia en la cocina / (energia global*(1000/60)) *100
+vivienda <- vivienda %>% mutate(Prop.cocina = Sub_metering_1 / (Global_active_power * 1000 / 60) * 100)
+```
+
+## Definimos unos subconjuntos
+
+Para empezar, vamos a añadir unas columnas que contengan el año, mes, día del mes y día de la semana y hora del día. Sus nombres serán *anyo*, *mes*, *diames*, *hora* *diasemana*, *hora* (evitamos las tildes y ñ en los nombres de variables). 
+
+Para ello, usamos el paquete "lubridate", no tenéis nada que completar aquí, pero podéis intentar entender el código:
+
+```{r, eval = exists("vivienda")}
+## nada que completar
+library("lubridate")
+vivienda  <- vivienda %>%
+  mutate(DateHour = ymd_hms(DateHour), ## <- pasamos DateHour de string a tipo fecha.
+         anyo = year(DateHour), ## <- podemos extraer su año etc..
+         mes = month(DateHour),
+         diames = day(DateHour),
+         hora = hour(DateHour),
+         diasemana = wday(DateHour, label = TRUE)) ## <-wday se refiere a week day.
+```
+
+Usad la instrucción *table* para deducir cuántas mediciones tenemos para cada año, y por otra parte cuántas mediciones por año y mes...
+
+```{r}
+## completar aquí para obtener el número de mediciones para cada año
+table(vivienda$anyo)
+## completar aquí para obtener el número de mediciones por año y por mes.
+table(vivienda$mes, vivienda$anyo)
+```
+
+Definir los tres subconjuntos siguientes:
+
+1. *consumo.2007* que contenga las mediciones del año 2007.
+2. *consumo.diurno* que contenga las mediciones en la franja horaria de 7:00 a 23:00.
+3. *consumo.we* que contenga las mediciones de los fines de semana.
+
+```{r}
+## completar aquí el código para consumo.2007. Subconjunto solo con las filas de 2007
+consumo.2007 <- vivienda %>% filter(anyo == 2007)
+
+## completar aquí el código para consumo.diurno
+consumo.diurno <- vivienda %>% filter(hora >= 7 & hora <= 23)
+#otra forma de hacerlo sería con 
+consumo.diurno2 <- vivienda %>% filter(hora <= 23 | hora > 7) #(8,22)h
+
+## completar aquí el código para consumo.we: (saturday or sunday)
+consumo.we <- vivienda %>% filter(diasemana == "Sat" | diasemana == "Sun")
+
+```
+
+
+## Resumimos por grupos
+En esta sección usaremos *group_by* y *summarise* para obtener distintos resúmenes del consumo energético de la vivienda.
+
+### Perfil de potencia a lo largo del día
+
+Queremos ver para empezar el perfil de potencia global activa medio por hora. 
+
+```{r}
+## Completar aquí para obtener el potencia global activa medio por hora
+#Tomo los datos, los agrupo y para cada subgrupo hago un calculo
+#group_by(columna) %>% summarise(valor)
+vivienda %>% 
+  group_by(hora) %>% 
+  summarise(media_por_hora = mean(Global_active_power, na.rm = TRUE))
+```
+
+Repetir la instrucción anterior para añadir a la vez la potencia global máxima por hora, el número de datos que han entrado en el cálculo, el rango intercuartílico (IQR), y la potencia mínima
+
+```{r}
+perfilhorariopotencia <- vivienda %>% 
+  group_by(hora) %>% 
+  summarise(media_hora = mean(Global_active_power, na.rm = TRUE), 
+            max_hora = max(Global_active_power, na.rm = TRUE), 
+            IQR = IQR(Global_active_power, na.rm = TRUE), 
+            min_hora= min(Global_active_power, na.rm = TRUE), 
+            num_datos = n()
+          )
+
+```
+
+Guardar el resultado del bloque anterior en un objeto (será un dataframe) llamado *perfilhorariopotencia*.
+
+Para mejorar la apariciencia del html generado, se puede usar el paquete *xtable* que transforma la salida en una tabla html que tiene mejor apariciencia en nuestro documento final. 
+
+Se ilustra en el bloque siguiente donde no hay que completar nada.
+
+```{r, eval = exists("perfilhorariopotencia"), echo = exists("perfilhorariopotencia"), results ='asis'}
+## nada que completar, ejemplo de uso de xtable
+library("xtable")
+print(xtable(perfilhorariopotencia), type = "html")
+```
+
+Queremos ahora ver si la proporción de potencia consumida por la cocina (era la columna *Prop.cocina* que hemos definido previamente) varía según la hora del día. Para ello, obtened el perfil horario de *Prop.cocina*, con los mismos indicadores que para la potencia global.
+
+```{r}
+perfilpropcocina <-vivienda %>% 
+  group_by(hora) %>% 
+  summarise(media_hora_cocina = mean(Prop.cocina, na.rm = TRUE), 
+            maxima_hora_cocina= max(Prop.cocina , na.rm = TRUE), 
+            IQR_cocina = IQR(Prop.cocina , na.rm = TRUE), 
+            min_hora_cocina= min(Prop.cocina , na.rm = TRUE), 
+            num_datos_cocina = n()
+          )
+
+```
+
+## Un ejemplo en el que usamos varios verbos en cadena
+Acabamos este trabajo con ejemplos en el que vamos a usar varios verbos de *dplyr* en cadena:
+
+> Queremos obtener los diez días que presentaron los mayor picos de consumo en horario de 12:00 a 14:00. 
+
+```{r}
+## completar aquí: pista, para obtener los 10 primeras filas de un data.frame
+## podemos usar head con el argumento n = 10.
+resultado1 <- vivienda %>% 
+                     filter(hora >= 12 & hora <=14) %>% #horario de 12-14h
+                     #el profesor dice que tambien podria ser asi: filter(between(hora,12,14)) %>% 
+                     arrange(desc(Global_active_power)) %>% #ordeno las filas segun los valores de la columna
+                               select(DateHour, Global_active_power) %>%  #selecciono las columnas que quiero
+                               head(n = 10) #10 dias de mayor pico de consumo. Cojo los 10 primeros del rango de mayor a menor(me quedo con los 10 mayores).
+resultado1
+```
+
+> Queremos por una parte obtener la  proporción de potencia consumida por el sector 3 (Sub_metering_3). A continuación obtener su valor promedio desglosándolo por mes, por día de la semana y hora. Finalmente nos quedamos con los 10 valores más altos
+
+```{r}
+resultado2 <- vivienda %>%
+  mutate (Prop.sector3 = Sub_metering_3/(Global_active_power * 1000 / 60) * 100) 
+resultado2 %>% 
+  group_by(mes, diasemana, hora) %>% 
+  summarise(Promedio = mean(Prop.sector3, na.rm = TRUE)) %>% 
+  arrange(desc(Promedio)) %>% 
+  head(n = 10)
+
+
+#Otra forma de hacerlo:
+#resultado2 <- head(vivienda %>% 
+#                     mutate(proporcion_potencia = Sub_metering_3 / (Global_active_power * 1000 / 60)) %>% #proporcion de potencia consumida por el sector 3
+#                     group_by(mes, diasemana, hora) %>% #valor promedio desglosandolo por mes, dia y hora
+#                     summarize(media_proporcion = mean(proporcion, na.rm = TRUE)) %>%
+#                     arrange(desc(media_proporcion)),10) #nos quedamos con el rango de los #10 valores más altos: los ordenamos de manera descendiente y me quedo con los 10 primeros #(10 mas altos)
+
+#resultado2
+```
+

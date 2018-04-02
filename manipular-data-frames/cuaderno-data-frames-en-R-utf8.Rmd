@@ -1,0 +1,132 @@
+Cuaderno compañero de las transparencias "Vectores y data.frames en R"
+========================================================
+
+Nombre y Apellidos: Jairo PEña Iglesias
+
+
+Ejericios estructuras de datos (data frames) en R
+---------------------------------------
+
+### Mediciones de nitrato 
+Se llevan a cabo varias mediciones del contenido de nitrato en muestras.
+```{r preliminares_1}
+concentracion<-c(0.45, rep(0.46, 2), rep(0.47, 4), rep(0.48, 8), 
+                 rep(0.49, 8), rep(0.5, 10), rep(0.51, 5), rep(0.52, 2))
+```
+
+Supongamos ahora que en una segunda sesión de mediciones se
+obtienen otros  20 datos que aparecen a continuación:
+
+0.51 ,0.51 ,0.5 ,0.49 ,0.5 ,0.56 ,0.48 ,0.49 ,0.45 ,0.48 ,0.49
+,0.53 ,0.48 ,0.48 ,0.49 ,0.49 ,0.51 ,0.47 ,0.44 ,0.49
+
+Añadir a la variable *concentracion* ya
+definida los valores de la segunda sesión. Definir una variable
+*sesion* que contenga 40 valores iguales a 1 y 20 iguales a 2.
+
+```{r completar_aquí_11}
+concentracion2 <- c(0.51 ,0.51 ,0.5 ,0.49 ,0.5 ,0.56 ,0.48 ,0.49 ,0.45 ,0.48 ,0.49
+,0.53 ,0.48 ,0.48 ,0.49 ,0.49 ,0.51 ,0.47 ,0.44 ,0.49)
+concentracion <- c(concentracion, concentracion2)
+concentracion
+sesion <- c(rep(1, 40), rep(2, 20))
+sesion
+```
+
+Juntar la variable concentración y la variable sesión en un único data.frame que se llame *conc.data*.
+```{r }
+conc.data <- data.frame(concentracion, sesion)
+conc.data
+```
+## Importar datos en R
+
+
+### Problemas
+
+1. Importar en dataframe separados los datos correspondientes a los ficheros datos1.txt, datos2.txt, datos3.txt, datos4.txt, mundodes.txt. Llamareís los dataframes correspondientes **datos1**, **datos2**, **datos3**, **datos4** y **mundodes**.
+Para más información sobre el archivo mundodes.txt, podeis leer mundodes.readme.
+
+```{r completar_aquí_12}
+datos1 <- read.table(file="data/datos1.txt")
+
+datos2 <- read.table(file = "data/datos2.txt", header=TRUE, sep=";", dec=",", stringsAsFactors = FALSE)
+
+datos3 <- read.table(file = "data/datos3.txt", header=TRUE, sep=";", dec=",", stringsAsFactors = FALSE)
+
+datos4 <- read.table(file = "data/datos4.txt", header=TRUE, sep=";", dec=",", stringsAsFactors = FALSE)
+
+mundodes <- read.table(file = "data/mundodes.txt", header=TRUE, sep=";", dec=",", stringsAsFactors = FALSE)
+```
+
+2. Para el conjunto de datos asociados al fichero anscombe.txt
+ - Realizar gráficas individuales de (x1, y1) (x2, y2), (x3, y3), (x4, y4).
+
+```{r}
+anscombe <- read.table(file = "data/anscombe.txt", header=FALSE, sep=";", dec=",", stringsAsFactors = FALSE)
+```
+
+ 
+```{r completar_aquí_plot_x1_y1}
+plot(anscombe$V1,anscombe$v2)
+```
+
+```{r completar_aquí_plot_x2_y2}
+plot(anscombe$V3,anscombe$v4)
+```
+
+```{r completar_aquí_plot_x3_y3}
+plot(anscombe$V5,anscombe$v6)
+```
+
+```{r completar_aquí_plot_x4_y4}
+plot(anscombe$V7,anscombe$v8)
+```
+
+Estos cuatros conjuntos, muy diferentes en su apariencia tienen la misma recta de regresión...
+
+3. Newcomb fue el primero en conseguir ¡en 1882!  una estimación bastante precisa de la velocidad de la luz. Las mediciones recogidas a continuación corresponden a los tiempos codificados que tardó un rayo de luz en recorrer el camino de ida y vuelta  desde el laboratorio de Simon Newcomb situado en el Río Potomac hasta un espejo situado en la base del ``Washington Monument'', en total una distancia de 7400m. Para obtener  los tiempos en nano segundos ($10^{-9}s$) no codificados, hay que añadir 24800 a cada dato.  
+Tiempos codificados: 28, 26, 33, 24, 34, -44, 27, 16, 40, -2, 29, 22, 24, 21, 25, 30, 23, 29, 31, 19, 24, 20, 36, 32, 36, 28, 25, 21, 28, 29, 37, 25, 28, 26, 30, 32, 36, 26, 30, 22, 36, 23, 27, 27, 28, 27, 31, 27, 26, 33, 26, 32, 32, 24, 39, 28, 24, 25, 32, 25, 29, 27, 28, 29, 16, 23
+Los datos se pueden encontrar en el fichero newcomb.txt.   
+
+ - Después de importar los datos, llevar a cabo un análisis exploratorio del conjunto, utilizando un histograma y un boxplot (se recomienda probar {\tt hist} y {\tt boxplot}
+ 
+```{r completar_aquí_17}
+#newcomb <- read.table(file="data/newcomb.txt")
+newcomb <- read.table(file = "data/newcomb.txt", header=FALSE, sep=";", dec=",", stringsAsFactors = FALSE)
+hist(newcomb$V1)
+boxplot(newcomb)
+```
+
+Utilizando estos datos, ¿qué valor proporcionarías para la velocidad de la luz?
+
+```{r completar_aquí_18}
+velocidad <- 7400/((newcomb$V1)+24800)
+mean(velocidad)*10^9
+```
+
+
+
+4. Un geyser es un nacimiento de agua hirviente que de vez en cuando se vuelve inestable y 
+expulsa agua y vapor. El geyser "Old Faithful" en el parque de Yellowstone en Wyoming es
+probablemente el más famoso del mundo. Los visitantes del parque se acercan al emplazamiento del
+geyser intentando no tener que esperar demasiado para verlo estallar. Los servicios del Parque
+colocan un cartel donde se anuncia la próxima erupción. Es por lo tanto de interés estudiar los
+intervalos de tiempo entre dos erupciones conjuntamente con la duración de cada erupción. En el fichero geyser.txt están los datos correspondientes a la duración de 222 erupciones asi como el intervalo de tiempo hasta la siguiente erupción, durante los meses de agosto 1978 y agosto 1979. Las unidades de medición son mn.
+
+- Importar los datos, realizar una exploración gráfica, ¿qué características parecen presentar los datos?.
+
+```{r completar_aquí_19}
+geyser <- read.table(file = "data/geyser.txt", header=FALSE, sep=",", dec=".", stringsAsFactors = FALSE)
+hist(geyser$V1)
+hist(geyser$V2)
+boxplot(geyser)
+
+``` 
+
+- ¿Podéis identificar dos grupos de erupciones? (se recomienda usar algunas gráficas para ello). Crear una variable **grupo** (las erupciones con intervalo menor de 65 y las con un intervalo mayor de 65) que indique a qué grupo se asigna cada erupción.
+
+```{r completar_aquí_20}
+menor65 <- (geyser$V2 < 65)
+mayor65 <- (geyser$V2 > 65)
+```
+

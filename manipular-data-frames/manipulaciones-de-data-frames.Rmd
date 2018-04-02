@@ -1,0 +1,130 @@
+---
+title: "manipulaciones-de-data-frames.Rmd"
+author: "Jairo Peña Iglesias"
+date: "6 de marzo de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#cargo la libreria dplyr
+library("dplyr") #Cargamos el paquete dplyr
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+mompean <- read.table(file = "data/Mompean.txt",
+                      header=TRUE,
+                      sep=";",
+                      dec=".", #puedo añadirlo o no, ya que por defecto el decimal se                                 pone con punto
+                      stringsAsFactors = FALSE) #lo ponemos FALSE siempre 
+#cargamos el fichero de texto
+```
+
+Empezamos por ver la estructura del dataframe mompean con glimpse
+```{r}
+glimpse(mompean) #vemos sus columnas. glimpse en ingles = vistazo, vislumbrar, mostrar, mirada rapida
+#NA quiere decir que falta un dato Not abailable
+```
+
+Ejemplo del uso del verbo filter, usado para filtrar filas.
+```{r}
+#filtrar filas
+# con conrol + shift + m => %>% 
+#Queremos quedarnos las mediciones de Enero => primer mes:
+datosenero <- mompean %>% filter(mes == 1) #datosenero será un subdata.frame de mompean
+#Queremos seleccionar datos diurnos (7,22)h
+diurnos <- mompean %>% filter(hora >= 7 & hora <= 22)
+#Entre ellos seleccionamos aquellos instantes que ruido > 65db
+diurnosilegales <- diurnos %>% filter(Rui > 65)
+#seleccionamos los nocturnos
+nocturnos <- mompean %>% filter(hora < 7 | hora > 22) #valores nocturnos (23, 0, 1, 2, 3, 4, 5, 6)
+```
+
+Ejemplos de uso del verbo select.
+```{r}
+#seleccionar columnas
+
+#nos queremos quedar solo con FechaHora, NO2 SO2 Y 03
+mompean.simple1 <- mompean %>% select(FechaHora, NO2, SO2, O3)
+#descartamos Rui (ruido)
+mompean.simple2 <- mompean %>% select(-Rui) #seleccionamos todos menos Rui
+#Nos quedamos con FechaHora, SO2 y NO2 (las 2 columnas contienen "O2" en su nombre)
+mompean.simple3 <- mompean %>% select(FechaHora, contains("O2"))
+
+```
+
+
+Ejemplo del verbo mutate
+```{r} 
+#calcular y trasformar columnas
+
+#añadimos columnas Oxidos = SO2+NO2+O3; Si falta alguno de los valores el resultado será NA => si hay un NA en una operacion se obtiene un NA
+#PropSO2 = SO2 / Oxidos
+mompean <- mompean %>% mutate(Oxidos = SO2 + NO2 + O3, PropSO2 = SO2 / Oxidos, PropNO2 = NO2 / Oxidos, PropO3 = O3 / Oxidos)
+#añadir columna PropRui
+mompean <-  mompean %>% mutate(PropRui = ifelse(hora >= 7 & hora <= 22, 
+                                                Rui / 65 * 100,  #True
+                                                Rui / 55 * 100)) #False
+#ifelse = true <- Rui / 65 * 100; => horario diurno 
+#ifelse = false <- Rui / 55 * 100; => horario nocturno 
+```
+
+Ejemplo de summarize con group_by, resumenes de columnas agrupandolos con diferentes valores en las filas
+```{r} 
+#resumir segun grupos
+
+#valor promedio de SO2 desglosando segun el dia de la semana
+mompean %>% group_by(diadelasemana) %>% 
+  summarise(SO2medio = mean(SO2, na.rm = TRUE)) #quitamos los valores que provocan NA
+#cojo los datos, los agrupo por dia de la semana (0, 6) y para cada subgrupo calculo la media
+
+#añadimos mas de una variable de agrupamiento
+#calculamos la media de la semana distinguiendo entre los meses del año
+resumen_mompean <- mompean %>% group_by(mes, diadelasemana) %>% 
+  summarise(SO2medio = mean(SO2, na.rm = TRUE))
+
+#podemos usar cualquier funcion que produzca un unico valor: mean, max, min, var, sd, n, ...
+mompean %>% group_by(mes, diadelasemana) %>% 
+  summarise(SO2max = max(SO2, na.rm = TRUE), numfilas = n()) #ya tenemos el numero de mediciones que se han tomado 
+
+```
+
+
+Ejemplo para ordenar usando arrange
+```{r} 
+#ordenar usando arrange
+
+#ordenar el resumen de medias SO2 por mes, por valores crecientes de SO2 promedio
+mompean %>% group_by(mes) %>% summarise(SO2medio = mean(SO2, na.rm = TRUE)) %>% arrange(SO2medio)
+#si lo queremos por valores decrecientes de SO2 promedio
+mompean %>% group_by(mes) %>% summarise(SO2medio = mean(SO2, na.rm = TRUE)) %>% arrange(desc(SO2medio))
+
+#ordenar por mas de una columna
+#ordenar por hora creciente y despues por mes creciente
+mompean %>% arrange(hora, mes) #(hora 0 del 1º mes, hora 0 del 2º mes,...)
+#incluso una columna creciende y otra decreciente
+mompean %>% arrange(hora, desc(mes))
+
+```
