@@ -1,0 +1,88 @@
+---
+title: "Ilustración lm con R, conjunto geysr"
+author: "Mathieu Kessler"
+date: "20/04/2015"
+output: html_document
+---
+
+  
+
+```{r}
+geyser <- read.table('data/geyser.txt',
+                     sep = ",", header = FALSE)
+names(geyser) <- c("duracion", "intervalo") ##Así declaro los nombres de las variables, ya que no tenian cabecera los datos
+## Utilizo como caracteristica (de información) para obtener la respuesta deseada la "duración", y en intervalo es el valor deseado.
+##Individuo =  erupción
+##Variable = intervalo
+##Característica = duración
+```
+
+## Realizamos el ajuste lineal de intervalo sobre duracion, usando lm:
+
+```{r}
+geyser.lm <- lm(data=geyser, intervalo ~ duracion)
+```
+
+## Para obtener un resumen, y en particular las estimaciones de $\theta$:
+
+```{r}
+summary(geyser.lm)
+```
+
+## Matriz del modelo 
+
+```{r, eval = FALSE}
+model.matrix(geyser.lm)
+```
+
+
+```{r, echo = FALSE}
+model.matrix(geyser.lm)[1:10,]
+```
+
+## Objetos incluidos en geyser.lm
+
+```{r}
+names(geyser.lm)
+```
+
+## Gráficas de residuos
+
+```{r}
+plot(geyser.lm, which = 1)
+plot(geyser.lm, which = 2)
+```
+
+## Para obtener margénes de error para los theta:
+
+```{r}
+confint(geyser.lm)
+```
+
+## Para hacer predicción:
+
+Empezamos por  introducir los valores de las explicativas para las cuales queremos realizar la predicción en un nuevo data.frame.
+
+```{r}
+nuevo <- data.frame(duracion = c(5, 6.5, 7))
+nuevo
+```
+
+Usamos ahora la instrucción predict
+```{r}
+predict(geyser.lm, nuevo)
+```
+
+### Predicción con margen de error para la respuesta promedio
+
+```{r}
+predict(geyser.lm, nuevo, interval = "conf")
+```
+
+### Predicción con margen de error para la valor posible de la respuesta
+
+```{r}
+predict(geyser.lm, nuevo, interval = "pred")
+```
+ 
+
