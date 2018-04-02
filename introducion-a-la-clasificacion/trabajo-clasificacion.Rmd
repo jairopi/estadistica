@@ -1,0 +1,211 @@
+Trabajo Clasificación con la regresión logística:  Primera parte.
+========================================================
+Nombre:
+
+Apellidos:
+
+```{r preliminares, echo=FALSE, message = FALSE}
+## Completad aquí para cargar ggplot2 y dplyr
+```
+
+
+## Primer conjunto de datos: frontera de decisión lineal.
+
+Vamos a empezar con un primer conjunto. El fichero que contiene los datos es ejemplo-logistica-1.csv que se puede descargar del Aula Virtual y guardar en la carpeta data del directorio asociado a nuestro nuevo proyecto.
+
+Cargar los datos en un dataframe llamado **datos**
+```{r}
+# Completar aqui
+```
+
+El conjunto presenta dos características x1 y x2, que queremos usar para poder predecir la variable binaria y.
+
+
+Llevad a cabo la representación gráfica del conjunto, usando un color distinto para distinguir entre los valores de y.
+```{r}
+# Completar aquí
+```
+
+
+## Ajuste paso a paso de una regresión logística.
+
+
+En esta parte, vamos a aprender a ajustar una regresión logística a nuestros datos.
+
+Lo haremos en varias etapas...
+
+### Implementación de la función logística.
+
+Recordar que la función logística que sirve de base para nuestro ajuste a datos binarios, es (ver transparencias):
+ $$g(z)=\frac 1 {1+e^{-z}}.$$\
+
+Definir una función g, que admita como argumento un vector z y que devuelva el vector de valores de la función g(z)
+```{r}
+g= function (z)
+  {
+  ## Completar aquí para calcular g.tmp
+
+  
+return(g.tmp) 
+}
+```
+
+Realizamos la gráfica de la curva
+
+```{r}
+## nada que completar
+curve(g, from = -10, to = 10)
+```
+
+### Implementación de la función coste 
+
+Vamos ahora a implementar la función coste que llamaremos J. En las transparencias, encontramos la expresión para esa función coste en el caso de la regresión logística (recordad que los datos y_i son datos binarios)
+$$J(\theta)=- \frac 1 n\sum_{i=1}^n \left\{y_i\log(h_\theta(x_{i\bullet}))+(1-y_i)\log(1-h_\theta(x_{i\bullet}))\right\}$$
+
+Empezamos por crear la matriz x.mat de diseño así como el vector y de observaciones para poder usarlos en la definición de la función de coste. 
+
+```{r}
+## nada que completar
+x.mat <- cbind(1, as.matrix(datos %>% select(-y)))
+y <- datos$y
+```
+
+```{r}
+J=function(theta)
+  {
+  ## Completar aquí para calcular J.tmp
+
+  
+  ##
+  return(J.tmp)
+  }
+```
+
+Podemos probar algunos valores de theta para comprobar vuestra implementación:
+Para J(c(0,0,0)) debéis encontrar 0.6931. Para J(c(-0.5,-0.5,0.5)), debéis encontrar 0.3724.
+
+### Implementación de la función gradiente del coste
+Para poder usar algorítmos de búsqueda del mínimo de la función de coste, implementaremos también la función gradiente del coste, cuya expresión es (ver transparencias)
+
+Si usamos la matriz de diseño $\mathbf{X}$, 
+  obtenemos  en forma compacta:
+  $$ \nabla J=\frac 1  n \mathbf{X}^T\cdot\left(\mathbf{H}_\theta-y\right),$$
+ donde $\mathbf{H}$ denota el vector columna:
+$$\mathbf{H}_\theta=\left(
+\begin{array}{l}
+  h_\theta(x_{1\bullet})\\
+  h_\theta(x_{2\bullet})\\
+  \vdots\\
+  h_\theta(x_{n\bullet})\\
+\end{array}\right)$$
+
+
+```{r}
+gradJ=function(theta)
+  {
+  # teneís que calcular el gradiente aquí
+```
+
+
+
+### Búsqueda del mínimo
+
+Una vez que tenemos implementada la función de coste, podemos escribir el código para una búsqueda del mínimo. Usaremos, en lugar de programar nosotros mismos el algoritmo del gradiente, la función optim() de R, que implementa métodos optimizados de búsqueda del mínimo. Especificamos como argumentos la función que queremos minimizar (argumento fn), su gradiente (argumento gr) y el método que queremos emplear (argumento method). Usaremos el método BFGS que consiste en una mejora del método del gradiente. También tenemos que especificar valores iniciales de los parámetros
+
+```{r, eval = exists("J") & exists("gradJ")}
+## nada que completar
+optim.results=optim(c(0,0,0), fn=J, gr=gradJ, method = "BFGS")
+```
+Guardamos los resultados del algoritmo de minimización en un vector que llamamos thetaopt.
+```{r, val = exists("optim.results")}
+## nada que completar 
+thetaopt=optim.results$par
+```
+
+En la gráfica que teníamos del conjunto, añadir la frontera de decisión.... (usar el geom: geom_abline)
+```{r}
+## Completar aquí
+```
+
+
+### Evaluación de la clasificación sobre el conjunto de entrenamiento 
+
+Añadimos a datos una columna que llamaremos yfit con los resultados de nuestro algoritmo de clasificación 
+
+```{r}
+## Completad aquí
+```
+
+Hacemos una tabla cruzada de los valores de y y los de yfit
+
+```{r}
+## completar aquí
+```
+
+Qué número de Falsos positivos y falsos negativos hemos obtenido respectivamente?
+
+¿Qué proporción de falsos positivos y falsos negativos hemos obtenido? Es decir, entre todos las observaciones que hemos clasificado como 1 (Positivos), ¿cuántos eran en realidad 0? y entre todas las observaciones que hemos clasificado como 0 (Negativos)
+ ¿cuántos eran en realidad 1? (Podéis usar la instrucción prop.table aplicada a la tabla anterior...)
+ 
+```{r}
+## Completad aquí 
+```
+
+## Segundo conjunto de datos: frontera de decisión cuadrática
+
+En este apartado, se realizará el ajuste de una regresión logística para los datos contenidos en el fichero ejemplo-logistica-2.csv, pero se realizará añadiendo a la matriz de diseño las columnas que corresponden a los cuadrados de x1 y x2.
+
+Cargar los datos en un dataframe llamado **datos**
+```{r}
+# Completar aqui
+```
+
+
+Llevad a cabo la representación gráfica del conjunto, usando un color distinto para distinguir entre los valores de y.
+```{r}
+# Completar aquí
+```
+
+Empezamos por crear la matriz x.mat de diseño así como el vector y de observaciones para poder usarlos en la definición de la función de coste. Para ello, tendréis que añadir las columnas que contengan los cuadrados de x1 y de x2.
+
+```{r}
+## Completad aquí para construir x.mat e y.
+```
+
+
+Usad la funció optim de R, para encontrar el mínimo de la función coste, al igual que en la sección anterior. Cuidado con el vector con el que hay que inicializar el algoritmo! (De qué longitud debe ser?)
+
+```{r}
+## Completad aquí para encontrar optim.results
+```
+Guardamos los resultados del algoritmo de minimización en un vector que llamamos thetaopt.
+```{r, eval=exists("optim.results")}
+## nada que completar 
+thetaopt=optim.results$par
+```
+
+Cuál es la ecuación de la frontera de decisión?
+
+
+¿Cuál es la forma de la frontera de decisión?
+
+En la gráfica que teníamos del conjunto, vamos a añadir la frontera de decisión.
+```{r, eval = exists("thetaopt") & exists("datos")}
+## Nada que completar aquí
+m1 <- - thetaopt[2] / (2 * thetaopt[4])
+m2 <- - thetaopt[3] / (2 * thetaopt[5])
+R2 <- thetaopt[2]^2 / (4 * thetaopt[4]) +
+  thetaopt[3]^2 / (4 * thetaopt[5]) -
+  thetaopt[1]
+r1 <- sqrt(R2 / thetaopt[4])
+r2 <- sqrt(R2 / thetaopt[5])
+x1e <- seq(m1 - r1, m1 + r1, length.out = 100)
+deltay1e <- sqrt(r2^2 * (1-(x1e-m1)^2 / r1^2))
+
+elipse <- data.frame(x1 = c(x1e, rev(x1e)),
+                     x2 = c(m2 + deltay1e,
+                            m2 - deltay1e))
+datos %>%
+  ggplot(aes(x1, x2)) + geom_point(aes(colour = factor(y))) +
+           geom_path(data = elipse)
+```
