@@ -1,0 +1,257 @@
+Trabajo de regularización en el problema de la clasificación
+========================================================
+Nombre:Jairo
+
+Apellidos: Peña Iglesias
+
+```{r message=FALSE}
+## Cargamos los paquetes necesarios
+library("dplyr")
+library("ggplot2")
+```
+
+Introducción
+--------------
+En este trabajo, empezaremos por implementar la regularización de la función coste en el algoritmo de regresión logística, probándolo con un primer ejemplo, comparando en particular el impacto de lambda.
+
+Implementación del algoritmo regularizado. 
+------------
+### Cargamos el primer ejemplo
+Vamos a empezar con un primer conjunto. El fichero que contiene los datos es ejemplo-logistica-1.csv que se puede descargar del Aula Virtual y guardar en la carpeta data del directorio asociado a nuestro nuevo proyecto.
+
+Cargar los datos en un dataframe llamado **datos**
+```{r}
+## Completar aqui
+datos <- read.table(file = "data/ejemplo-logistica-1.csv", header=TRUE, sep=";", dec=".", stringsAsFactors = FALSE)
+```
+El conjunto presenta dos características x1 y x2, que queremos usar para poder predecir la variable binaria y.
+
+Al igual que hicimos en el trabajo anterior, creamos la matriz x.mat de diseño así como el vector y de observaciones para poder usarlos en la definición de la función de coste. 
+
+```{r}
+## Nada que completar
+x.mat <- cbind(1, as.matrix(datos %>% select(-y)))
+y <- datos$y
+```
+
+
+Implementamos la función sigmoidal, base de nuestro cálculo de la función coste
+
+```{r}
+## nada que completar
+g <-  function(z)
+  {
+  g.tmp <- 1 / (1 + exp(-z))
+return(g.tmp) 
+}
+```
+
+
+La función coste sin regularizar es la que se implementó en el trabajo anterior:
+
+$$J(\theta)=- \frac 1 n\sum_{i=1}^n \left\{y_i\log(h_\theta(x_{i\bullet}))+(1-y_i)\log(1-h_\theta(x_{i\bullet}))\right\}$$
+
+
+
+```{r}
+## nada que completar
+J <- function(theta,x.mat,y)
+  {
+  h.tmp <- g(x.mat %*% theta)
+  J.tmp <- - mean(y * log(h.tmp) + (1 - y) * log(1 - h.tmp))
+  return(J.tmp)
+  }
+```
+
+También teníamos el gradiente de la función de coste sin regularizar
+
+```{r}
+ # nada que completar
+gradJ <- function(theta, x.mat, y)
+  {
+   gradJ.tmp <- 1 / length(y) * t(x.mat) %*% (g(x.mat %*% theta) - y)  
+  return(gradJ.tmp)
+  }
+```
+
+Introducimos ahora la función de coste regularizada. Su expresión se puede encontrar en las transparencias:
+
+
+$$J(\theta)=- \frac 1 n\sum_{i=1}^n \left\{y_i\log(h_\theta(x_{i\bullet}))+(1-y_i)\log(1-h_\theta(x_{i\bullet}))\right\}+\frac \lambda n\sum_{j=1}^k \theta_j^2.$$
+
+```{r}
+Jreg <- function(theta, lambda, x.mat, y)
+  {
+  ## completar aquí devolviendo el valor J.tmp
+  theta.tmp <- theta
+  theta.tmp[1] <- 0
+  n = length(y)
+  J.tmp = J(theta, x.mat, y) + (lambda/n)*sum(theta.tmp^2)
+
+  return(J.tmp)
+  }
+```
+
+y su gradiente es: 
+      $$ \nabla J(\theta)=\frac 1  n \mathbf{X}^T\cdot\left(\mathbf{H}_\theta-y\right)+ 2\frac \lambda n \theta[-1],  $$
+
+ donde $\theta[-1]=(0,\theta_1,\ldots,\theta_k).$
+
+Teneís que completar el código del siguiente bloque para implementar el gradiente de Jreg
+```{r}
+## completar aquí
+gradJreg <- function(theta,lambda,x.mat,y)
+  {
+  # teneís que calcular el gradiente aquí
+  theta.tmp <- theta
+  theta.tmp[1] <- 0
+  n <- length(y)
+  gradJ.tmp = gradJ(theta, x.mat, y) + 2*(lambda/n)*theta.tmp
+
+  # fin completar
+  return(gradJ.tmp)}
+```
+
+
+### Búsqueda del mínimo con la función coste regularizada
+
+Una vez que tenemos implementada la función de coste regularizada, podemos escribir el código para una búsqueda del mínimo. Usaremos, al igual que en el trabajo anterior, en lugar de programar nosotros mismos el algoritmo del gradiente, la función optim() de R. En este caso, espeficamos argumentos adicionales (x.mat,y lambda) para que sean pasados a Jreg y gradJreg.
+
+Empezaremos probando con lambda=1.
+```{r}
+## nada que completar
+## Observad que podemos pasar como argumentos de optim, los argumentos que 
+## queremos sean de Jreg y gradJreg  
+optim.results <- optim(c(0, 0, 0), fn = Jreg, gr = gradJreg, x.mat = x.mat,
+                       y = y, lambda = 1, method = "BFGS")
+```
+
+Guardamos los resultados del algoritmo de minimización en un vector que llamamos thetaopt.
+```{r}
+## nada que completar 
+thetaopt <- optim.results$par
+thetaopt
+```
+
+Comprobad que con lambda=0, encontraís los mismos resultados que con el algoritmo con función de coste sin regularizar..
+
+### Evaluación de la clasificación sobre el conjunto de entrenamiento para varios valores de lambda. 
+
+Realizaremos un bucle para probar los siguientes valores de lambda: 0,0.01,0.02,0.04, etc.. hasta lambda=10.24
+
+Para cada uno de estos valores de lambda, añadiremos una columna a datos, con los resultados de nuestro algoritmos de clasificación con coste regularizado.
+
+```{r}
+## completar aquí el vector lambdav de valores de lambda que nos interesa
+  lambdav <- c(0,2^(0:10)/100)
+  x<-c(1:length(lambdav))
+
+for (i in 1:length(lambdav))
+     {
+  ## completar aquí para la clasificación con el valor actual de lambda, debéis obtener thetopt.
+optim.results <- optim(c(0, 0, 0), fn = Jreg, gr = gradJreg, x.mat = x.mat,
+                       y = y, lambda = lambdav[i], method = "BFGS")
+thetaopt <- optim.results$par
+
+  ## Completar aquí para añadir una columna a datos con nuestra clasificación predicha
+datos[i+3] <- as.numeric(g(x.mat%*%thetaopt)>0.5)
+
+  }
+```
+
+
+Para poder comparar, vamos a vizualizar la tasa de falsos positivos y falsos negativos.
+```{r}
+## nada que completar
+tasas <- data.frame(lambda = NA, correctpositiverate = NA, correctnegativerate = NA,
+                    falsepositiverate = NA, falsenegativerate = NA)
+for (i in 1:length(lambdav))
+{
+  tasas[i,]$lambda <- lambdav[i]
+  tablefalse.tmp <- prop.table(table(datos$y, datos[,3+i]), margin=2)
+  tablecorrect.tmp <- prop.table(table(datos$y,datos[,3+i]), margin=1)
+  tasas[i,]$correctpositiverate <- tablecorrect.tmp[2,2]
+  tasas[i,]$correctnegativerate <- tablecorrect.tmp[1,1]
+  tasas[i,]$falsepositiverate <- tablefalse.tmp[1,2]
+  tasas[i,]$falsenegativerate <- tablefalse.tmp[2,1]
+}
+```
+
+Una vez obtenido el data.frame tasas con el bloque anterior, (podeís hacer un head(tasas) para ver qué contiene..) representad en una misma gráfica con puntos, las tasas de falsos positivos y la tasa de falsos negativos (se recomiendo usar dos geom_point, en el segundo, habrá que cambiar algun componente de aes )
+
+
+```{r}
+## completad aquí...
+p<- tasas %>%
+  ggplot(aes(x=lambda))
+p + geom_point(aes(y = falsepositiverate),colour = 'black',size=5) + geom_point(aes(y = falsenegativerate),colour='red',size=5)
+```
+
+¿qué valor de lambda recomendarías escoger para obtener un buen equilibrio entre la tasa de falsos positivos y falsos negativos?
+
+## Parte opcional: mejora del código con R
+
+Hacer bucles en R no es recomendable, se debe intentar siempre vectorizar el código. En esta parte, opcional, se implementará de manera más eficiente y elegante en R el bucle sobre $\lambda$ para obtener el thetaopt por una parte y las tasas de falsos positivos y falsos negativos por otra.
+
+### Aplicar una función sobre un vector con sapply
+
+Hemos usado un bucle sobre los valores de $\lambda$ para aplicarle la función optim, porque no podemos pasar directamente el vector $\lambda$ para que nos devuelva el vector de thetaopt.
+
+Para evitar la solución del bucle, podemos usar sapply, que aplica directamente una función sobre un vector o una lista. Podéis encontrar más información en la ayuda de sapply 
+
+Por ejemplo, si construyo  una función f que admita un argumento x escalar y quiero calcular la valor de f para los elementos del vector v, es decir quiero c(f(v[1]), f(v[2]), ....) , basta con usar sapply(v, f).
+
+Nuestro primer paso consistirá en definir una función f que admita como argumento el escalar lambda y que devuelva el valor de thetaopt para este lambda.
+
+```{r}
+## Completad aquí para definir una función f que devueva thetaopt
+f <- function(lambda){
+  ##
+
+  }
+```
+
+Podemos ahora usar sapply para aplicar la función recien creada f al vector lambdav. Guardaremos el resultado en un objeto que llamaremos Theta
+
+```{r}
+## Completad aquí para devolver Theta
+
+```
+
+Después de comprobar Theta, (en particular su dimensión), creamos un objeto llamado Fit que tendrá tantas columnas como valores de lambda, y tantas filas como filas en datos.
+Cada columna contendrá nuestros valores predichos para la clasificación de los registros en 0 o 1, basándose en los valores de x1 y x2
+```{r}
+## Completad para crear Fit
+
+
+## nada que completar
+Fit  <- data.frame(Fit)
+colnames(Fit) <- paste0("lambda", 1:ncol(Fit))
+```
+
+Creamos una función que devuelva las tasas de errores en la predicción (falsos positivos, falsos negativos...)
+```{r}
+## Nada que completar
+ftasas <- function(fit){
+  tablefalse.tmp <- prop.table(table(datos$y, fit), margin=2)
+  tablecorrect.tmp <- prop.table(table(datos$y, fit), margin=1)
+  c(correctpositiverate = tablecorrect.tmp[2,2],
+  correctnegativerate = tablecorrect.tmp[1,1],
+  falsepositiverate = tablefalse.tmp[1,2],
+  falsenegativerate = tablefalse.tmp[2,1])
+}
+```
+
+Podemos ahora volver a usar sapply para aplicar ftasas al dataframe Fit. Lo llamamos tasas, usaremos la transpuesta y data frame para obtener lo que necesitamos 
+```{r}
+## Completad aquí para obtener tasas
+```
+
+
+
+```{r}
+## completad aquí...
+
+```
+
+
