@@ -1,0 +1,207 @@
+Trabajo. Manipulaciones y gráficas: paquetes transmitidos en la cabecera de red de la UPCT.
+========================================================
+
+Nombre: 
+
+En este trabajo, tenéis que completar algunos de los bloques de código para contestar a las preguntas que van apareciendo en el documento. 
+
+Los paquetes fuentes que analizaremos en este trabajo fueron proporcionados por el Servicio de Informática de la UPCT (¡muchas gracias a ellos!), y se obtuvieron de la cabecera de red de la UPCT...
+
+
+```{r}
+## Cargamos los paquetes ggplot2, dplyr y lubridate
+```
+
+# Primera parte, número de paquetes en el mes de septiembre de 2013.
+
+El fichero paq-transmitidos.csv contiene el número de paquetes transmitidos cada hora según su tipo "Inbound" "Outbound", en la cabeceera de la red UPCT desde el 4 de septiembre  hasta el 4 de octubre de 2013. 
+
+La primera tarea que tenéis que hacer consiste en importar los paquetes en un data.frame que se llamará paquetes.
+
+```{r completar_aqui1}
+### insertar el código para importar:
+
+###
+```
+
+- La variable *pkts* es el número de paquetes transmitidos.
+
+- La variable *tcp_retx_pkts* es el número de paquetes retransmitidos, que son paquetes que se vuelven a mandar, porque no ha sido confirmado por parte del receptor/emisor que haya sido recibido bien. 
+
+Contestar a las preguntas siguientes entre líneas (podéis utilizar código R directamente, como lo explican en el párrafo "Embedding inline R code" en [http://www.rstudio.com/ide/docs/authoring/using_markdown](http://www.rstudio.com/ide/docs/authoring/using_markdown)
+
+1. Cuántas filas tiene el conjunto *paquetes*? 
+
+2. Cuál el número mínimo de paquetes por hora que se encuentra en el conjunto? Cuál es el número máximo? ¿En qué fechas y hora se dieron? 
+
+3. Cuál es el número medio de paquetes transmitidos
+
+# Representaciones gráficas
+
+Cuál es el tipo de la columna "time"?
+
+
+Vais a usar la instrucción dmy_hms del paquete "lubridate", para transformar la columna "time" en un objeto de tipo tiempo.
+
+```{r}
+## completar aquí
+
+```
+
+Empezamos por representar la evolución temporal de los paquetes transmitidos, distinguiendo según la dirección de transmisión, "Inbound" o "Outbound" (una línea para cada uno)
+
+```{r}
+## completar aquí
+
+```
+
+Se observa algún tipo de patrón en las curvas temporales?
+
+Vamos a explorar el perfil de evolución diaria del número de paquetes transmitidos, distinguiendo entre los días de la semana:
+
+Para ello, necesitamos crear  nuevas columnas que contengan 
+
+- el día de la semana que corresponde a la fecha considerada.
+- la hora del día (0 a 23) que corresponde al momento considerado
+
+Podéis inspiraros en lo hecho en el trabajo de introdución a la manipulación de datos con dplyr. *Pista*: son funciones de la librería "lubridate"
+ 
+```{r}
+## completad aquí
+
+```
+
+Cread un dataframe  llamado **mediashorarias** que contenga el número medio de paquetes transmitidos, por día de la semana, y por hora (de 0 a 23).
+```{r}
+## completad aquí 
+```
+
+Queremos representar la media de paquetes transmitidos solamente en la dirección "Outbound", en función de la hora del día, distinguiendo el día de la semana (una línea por día)
+
+```{r}
+## Completad aquí
+
+```
+
+
+¿Se observa un patrón diferente según los días de la semana? ¿Qué destacaría de la evolución por hora del día?
+
+Respuesta:
+
+Obtener la misma gráfica para los paquetes "Inbound".
+
+```{r}
+## completad aquí 
+
+```
+
+Exploración de los paquetes rechazados:
+---------------------------------------
+
+Nos interesa ahora estudiar la evolución del número de paquetes que hay que volver a retransmitir (**tcp_retx_pkts**) para monitorizar el buen funcionamiento de nuestro tráfico.
+
+Para empezar, hacemos un gráfica de la evolución temporal del número de paquetes retransmitidos.
+
+```{r}
+## completad aquí
+
+```
+
+Parecen presentar un patrón de evolución parecido al del número de paquetes transmitidos. Es por lo tanto conveniente considerar la proporción de paquetes que hay que retransmitir.
+
+En el bloque siguiente, teneís que añadir al data.frame **paquetes** una columna adicional que contenga la proporción (en porcentaje) de paquetes que han sido retransmidos (respeto a los paquetes transmitidos)
+
+```{r}
+## completad aquí
+
+```
+
+
+Contestar a las preguntas siguientes (entre líneas):
+1. Cuál es la mediana del porcentaje de paquetes que han tenido que ser retransmitidos
+
+2. Cuál es el porcentaje máximo de paquetes que tuvieron que ser retransmitidos. ¿En qué día y hora se dio?
+
+4. Obtener los 10 mayores valores del porcentaje de paquetes que tuvieron que ser retransmitidos y las fechas y horas en los que se dieron. . A qué clase ("Inbound" o "Outbound") pertenecen?
+
+```{r}
+## completad aquí
+
+```
+
+     
+
+3. Hacer un boxplot de del porcentaje de paquetes retransmitidos, separando según la clase ("Inbound" y "Outbound"), es decir dos boxplots paralelos, uno para "Inbound" y otro para "Outbound".
+
+```{r}
+## completad aquí 
+
+```
+
+Consideramos que una tasa de paquetes retransmitidos superior a 1% es anormal. Queremos ver si existe un patrón temporal para estos valores anormales.  Empezamos por añadir una columna lógica que llamaremos prop_retx_anormal al dataframe **paquetes** que valga TRUE si la proporción de paquetes que se tuvieron que retransmitir es superior a 1%, y FALSE en caso contrario 
+
+
+```{r}
+## completad aquí
+
+```
+
+Vamos  a crear un dataframe, que llamaremos paquetes.prop.retx.anormal donde nos quedamos solamente con los valores TRUE de paquetes. para que sea más facil de recordar,  a cambiar los valores de prop_retx_anormal, asignandole el valor "Anormal" si es TRUE, y "Normal":
+
+```{r}
+## completad aquí
+
+```
+
+Usando la instrucción **table** contestar (entre líneas) a las preguntas siguientes:
+
+1. Hay diferencias entre días de la semana en cuanto a número de horas en la que se produjeron valores anormales de la proporción de paquetes que tuvieron que ser retransmitidos?
+
+2. Hay diferencias entre horas del día en cuanto a número de horas en la que se produjeron valores anormales de la proporción de paquetes que tuvieron que ser retransmitidos?
+
+3. Construir ahora una tabla que cuente el número de valores anormales de la proporción de paquetes que tuvieron que ser retransmitidos por hora del día Y por día de la semana. (es decir una tabla de dos dimensiones: la hora del día en las filas y los días de la semana en columnas)
+
+
+Consideramos ahora la tabla que habéis obtenido en el apartado 3 anterior. Vamos a transformarla en un dataframe para poder representar sus valores de manera gráfica. Para ello, tenéis que empezar por guardar la tabla del apartado 3 en un objeto que llamaremos tabla.anormales.hora.dia
+```{r}
+## bloque para completar
+
+```
+
+
+Usamos para transformarla en dataframe la instrucción **as.data.frame.table**:
+
+```{r, eval = exists("tabla.anormales.hora.dia")}
+## nada que completar
+  df.tabla.anormales.hora.dia <- as.data.frame.table(tabla.anormales.hora.dia)
+```
+
+Tenéis ahora que cambiar los nombres de las columnas del dataframe que acabamos de crear, dándoles los nombres: "hora", "dia" y "Frecuencia".
+
+Pista. Tenéis dos opciones: usar la instrucción names directamente, o bien usando el verbo rename de la librería "dplyr"
+
+```{r}
+## completad aquí
+
+```
+
+
+Vamos ahora que realizar una gráfica de tipo mosáico (tile), donde el eje horizontal esté asociado a la variable hora, y el eje vertical a la variable dia, y donde además el color de relleno esté asociado a la variable Frecuencia...
+
+```{r}
+## completad aquí
+
+```
+
+Algún comentario sobre esta gráfica? ¿Algún patrón destacable?
+
+# Para ir más lejos..
+
+
+Si tenéis alguna sugerencia sobre qué más se podría intentar explorar de este conjunto de datos, podéis apuntarlo aquí con una lista numerada...
+
+1. 
+
+2. 
+
+

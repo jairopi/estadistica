@@ -1,0 +1,9 @@
+Jairo, tienes un par de errores:
+
+(1) Se pide contestar a las preguntas con "in-line text". Para ello, debes de escribir la línea de código r tal que así: `r min(paquetes$pkts)` fuera de un chunk.
+
+(2) Realmente no proporcionas las fechas donde se dan las transferencias máxima y mínima, filtras la fila correcta pero devuelves todas las columnas.
+
+(3) Observación: al usar geom_line, no necesitas fijar stat = "identity", eso es con geom_bar.
+
+(4) Mismo problema con las fechas para la proporción de retransmisiones que en (2).

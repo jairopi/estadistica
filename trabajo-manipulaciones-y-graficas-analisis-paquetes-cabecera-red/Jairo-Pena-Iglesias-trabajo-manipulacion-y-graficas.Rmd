@@ -1,0 +1,323 @@
+Trabajo. Manipulaciones y gráficas: paquetes transmitidos en la cabecera de red de la UPCT.
+========================================================
+
+Nombre: Jairo Peña Iglesias
+
+En este trabajo, tenéis que completar algunos de los bloques de código para contestar a las preguntas que van apareciendo en el documento. 
+
+Los paquetes fuentes que analizaremos en este trabajo fueron proporcionados por el Servicio de Informática de la UPCT (¡muchas gracias a ellos!), y se obtuvieron de la cabecera de red de la UPCT...
+
+
+```{r echo= TRUE, warning=FALSE, error=FALSE, message=FALSE}
+## Cargamos los paquetes ggplot2, dplyr y lubridate
+library("lubridate")
+library("dplyr")
+library("ggplot2")
+```
+
+# Primera parte, número de paquetes en el mes de septiembre de 2013.
+
+El fichero paq-transmitidos.csv contiene el número de paquetes transmitidos cada hora según su tipo "Inbound" "Outbound", en la cabeceera de la red UPCT desde el 4 de septiembre  hasta el 4 de octubre de 2013. 
+
+La primera tarea que tenéis que hacer consiste en importar los paquetes en un data.frame que se llamará paquetes.
+
+```{r completar_aqui1}
+### insertar el código para importar:
+paquetes <- read.table(file = "data/paq-transmitidos.csv", 
+                       header=TRUE, 
+                       sep=",", 
+                       stringsAsFactors = FALSE)
+###
+```
+
+- La variable *pkts* es el número de paquetes transmitidos.
+
+- La variable *tcp_retx_pkts* es el número de paquetes retransmitidos, que son paquetes que se vuelven a mandar, porque no ha sido confirmado por parte del receptor/emisor que haya sido recibido bien. 
+
+Contestar a las preguntas siguientes entre líneas (podéis utilizar código R directamente, como lo explican en el párrafo "Embedding inline R code" en [http://www.rstudio.com/ide/docs/authoring/using_markdown](http://www.rstudio.com/ide/docs/authoring/using_markdown)
+
+1. Cuántas filas tiene el conjunto *paquetes*? 
+
+```{r}
+nrow(paquetes)
+```
+2. Cuál el número mínimo de paquetes por hora que se encuentra en el conjunto? Cuál es el número máximo? ¿En qué fechas y hora se dieron? 
+
+```{r}
+#Nº máx. de paquetes
+max(paquetes$pkts) 
+#fecha y hora en que se dio el nº máx. de paquetes
+fecha_max <- paquetes %>% 
+  filter(pkts == max(max(paquetes$pkts), na.rm = TRUE))
+```
+
+Podemos ver su resumen en la tabla siguiente
+
+**Número máx.de paquetes**   |   **fecha y hora en que se dio el nº máx. de paquetes**  | 
+----------------------|-----------------------------------------------------------------| 
+`r max(paquetes$pkts) ` | `r fecha_max`
+
+```{r}
+#Nº min. de paquetes
+min(paquetes$pkts)
+#fecha y hora en que se dio el nº MIN. de paquetes
+fecha_min <- paquetes %>% 
+  filter(pkts == min(min(paquetes$pkts), na.rm = TRUE))
+
+```
+Podemos ver su resumen en la tabla siguiente
+
+**Número min.de paquetes**   |   **fecha y hora en que se dio el nº min. de paquetes**  | 
+----------------------|-----------------------------------------------------------------| 
+`r min(paquetes$pkts) ` | `r fecha_min`
+
+3. Cuál es el número medio de paquetes transmitidos
+```{r}
+mean(paquetes$pkts)
+```
+
+# Representaciones gráficas
+
+Cuál es el tipo de la columna "time"?
+Es de tipo char, ya que hay numeros, letras y signos.
+
+Vais a usar la instrucción dmy_hms del paquete "lubridate", para transformar la columna "time" en un objeto de tipo tiempo.
+
+```{r}
+## completar aquí
+paquetes <- paquetes %>% 
+  mutate(time = dmy_hms(time, locale = "English")) #así indicamos que el formato de hora es de tipo ingles
+```
+
+Empezamos por representar la evolución temporal de los paquetes transmitidos, distinguiendo según la dirección de transmisión, "Inbound" o "Outbound" (una línea para cada uno)
+
+```{r}
+## completar aquí
+paquetes %>%
+  ggplot(aes(x = time, y = pkts)) + 
+  geom_line(stat = 'identity', aes(colour=class))
+
+```
+
+Se observa algún tipo de patrón en las curvas temporales?
+Parece que hay 5 días con mucho tráfico de paquetes y 2 con poco, lo que podría llevarnos a la conclusión de que los fines de semana hay menos gente en la biblioteca y por lo tanto un menor tráfico en la red.
+
+
+Vamos a explorar el perfil de evolución diaria del número de paquetes transmitidos, distinguiendo entre los días de la semana:
+
+Para ello, necesitamos crear nuevas columnas que contengan 
+
+- el día de la semana que corresponde a la fecha considerada.
+- la hora del día (0 a 23) que corresponde al momento considerado
+
+Podéis inspiraros en lo hecho en el trabajo de introdución a la manipulación de datos con dplyr. *Pista*: son funciones de la librería "lubridate"
+ 
+```{r}
+paquetes  <- paquetes %>%
+  mutate(DateHour = ymd_hms(time, locale="English"),
+       diasemana = wday(time, label = TRUE, abbr = FALSE),
+       hora = hour(time))
+
+```
+
+Cread un dataframe  llamado **mediashorarias** que contenga el número medio de paquetes transmitidos, por día de la semana, y por hora (de 0 a 23).
+```{r}
+mediashorarias <- paquetes %>% 
+  group_by(hora, diasemana) %>% 
+  summarise(pkts = mean(pkts, na.rm = TRUE))
+
+```
+
+Queremos representar la media de paquetes transmitidos solamente en la dirección "Outbound", en función de la hora del día, distinguiendo el día de la semana (una línea por día)
+
+```{r}
+outbound <- paquetes %>% 
+  filter(class == "Outbound")
+
+mean_hour_out <- outbound %>% 
+  group_by(hora, diasemana) %>% 
+  summarise(meanpkts = mean(pkts, na.rm = TRUE))
+
+ggplot(data = mean_hour_out, aes(x = hora, y = meanpkts, fill = diasemana)) + 
+geom_line(stat = 'identity', aes(colour = diasemana))
+
+```
+
+
+¿Se observa un patrón diferente según los días de la semana? ¿Qué destacaría de la evolución por hora del día?
+Observamos dos importantes descensos en el número de paquetes enviados a la red, uno es por la noche (aproximadamente de 21h a 8h) y el otro es a la hora de comer (en torno a las 12:30h-15:30h). Además, podemos afirmar que los fines de semana hay mucho menos tráfico y tambien que el martes se enviaron un mayor número de paquetes, mientras que el viernes menos.
+
+Respuesta:
+
+Obtener la misma gráfica para los paquetes "Inbound".
+
+```{r}
+inbound <- paquetes %>% 
+  filter(class == "Inbound")
+
+mean_hour_in <- inbound %>% 
+  group_by(hora, diasemana) %>% 
+  summarise(meanpkts = mean(pkts, na.rm = TRUE))
+
+ggplot(data = mean_hour_in, aes(x = hora, y = meanpkts, fill = diasemana)) +
+geom_line(stat = 'identity', aes(colour = diasemana))
+
+
+```
+
+Exploración de los paquetes rechazados:
+---------------------------------------
+
+Nos interesa ahora estudiar la evolución del número de paquetes que hay que volver a retransmitir (**tcp_retx_pkts**) para monitorizar el buen funcionamiento de nuestro tráfico.
+
+Para empezar, hacemos un gráfica de la evolución temporal del número de paquetes retransmitidos.
+
+```{r}
+ggplot(data = paquetes, aes(x = time, y = tcp_retx_pkts)) + geom_line()
+
+```
+
+Parecen presentar un patrón de evolución parecido al del número de paquetes transmitidos. Es por lo tanto conveniente considerar la proporción de paquetes que hay que retransmitir.
+
+En el bloque siguiente, teneís que añadir al data.frame **paquetes** una columna adicional que contenga la proporción (en porcentaje) de paquetes que han sido retransmidos (respeto a los paquetes transmitidos)
+
+```{r}
+#calculo el porcentaje como los paquetes retransmitidos entre el total de paquetes y lo multiplico por 100
+porcentaje <- (paquetes$tcp_retx_pkts/paquetes$pkts)*100
+
+paquetes  <- paquetes %>% 
+  mutate(porcentaje = porcentaje) #añado a la tabla una nueva fila con los porcentajes calculados previamente, que se llamará porcentaje
+
+```
+
+
+Contestar a las preguntas siguientes (entre líneas):
+1. Cuál es la mediana del porcentaje de paquetes que han tenido que ser retransmitidos
+
+```{r}
+median(paquetes$porcentaje)
+
+```
+
+2. Cuál es el porcentaje máximo de paquetes que tuvieron que ser retransmitidos. ¿En qué día y hora se dio?
+
+```{r}
+max(paquetes$porcentaje)
+
+fecha_max_retransmision <- paquetes %>% 
+  filter(porcentaje == max(paquetes$porcentaje, na.rm = TRUE))
+
+```
+
+4. Obtener los 10 mayores valores del porcentaje de paquetes que tuvieron que ser retransmitidos y las fechas y horas en los que se dieron. . A qué clase ("Inbound" o "Outbound") pertenecen?
+
+```{r}
+mayores_valores <- head(paquetes %>% 
+                          arrange(desc(porcentaje)), 10) #ordenamos de manera descendente los 10 mayores valores
+mayores_valores
+
+mayores_valores$class #mostramos a que clase pertenecen los mayores valores
+
+```
+
+     
+
+3. Hacer un boxplot del porcentaje de paquetes retransmitidos, separando según la clase ("Inbound" y "Outbound"), es decir dos boxplots paralelos, uno para "Inbound" y otro para "Outbound".
+
+```{r}
+ggplot(data = paquetes, aes(x = class, y = porcentaje)) + geom_boxplot() #con x = class he separado la gráfica en todas las clases (en este caso 2) y las situo en el eje 0x
+
+```
+
+Consideramos que una tasa de paquetes retransmitidos superior a 1% es anormal. Queremos ver si existe un patrón temporal para estos valores anormales.  Empezamos por añadir una columna lógica que llamaremos prop_retx_anormal al dataframe **paquetes** que valga TRUE si la proporción de paquetes que se tuvieron que retransmitir es superior a 1%, y FALSE en caso contrario 
+
+
+```{r}
+paquetes  <- paquetes %>% 
+  mutate(prop_retx_anormal = porcentaje > 1)
+
+```
+
+Vamos  a crear un dataframe, que llamaremos paquetes.prop.retx.anormal donde nos quedamos solamente con los valores TRUE de paquetes. para que sea más facil de recordar,  a cambiar los valores de prop_retx_anormal, asignandole el valor "Anormal" si es TRUE, y "Normal":
+
+```{r}
+paquetes.prop.retx.anormal  <- paquetes %>% 
+  filter(porcentaje > 1)
+
+```
+
+Usando la instrucción **table** contestar (entre líneas) a las preguntas siguientes:
+
+1. Hay diferencias entre días de la semana en cuanto a número de horas en la que se produjeron valores anormales de la proporción de paquetes que tuvieron que ser retransmitidos?
+El viernes el valor aumenta.
+
+```{r}
+table(paquetes.prop.retx.anormal$diasemana)
+
+```
+
+2. Hay diferencias entre horas del día en cuanto al número de horas en la que se produjeron valores anormales de la proporción de paquetes que tuvieron que ser retransmitidos?
+Observamos que el valor es mayor cuando la biblioteca está abierta que cuando llega la noche.
+
+```{r}
+table(paquetes.prop.retx.anormal$hora)
+
+```
+
+3. Construir ahora una tabla que cuente el número de valores anormales de la proporción de paquetes que tuvieron que ser retransmitidos por hora del día Y por día de la semana. (es decir una tabla de dos dimensiones: la hora del día en las filas y los días de la semana en columnas).
+
+
+```{r}
+table(paquetes.prop.retx.anormal$hora, paquetes.prop.retx.anormal$diasemana)
+
+```
+
+Consideramos ahora la tabla que habéis obtenido en el apartado 3 anterior. Vamos a transformarla en un dataframe para poder representar sus valores de manera gráfica. Para ello, tenéis que empezar por guardar la tabla del apartado 3 en un objeto que llamaremos tabla.anormales.hora.dia
+
+```{r}
+tabla.anormales.hora.dia <- table(paquetes.prop.retx.anormal$hora, paquetes.prop.retx.anormal$diasemana)
+
+```
+
+
+Usamos para transformarla en dataframe la instrucción **as.data.frame.table**:
+
+```{r, eval = exists("tabla.anormales.hora.dia")}
+## nada que completar
+  df.tabla.anormales.hora.dia <- as.data.frame.table(tabla.anormales.hora.dia)
+```
+
+Tenéis ahora que cambiar los nombres de las columnas del dataframe que acabamos de crear, dándoles los nombres: "hora", "dia" y "Frecuencia".
+
+Pista. Tenéis dos opciones: usar la instrucción names directamente, o bien usando el verbo rename de la librería "dplyr"
+
+```{r}
+df.tabla.anormales.hora.dia <- rename(df.tabla.anormales.hora.dia, hora = Var1)
+df.tabla.anormales.hora.dia <- rename(df.tabla.anormales.hora.dia, dia = Var2)
+df.tabla.anormales.hora.dia <- rename(df.tabla.anormales.hora.dia, Frecuencia = Freq)
+
+```
+
+
+Vamos ahora a realizar una gráfica de tipo mosáico (tile), donde el eje horizontal esté asociado a la variable hora, y el eje vertical a la variable dia, y donde además el color de relleno esté asociado a la variable Frecuencia...
+
+```{r}
+ggplot(data = df.tabla.anormales.hora.dia, aes(x = hora, y = dia)) + 
+  geom_tile(stat = 'identity', aes(fill = Frecuencia))
+
+
+```
+
+Algún comentario sobre esta gráfica? ¿Algún patrón destacable?
+Tenemos 2 patrones destacables, el primero de 7:30 a 9:30, que exceptuando los lunes, tiene la misma frecuencia. Y el segundo patrón es el de las 9:30 a 10:30, donde tenemos una frecuencia similar, excepto para el sábado.
+
+# Para ir más lejos..
+
+
+Si tenéis alguna sugerencia sobre qué más se podría intentar explorar de este conjunto de datos, podéis apuntarlo aquí con una lista numerada...
+
+1. 
+
+2. 
+
+
