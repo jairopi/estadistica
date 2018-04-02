@@ -1,0 +1,148 @@
+---
+output: html_document
+---
+Cuaderno compañero de las transparencias "Vectores y data.frames en R"
+========================================================
+Nombre y Apellidos: Jairo Peña Iglesias
+Ejercicios "Manipulacion de vectores"
+--------------------------------------
+
+```{r}
+x <- c(2, 3, 0, 3, 1, 0, 0, 1)
+x^2
+x / 3
+2 < 1
+3 == (1 + 2)
+2 != (5 / 3)
+rep(c(4, 5, 7), times = 3)
+rep(c(4, 5, 7), times = c(1, 3, 2))
+x  <- c(1 ,4, 5, 10)
+y  <-  c(2, 5, 6, 11)
+x + y 
+x / y
+```
+
+### Calcular con la expresi?n m?s compacta posible
+1. La suma de los cien primeros numeros enteros
+```{r }
+i <- 1 : 100
+sum(i)
+```
+2. La suma de los cien primeros terminos de la sucesion $(1+i)/(2+3*(i-1)^2)*\cos(i*\pi/100)$.
+
+```{r }
+i <- 0 : 99
+sum((1+i)/(2+3*(i-1)^2)*cos(i*pi/100))
+```
+3. Una aproximacion de $\pi$ usando la formula de Gregory-Leibniz:
+$$\pi=\frac 4  1 - \frac 4 3 +\frac 4 5 - \frac 4 7 + \frac 4 9 +\cdots.$$
+```{r }
+a <- seq (1, 100, by = 4)
+b <- seq (3, 100, by = 4)
+sum((4/a) - (4/b))
+
+```
+
+### Problemas
+```{r , echo=FALSE}
+## creamos un vector x para servir en los ejemplos en caso de necesidad.
+set.seed(seed=1)
+x=round(rnorm(15,mean=3,sd=0.5),digits=1)
+x
+```
+
+1. Dado un vector *x*, crear un vector *i* que contenga los indices de *x*.
+```{r }
+i <- 1 : length(x)
+i
+```
+2. Dado un vector *x}, crear un vector *inv\_i} que contenga los indices de *x} ordenados de mayor a menor.
+
+```{r}
+inv_i <- length(x): 1
+inv_i
+```
+
+
+3. Dado un vector *x*, crear un vector *inv_x* que contenga los valores de *x* empezando por el ultimo, luego el penultimo, etc....
+```{r completar_aqu?_4}
+inv_x <- c(x[15:1])
+##no quiero la inversa de los indices(apartado 2), sino los valores de x empezando por el ultimo. Por ello, extraigo los elementos desde el 15 hasta el 1 y los concateno en el vector inv_x
+inv_x
+```
+
+3. Introducir el vector *x=c(2,5,120,5,8,11)*. Supongamos que me he equivocado y he olvidado el numero 7 entre el 5 y el 8 (indices 4 y 5 resp.). ¿Como arreglarlo? Tambien he olvidado el ultimo numero: despues del 11, viene un 3. Finalmente, resulta que el valor 120 es un error tipografico, en realidad es un 12. Llevar a cabo las correcciones pertinentes...
+```{r completar_aqu?_5}
+x <- c(2,5,120,5,8,11)
+#numero olvidado entre indices 4 y 5, un 7
+x <- c(x[1:4], 7, x[5:length(x)])
+#he olvidado el ultimo numero, un 3
+x[length(x)+1] <- 3
+#el valor 120 es en realidad un 12
+x[3] <- 12
+x
+```
+4. Generar dos vectores *x* e *y* tal que
+*x* contenga los valores de 0 a 5 con un incremento de 0.01, y
+tal que *y* sea igual a *sen(x)*. A continuacion se puede
+realizar la grafica de *y* en funcion de *x* con la
+instruccion *plot(x,y)*.
+```{r completar_aqu?_6}
+x <- seq (0, 5, by = 0.01)
+y <- sin(x)
+plot(x, y)
+```
+
+5.  Generar un vector que contenga 12 valores, los
+primeros 4 siendo igual a 0.5, los 4 siguientes a 1.5, y los 4
+ultimos a 3.
+```{r completar_aqu?_7}
+x <- rep(c (0.5, 1.5, 3), times = c (4, 4, 4))
+x
+```
+6.   Encontrar como calcular la media de un vector *x* sin utilizar la funcion *mean*.
+```{r completar_aqu?_8}
+x <- sum(x)/(length(x)) #sumatorio de x/ numero de sumandos = mean(x)
+x
+```
+
+7. Encontrar una manera alternativa de calcular la varianza de un vector *x*, utilizando la formula 
+$$var(x)=\frac n {n-1} \{\overline{x^2}-(\bar{x})^2\}$$
+```{r completar_aqu?_9}
+x <- c(1, 3, 5, 7, 9)
+media <- sum(x)/length(x)
+media_cuadrado <- media^2
+
+x2 <- sum(x^2)
+media_x2 <- x2/length(x)
+
+x4 <- (media_x2 - media_cuadrado)*length(x)/(length(x)-1)
+x4
+x3 <- var(x) #comprobamos que obtenemos el resultado correcto
+x3
+```
+
+8. A lo largo de un año, los importes de las facturas mensuales de vuestro movil han sido:    23, 33, 25, 45, 10, 28, 39, 27, 15, 38, 34, 29
+ 
+ ¿Cuanto habeis gastado en total en el año? ¿Cual ha sido el gasto minimo? ¿Y el maximo? ¿Que meses han supuesto un gasto mayor que el gasto medio? ¿Que porcentaje de meses han supuesto un gasto mayor que el gasto promedio?
+ 
+```{r completar_aqu?_10}
+x <- c(23, 33, 25, 45, 10, 28, 39, 27, 15, 38, 34, 29)
+#¿Cuanto habeis gastado en total en el año?
+x1 <- sum(x)
+x1
+#¿Cual ha sido el gasto minimo? 
+x2 <- min(x)
+x2
+#¿Y el maximo? 
+x3 <- max(x)
+x3
+#¿Que meses han supuesto un gasto mayor que el gasto medio?
+x4 <- mean(x)
+x4
+x4 <- which (x > mean(x))
+x4
+#¿Que porcentaje de meses han supuesto un gasto mayor que el gasto promedio?
+x5 <- (length(x4)/length(x)) * 100
+x5
+```
