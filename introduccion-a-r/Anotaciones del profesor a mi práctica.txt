@@ -1,0 +1,3 @@
+Jairo, tienes un pequeño fallo en el último apartado. 
+Se pedía crear un data.frame con dos columnas llamadas x e y, pero tú has hecho dos vectores. 
+Por lo demás, todo bien.

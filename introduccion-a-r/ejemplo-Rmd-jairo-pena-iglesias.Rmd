@@ -1,0 +1,71 @@
+---
+title: "Ejemplo de documento Rmarkdown"
+author: "Mathieu Kessler"
+date: "17/02/2015"
+output: html_document
+---
+##Introducción
+Este documento sirve para ilustrar el modo Rmardown, que permite crear documentos dinámicos que ejecuten bloques de código R cuando se generen con dos objetivos:
+
+* Conseguir la reproductibilidad del análisis realizado
+* Facilitar la generación de informes que se puedan adaptar con facilidad si hay cambios en los datos de entrada.
+
+##Indicadores básicos del conjunto de datos “constitución”
+<!-- Para ir insertando bloques (chunk) de códigos, se puede usar el comando "Insert chunk" del menú Code. -->
+El número de filas que contiene el conjunto de datos considerados es 6, mientras que el número de columnas es 2.
+```{r eval=TRUE, echo=FALSE}
+constitución <- data.frame(peso = c(54, 70, 65, 
+                                      78, 68, 85),
+                           altura = c( 160, 170, 172,
+                                    185, 160, 175))
+```
+###Media y desviación típica
+Podemos calcular indicadores asociados al conjunto de datos que consideramos,
+```{r}
+mean(constitución$peso)
+mean(constitución$altura)
+```
+###Representación gráfica
+<!-- Podemos incluir gráficas que se generen en el momento de "Knit HTML". -->
+Es útil realizar una representación gráfica de peso y altura.
+```{r eval=TRUE, echo=FALSE}
+plot(constitución$peso, constitución$altura)
+```
+
+
+<!-- Tenemos la opción de que aparezca o no el código del bloque, si le añadimos el argumento *echo = FALSE* en la cabecera del bloque. Si queremos por ejemplo pasar el informe a alguien a quién no le interesa el código con él que se ha generado, podremos usar este argumento en todos los bloques. -->
+
+```{r eval=FALSE, echo=FALSE}
+plot(constitución$peso, constitución$altura)
+```
+
+<!-- Existe la posibilidad de insertar código R en una línea de texto, (sin recurrir necesariamente a un bloque): -->
+
+<!-- El número de filas que contiene el conjunto de datos considerados es `r nrow(constitución)`, mientras que el número de columnas es `r ncol(constitución)`. -->
+
+
+<!-- La media del peso en el conjunto de datos considerados es `r mean(constitución$peso)` y su desviación típica es `r sd(constitución$peso)`. -->
+
+##Calculo del índice de masa corporal.
+
+> El índice de masa corporal (IMC) es una medida de asociación entre la masa y la talla de un individuo ideada por el estadístico belga Adolphe Quetelet, por lo que también se conoce como índice de Quetelet. (Wikipedia)
+
+Se puede encontrar más información en la Wikipedia: [enlace al artículo sobre IMC](https://es.wikipedia.org/wiki/%C3%8Dndice_de_masa_corporal), donde aparece la clasificación de los valores del IMC según la OMC.
+
+Si queremos calcular el IMC, añadimos una columna al conjunto de datos
+```{r}
+constitución$IMC = constitución$peso / ((constitución$altura /100)^2)
+```
+
+Y podemos ver su resumen en la tabla siguiente
+
+**Número de datos**   |   **Media**  |  **Desviación típica**
+----------------------|--------------|-----------------------  
+`r nrow (constitución)` | `r mean(constitución$IMC)` | `r sd(constitución$IMC)`
+
+Visualizamos además el IMC atípicos usando un boxplot
+
+```{r eval=TRUE, echo=FALSE}
+boxplot(constitución$IMC)
+``` 
+
