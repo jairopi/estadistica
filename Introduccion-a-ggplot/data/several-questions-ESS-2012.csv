@@ -1,0 +1,833 @@
+## Frequencies(%) of answers to several questions of the module  "Personal and Social Well-Being"
+## as prepared  from the data table corresponding to the ESS 2012
+## downloaded from http://www.europeansocialsurvey.org/.
+## Mathieu Kessler, Universidad Politécnica de Cartagena, January 20th, 2014.
+"Pais";"Pregunta";"Respuesta";"Porcentaje"
+"Belgium";"Felt anxious, how often past week";"None or almost none of the time";30.1714898177921
+"Bulgaria";"Felt anxious, how often past week";"None or almost none of the time";16.5701559020045
+"Switzerland";"Felt anxious, how often past week";"None or almost none of the time";36.260053619303
+"Cyprus";"Felt anxious, how often past week";"None or almost none of the time";30.3683737646002
+"Czech Republic";"Felt anxious, how often past week";"None or almost none of the time";57.75950668037
+"Germany";"Felt anxious, how often past week";"None or almost none of the time";80.8121827411168
+"Denmark";"Felt anxious, how often past week";"None or almost none of the time";78.6855036855037
+"Estonia";"Felt anxious, how often past week";"None or almost none of the time";40.9110080134964
+"Spain";"Felt anxious, how often past week";"None or almost none of the time";65.3866666666667
+"Finland";"Felt anxious, how often past week";"None or almost none of the time";66.1172161172161
+"United Kingdom";"Felt anxious, how often past week";"None or almost none of the time";54.0386303775241
+"Ireland";"Felt anxious, how often past week";"None or almost none of the time";56.2046582665139
+"Israel";"Felt anxious, how often past week";"None or almost none of the time";67.9336837848767
+"Iceland";"Felt anxious, how often past week";"None or almost none of the time";63.8666666666667
+"Netherlands";"Felt anxious, how often past week";"None or almost none of the time";31.0363537710255
+"Norway";"Felt anxious, how often past week";"None or almost none of the time";81.8181818181818
+"Poland";"Felt anxious, how often past week";"None or almost none of the time";60.3531300160514
+"Portugal";"Felt anxious, how often past week";"None or almost none of the time";39.5998138669148
+"Russian Federation";"Felt anxious, how often past week";"None or almost none of the time";28.518821603928
+"Sweden";"Felt anxious, how often past week";"None or almost none of the time";61.1050920910076
+"Slovenia";"Felt anxious, how often past week";"None or almost none of the time";72.0223820943245
+"Slovakia";"Felt anxious, how often past week";"None or almost none of the time";43.9410480349345
+"Kosovo";"Felt anxious, how often past week";"None or almost none of the time";47.9285134037368
+"Belgium";"Felt anxious, how often past week";"Some of the time";54.3408360128617
+"Bulgaria";"Felt anxious, how often past week";"Some of the time";62.4053452115813
+"Switzerland";"Felt anxious, how often past week";"Some of the time";53.6193029490617
+"Cyprus";"Felt anxious, how often past week";"Some of the time";41.329739442947
+"Czech Republic";"Felt anxious, how often past week";"Some of the time";30.5755395683453
+"Germany";"Felt anxious, how often past week";"Some of the time";16.1082910321489
+"Denmark";"Felt anxious, how often past week";"Some of the time";18.9189189189189
+"Estonia";"Felt anxious, how often past week";"Some of the time";46.6891606916913
+"Spain";"Felt anxious, how often past week";"Some of the time";27.2533333333333
+"Finland";"Felt anxious, how often past week";"Some of the time";29.9908424908425
+"United Kingdom";"Felt anxious, how often past week";"Some of the time";38.2352941176471
+"Ireland";"Felt anxious, how often past week";"Some of the time";36.9224894998091
+"Israel";"Felt anxious, how often past week";"Some of the time";26.081682167408
+"Iceland";"Felt anxious, how often past week";"Some of the time";29.8666666666667
+"Netherlands";"Felt anxious, how often past week";"Some of the time";55.2902875746066
+"Norway";"Felt anxious, how often past week";"Some of the time";15.8317872603587
+"Poland";"Felt anxious, how often past week";"Some of the time";28.3039058319957
+"Portugal";"Felt anxious, how often past week";"Some of the time";48.1619357840856
+"Russian Federation";"Felt anxious, how often past week";"Some of the time";47.3404255319149
+"Sweden";"Felt anxious, how often past week";"Some of the time";33.1527627302275
+"Slovenia";"Felt anxious, how often past week";"Some of the time";22.3820943245404
+"Slovakia";"Felt anxious, how often past week";"Some of the time";44.6506550218341
+"Kosovo";"Felt anxious, how often past week";"Some of the time";39.642567018684
+"Belgium";"Felt anxious, how often past week";"Most of the time";11.8971061093248
+"Bulgaria";"Felt anxious, how often past week";"Most of the time";15.7238307349666
+"Switzerland";"Felt anxious, how often past week";"Most of the time";7.43967828418231
+"Cyprus";"Felt anxious, how often past week";"Most of the time";17.8796046720575
+"Czech Republic";"Felt anxious, how often past week";"Most of the time";8.78725590955807
+"Germany";"Felt anxious, how often past week";"Most of the time";2.165820642978
+"Denmark";"Felt anxious, how often past week";"Most of the time";1.53562653562654
+"Estonia";"Felt anxious, how often past week";"Most of the time";10.4597216364403
+"Spain";"Felt anxious, how often past week";"Most of the time";4.69333333333333
+"Finland";"Felt anxious, how often past week";"Most of the time";3.02197802197802
+"United Kingdom";"Felt anxious, how often past week";"Most of the time";5.09218612818262
+"Ireland";"Felt anxious, how often past week";"Most of the time";4.8491790759832
+"Israel";"Felt anxious, how often past week";"Most of the time";4.48847553578649
+"Iceland";"Felt anxious, how often past week";"Most of the time";4.26666666666667
+"Netherlands";"Felt anxious, how often past week";"Most of the time";10.4177970699946
+"Norway";"Felt anxious, how often past week";"Most of the time";2.16450216450216
+"Poland";"Felt anxious, how often past week";"Most of the time";8.23970037453183
+"Portugal";"Felt anxious, how often past week";"Most of the time";8.93438808748255
+"Russian Federation";"Felt anxious, how often past week";"Most of the time";21.6857610474632
+"Sweden";"Felt anxious, how often past week";"Most of the time";4.60455037919827
+"Slovenia";"Felt anxious, how often past week";"Most of the time";4.63629096722622
+"Slovakia";"Felt anxious, how often past week";"Most of the time";9.49781659388646
+"Kosovo";"Felt anxious, how often past week";"Most of the time";10.1543460601137
+"Belgium";"Felt anxious, how often past week";"All or almost all of the time";3.59056806002144
+"Bulgaria";"Felt anxious, how often past week";"All or almost all of the time";5.30066815144766
+"Switzerland";"Felt anxious, how often past week";"All or almost all of the time";2.68096514745308
+"Cyprus";"Felt anxious, how often past week";"All or almost all of the time";10.4222821203953
+"Czech Republic";"Felt anxious, how often past week";"All or almost all of the time";2.87769784172662
+"Germany";"Felt anxious, how often past week";"All or almost all of the time";0.913705583756345
+"Denmark";"Felt anxious, how often past week";"All or almost all of the time";0.85995085995086
+"Estonia";"Felt anxious, how often past week";"All or almost all of the time";1.940109658372
+"Spain";"Felt anxious, how often past week";"All or almost all of the time";2.66666666666667
+"Finland";"Felt anxious, how often past week";"All or almost all of the time";0.86996336996337
+"United Kingdom";"Felt anxious, how often past week";"All or almost all of the time";2.63388937664618
+"Ireland";"Felt anxious, how often past week";"All or almost all of the time";2.02367315769378
+"Israel";"Felt anxious, how often past week";"All or almost all of the time";1.49615851192883
+"Iceland";"Felt anxious, how often past week";"All or almost all of the time";2
+"Netherlands";"Felt anxious, how often past week";"All or almost all of the time";3.2555615843733
+"Norway";"Felt anxious, how often past week";"All or almost all of the time";0.185528756957328
+"Poland";"Felt anxious, how often past week";"All or almost all of the time";3.10326377742108
+"Portugal";"Felt anxious, how often past week";"All or almost all of the time";3.30386226151699
+"Russian Federation";"Felt anxious, how often past week";"All or almost all of the time";2.45499181669394
+"Sweden";"Felt anxious, how often past week";"All or almost all of the time";1.13759479956663
+"Slovenia";"Felt anxious, how often past week";"All or almost all of the time";0.959232613908873
+"Slovakia";"Felt anxious, how often past week";"All or almost all of the time";1.91048034934498
+"Kosovo";"Felt anxious, how often past week";"All or almost all of the time";2.27457351746548
+"Belgium";"Had lot of energy, how often past week";"None or almost none of the time";12.7077747989276
+"Bulgaria";"Had lot of energy, how often past week";"None or almost none of the time";13.7606454504706
+"Switzerland";"Had lot of energy, how often past week";"None or almost none of the time";5.1747311827957
+"Cyprus";"Had lot of energy, how often past week";"None or almost none of the time";8.5278276481149
+"Czech Republic";"Had lot of energy, how often past week";"None or almost none of the time";5.41645375574859
+"Germany";"Had lot of energy, how often past week";"None or almost none of the time";6.86971235194585
+"Denmark";"Had lot of energy, how often past week";"None or almost none of the time";8.56102003642987
+"Estonia";"Had lot of energy, how often past week";"None or almost none of the time";8.96405919661733
+"Spain";"Had lot of energy, how often past week";"None or almost none of the time";22.5412014885699
+"Finland";"Had lot of energy, how often past week";"None or almost none of the time";8.0512351326624
+"United Kingdom";"Had lot of energy, how often past week";"None or almost none of the time";16.0157964019307
+"Ireland";"Had lot of energy, how often past week";"None or almost none of the time";7.38766184310739
+"Israel";"Had lot of energy, how often past week";"None or almost none of the time";8.03571428571429
+"Iceland";"Had lot of energy, how often past week";"None or almost none of the time";9.09090909090909
+"Netherlands";"Had lot of energy, how often past week";"None or almost none of the time";10.2550189907759
+"Norway";"Had lot of energy, how often past week";"None or almost none of the time";6.55534941249227
+"Poland";"Had lot of energy, how often past week";"None or almost none of the time";11.04
+"Portugal";"Had lot of energy, how often past week";"None or almost none of the time";16.8372093023256
+"Russian Federation";"Had lot of energy, how often past week";"None or almost none of the time";6.37765735723218
+"Sweden";"Had lot of energy, how often past week";"None or almost none of the time";10.2925243770314
+"Slovenia";"Had lot of energy, how often past week";"None or almost none of the time";3.83386581469649
+"Slovakia";"Had lot of energy, how often past week";"None or almost none of the time";9.65103598691385
+"Kosovo";"Had lot of energy, how often past week";"None or almost none of the time";8.9622641509434
+"Belgium";"Had lot of energy, how often past week";"Some of the time";35.3887399463807
+"Bulgaria";"Had lot of energy, how often past week";"Some of the time";33.2586284177499
+"Switzerland";"Had lot of energy, how often past week";"Some of the time";22.4462365591398
+"Cyprus";"Had lot of energy, how often past week";"Some of the time";25.4937163375224
+"Czech Republic";"Had lot of energy, how often past week";"Some of the time";29.5861011752683
+"Germany";"Had lot of energy, how often past week";"Some of the time";27.6480541455161
+"Denmark";"Had lot of energy, how often past week";"Some of the time";30.8439587128112
+"Estonia";"Had lot of energy, how often past week";"Some of the time";31.2896405919662
+"Spain";"Had lot of energy, how often past week";"Some of the time";42.6900584795322
+"Finland";"Had lot of energy, how often past week";"Some of the time";37.9231473010064
+"United Kingdom";"Had lot of energy, how often past week";"Some of the time";38.4817902588855
+"Ireland";"Had lot of energy, how often past week";"Some of the time";31.8354912414318
+"Israel";"Had lot of energy, how often past week";"Some of the time";30.1948051948052
+"Iceland";"Had lot of energy, how often past week";"Some of the time";31.951871657754
+"Netherlands";"Had lot of energy, how often past week";"Some of the time";25.5561584373304
+"Norway";"Had lot of energy, how often past week";"Some of the time";34.5701917130489
+"Poland";"Had lot of energy, how often past week";"Some of the time";28.0533333333333
+"Portugal";"Had lot of energy, how often past week";"Some of the time";37.5348837209302
+"Russian Federation";"Had lot of energy, how often past week";"Some of the time";33.5973322217591
+"Sweden";"Had lot of energy, how often past week";"Some of the time";34.3986998916576
+"Slovenia";"Had lot of energy, how often past week";"Some of the time";17.4920127795527
+"Slovakia";"Had lot of energy, how often past week";"Some of the time";34.1875681570338
+"Kosovo";"Had lot of energy, how often past week";"Some of the time";37.185534591195
+"Belgium";"Had lot of energy, how often past week";"Most of the time";38.7131367292225
+"Bulgaria";"Had lot of energy, how often past week";"Most of the time";35.8135365307037
+"Switzerland";"Had lot of energy, how often past week";"Most of the time";47.5134408602151
+"Cyprus";"Had lot of energy, how often past week";"Most of the time";33.4829443447038
+"Czech Republic";"Had lot of energy, how often past week";"Most of the time";46.7041389882473
+"Germany";"Had lot of energy, how often past week";"Most of the time";46.1928934010152
+"Denmark";"Had lot of energy, how often past week";"Most of the time";43.7765634486946
+"Estonia";"Had lot of energy, how often past week";"Most of the time";46.4693446088795
+"Spain";"Had lot of energy, how often past week";"Most of the time";24.0297713981925
+"Finland";"Had lot of energy, how often past week";"Most of the time";45.1509606587374
+"United Kingdom";"Had lot of energy, how often past week";"Most of the time";33.7867485739359
+"Ireland";"Had lot of energy, how often past week";"Most of the time";40.7083015993907
+"Israel";"Had lot of energy, how often past week";"Most of the time";43.1006493506493
+"Iceland";"Had lot of energy, how often past week";"Most of the time";45.855614973262
+"Netherlands";"Had lot of energy, how often past week";"Most of the time";47.0971242539338
+"Norway";"Had lot of energy, how often past week";"Most of the time";45.3308596165739
+"Poland";"Had lot of energy, how often past week";"Most of the time";37.1733333333333
+"Portugal";"Had lot of energy, how often past week";"Most of the time";27.6279069767442
+"Russian Federation";"Had lot of energy, how often past week";"Most of the time";51.3964151729887
+"Sweden";"Had lot of energy, how often past week";"Most of the time";38.4073672806067
+"Slovenia";"Had lot of energy, how often past week";"Most of the time";58.3067092651757
+"Slovakia";"Had lot of energy, how often past week";"Most of the time";38.8222464558342
+"Kosovo";"Had lot of energy, how often past week";"Most of the time";39.8584905660377
+"Belgium";"Had lot of energy, how often past week";"All or almost all of the time";13.1903485254692
+"Bulgaria";"Had lot of energy, how often past week";"All or almost all of the time";17.1671896010757
+"Switzerland";"Had lot of energy, how often past week";"All or almost all of the time";24.8655913978495
+"Cyprus";"Had lot of energy, how often past week";"All or almost all of the time";32.4955116696589
+"Czech Republic";"Had lot of energy, how often past week";"All or almost all of the time";18.2933060807358
+"Germany";"Had lot of energy, how often past week";"All or almost all of the time";19.2893401015228
+"Denmark";"Had lot of energy, how often past week";"All or almost all of the time";16.8184578020644
+"Estonia";"Had lot of energy, how often past week";"All or almost all of the time";13.276955602537
+"Spain";"Had lot of energy, how often past week";"All or almost all of the time";10.7389686337055
+"Finland";"Had lot of energy, how often past week";"All or almost all of the time";8.87465690759378
+"United Kingdom";"Had lot of energy, how often past week";"All or almost all of the time";11.7156647652479
+"Ireland";"Had lot of energy, how often past week";"All or almost all of the time";20.0685453160701
+"Israel";"Had lot of energy, how often past week";"All or almost all of the time";18.6688311688312
+"Iceland";"Had lot of energy, how often past week";"All or almost all of the time";13.1016042780749
+"Netherlands";"Had lot of energy, how often past week";"All or almost all of the time";17.0916983179598
+"Norway";"Had lot of energy, how often past week";"All or almost all of the time";13.543599257885
+"Poland";"Had lot of energy, how often past week";"All or almost all of the time";23.7333333333333
+"Portugal";"Had lot of energy, how often past week";"All or almost all of the time";18
+"Russian Federation";"Had lot of energy, how often past week";"All or almost all of the time";8.62859524802001
+"Sweden";"Had lot of energy, how often past week";"All or almost all of the time";16.9014084507042
+"Slovenia";"Had lot of energy, how often past week";"All or almost all of the time";20.3674121405751
+"Slovakia";"Had lot of energy, how often past week";"All or almost all of the time";17.3391494002181
+"Kosovo";"Had lot of energy, how often past week";"All or almost all of the time";13.9937106918239
+"Belgium";"Could not get going, how often past week";"None or almost none of the time";58.0921757770632
+"Bulgaria";"Could not get going, how often past week";"None or almost none of the time";54.9929676511955
+"Switzerland";"Could not get going, how often past week";"None or almost none of the time";68.4351914036266
+"Cyprus";"Could not get going, how often past week";"None or almost none of the time";64.9186256781193
+"Czech Republic";"Could not get going, how often past week";"None or almost none of the time";26.5473145780051
+"Germany";"Could not get going, how often past week";"None or almost none of the time";60.8062330623306
+"Denmark";"Could not get going, how often past week";"None or almost none of the time";60.6337599024985
+"Estonia";"Could not get going, how often past week";"None or almost none of the time";46.9587409612931
+"Spain";"Could not get going, how often past week";"None or almost none of the time";47.7453580901857
+"Finland";"Could not get going, how often past week";"None or almost none of the time";51.0550458715596
+"United Kingdom";"Could not get going, how often past week";"None or almost none of the time";54.1978021978022
+"Ireland";"Could not get going, how often past week";"None or almost none of the time";59.0126291618829
+"Israel";"Could not get going, how often past week";"None or almost none of the time";64.5909645909646
+"Iceland";"Could not get going, how often past week";"None or almost none of the time";64.7058823529412
+"Netherlands";"Could not get going, how often past week";"None or almost none of the time";47.7765726681128
+"Norway";"Could not get going, how often past week";"None or almost none of the time";63.4282178217822
+"Poland";"Could not get going, how often past week";"None or almost none of the time";55.6447298020332
+"Portugal";"Could not get going, how often past week";"None or almost none of the time";42.5848442584844
+"Russian Federation";"Could not get going, how often past week";"None or almost none of the time";36.6101694915254
+"Sweden";"Could not get going, how often past week";"None or almost none of the time";55.531453362256
+"Slovenia";"Could not get going, how often past week";"None or almost none of the time";54.8
+"Slovakia";"Could not get going, how often past week";"None or almost none of the time";30.2479338842975
+"Kosovo";"Could not get going, how often past week";"None or almost none of the time";38.755980861244
+"Belgium";"Could not get going, how often past week";"Some of the time";34.6195069667738
+"Bulgaria";"Could not get going, how often past week";"Some of the time";33.8490389123301
+"Switzerland";"Could not get going, how often past week";"Some of the time";26.0577568838146
+"Cyprus";"Could not get going, how often past week";"Some of the time";27.9385171790235
+"Czech Republic";"Could not get going, how often past week";"Some of the time";52.3273657289003
+"Germany";"Could not get going, how often past week";"Some of the time";32.4525745257453
+"Denmark";"Could not get going, how often past week";"Some of the time";32.9677026203534
+"Estonia";"Could not get going, how often past week";"Some of the time";41.7269247128881
+"Spain";"Could not get going, how often past week";"Some of the time";43.0769230769231
+"Finland";"Could not get going, how often past week";"Some of the time";41.5137614678899
+"United Kingdom";"Could not get going, how often past week";"Some of the time";35.2087912087912
+"Ireland";"Could not get going, how often past week";"Some of the time";34.4814389590509
+"Israel";"Could not get going, how often past week";"Some of the time";26.2108262108262
+"Iceland";"Could not get going, how often past week";"Some of the time";29.144385026738
+"Netherlands";"Could not get going, how often past week";"Some of the time";40.3470715835141
+"Norway";"Could not get going, how often past week";"Some of the time";31.9306930693069
+"Poland";"Could not get going, how often past week";"Some of the time";31.5676832530765
+"Portugal";"Could not get going, how often past week";"Some of the time";44.5374244537424
+"Russian Federation";"Could not get going, how often past week";"Some of the time";45.635593220339
+"Sweden";"Could not get going, how often past week";"Some of the time";36.2255965292842
+"Slovenia";"Could not get going, how often past week";"Some of the time";35.36
+"Slovakia";"Could not get going, how often past week";"Some of the time";56.3636363636364
+"Kosovo";"Could not get going, how often past week";"Some of the time";48.3253588516746
+"Belgium";"Could not get going, how often past week";"Most of the time";5.51982851018221
+"Bulgaria";"Could not get going, how often past week";"Most of the time";8.15752461322082
+"Switzerland";"Could not get going, how often past week";"Most of the time";3.96239086635326
+"Cyprus";"Could not get going, how often past week";"Most of the time";5.69620253164557
+"Czech Republic";"Could not get going, how often past week";"Most of the time";16.0102301790281
+"Germany";"Could not get going, how often past week";"Most of the time";5.18292682926829
+"Denmark";"Could not get going, how often past week";"Most of the time";4.57038391224863
+"Estonia";"Could not get going, how often past week";"Most of the time";9.14504466184602
+"Spain";"Could not get going, how often past week";"Most of the time";5.94164456233422
+"Finland";"Could not get going, how often past week";"Most of the time";5
+"United Kingdom";"Could not get going, how often past week";"Most of the time";7.51648351648352
+"Ireland";"Could not get going, how often past week";"Most of the time";4.20972062763108
+"Israel";"Could not get going, how often past week";"Most of the time";6.71550671550672
+"Iceland";"Could not get going, how often past week";"Most of the time";4.41176470588235
+"Netherlands";"Could not get going, how often past week";"Most of the time";9.05639913232104
+"Norway";"Could not get going, how often past week";"Most of the time";3.46534653465347
+"Poland";"Could not get going, how often past week";"Most of the time";9.09577314071696
+"Portugal";"Could not get going, how often past week";"Most of the time";9.9488609948861
+"Russian Federation";"Could not get going, how often past week";"Most of the time";15.2118644067797
+"Sweden";"Could not get going, how often past week";"Most of the time";6.56182212581345
+"Slovenia";"Could not get going, how often past week";"Most of the time";7.68
+"Slovakia";"Could not get going, how often past week";"Most of the time";10.4683195592287
+"Kosovo";"Could not get going, how often past week";"Most of the time";10.9250398724083
+"Belgium";"Could not get going, how often past week";"All or almost all of the time";1.76848874598071
+"Bulgaria";"Could not get going, how often past week";"All or almost all of the time";3.00046882325363
+"Switzerland";"Could not get going, how often past week";"All or almost all of the time";1.54466084620551
+"Cyprus";"Could not get going, how often past week";"All or almost all of the time";1.44665461121157
+"Czech Republic";"Could not get going, how often past week";"All or almost all of the time";5.1150895140665
+"Germany";"Could not get going, how often past week";"All or almost all of the time";1.55826558265583
+"Denmark";"Could not get going, how often past week";"All or almost all of the time";1.82815356489945
+"Estonia";"Could not get going, how often past week";"All or almost all of the time";2.16928966397278
+"Spain";"Could not get going, how often past week";"All or almost all of the time";3.23607427055703
+"Finland";"Could not get going, how often past week";"All or almost all of the time";2.43119266055046
+"United Kingdom";"Could not get going, how often past week";"All or almost all of the time";3.07692307692308
+"Ireland";"Could not get going, how often past week";"All or almost all of the time";2.29621125143513
+"Israel";"Could not get going, how often past week";"All or almost all of the time";2.48270248270248
+"Iceland";"Could not get going, how often past week";"All or almost all of the time";1.7379679144385
+"Netherlands";"Could not get going, how often past week";"All or almost all of the time";2.81995661605206
+"Norway";"Could not get going, how often past week";"All or almost all of the time";1.17574257425743
+"Poland";"Could not get going, how often past week";"All or almost all of the time";3.69181380417336
+"Portugal";"Could not get going, how often past week";"All or almost all of the time";2.92887029288703
+"Russian Federation";"Could not get going, how often past week";"All or almost all of the time";2.54237288135593
+"Sweden";"Could not get going, how often past week";"All or almost all of the time";1.68112798264642
+"Slovenia";"Could not get going, how often past week";"All or almost all of the time";2.16
+"Slovakia";"Could not get going, how often past week";"All or almost all of the time";2.92011019283747
+"Kosovo";"Could not get going, how often past week";"All or almost all of the time";1.99362041467305
+"Belgium";"Enjoyed life, how often past week";"None or almost none of the time";3.96570203644159
+"Bulgaria";"Enjoyed life, how often past week";"None or almost none of the time";10.0403406544151
+"Switzerland";"Enjoyed life, how often past week";"None or almost none of the time";2.81501340482574
+"Cyprus";"Enjoyed life, how often past week";"None or almost none of the time";8.22041553748871
+"Czech Republic";"Enjoyed life, how often past week";"None or almost none of the time";11.4080164439877
+"Germany";"Enjoyed life, how often past week";"None or almost none of the time";6.6079295154185
+"Denmark";"Enjoyed life, how often past week";"None or almost none of the time";3.23170731707317
+"Estonia";"Enjoyed life, how often past week";"None or almost none of the time";5.68037303942348
+"Spain";"Enjoyed life, how often past week";"None or almost none of the time";9.80810234541578
+"Finland";"Enjoyed life, how often past week";"None or almost none of the time";3.24497257769653
+"United Kingdom";"Enjoyed life, how often past week";"None or almost none of the time";3.28803156510302
+"Ireland";"Enjoyed life, how often past week";"None or almost none of the time";3.01067073170732
+"Israel";"Enjoyed life, how often past week";"None or almost none of the time";6.27276406313234
+"Iceland";"Enjoyed life, how often past week";"None or almost none of the time";2.54010695187166
+"Netherlands";"Enjoyed life, how often past week";"None or almost none of the time";4.6195652173913
+"Norway";"Enjoyed life, how often past week";"None or almost none of the time";1.79455445544554
+"Poland";"Enjoyed life, how often past week";"None or almost none of the time";8.35117773019272
+"Portugal";"Enjoyed life, how often past week";"None or almost none of the time";9.59925442684063
+"Russian Federation";"Enjoyed life, how often past week";"None or almost none of the time";5.42929292929293
+"Sweden";"Enjoyed life, how often past week";"None or almost none of the time";5.04612045577862
+"Slovenia";"Enjoyed life, how often past week";"None or almost none of the time";1.84294871794872
+"Slovakia";"Enjoyed life, how often past week";"None or almost none of the time";3.43698854337152
+"Kosovo";"Enjoyed life, how often past week";"None or almost none of the time";8.83280757097792
+"Belgium";"Enjoyed life, how often past week";"Some of the time";17.8456591639871
+"Bulgaria";"Enjoyed life, how often past week";"Some of the time";34.648139847602
+"Switzerland";"Enjoyed life, how often past week";"Some of the time";17.7613941018767
+"Cyprus";"Enjoyed life, how often past week";"Some of the time";25.2032520325203
+"Czech Republic";"Enjoyed life, how often past week";"Some of the time";27.5950668036999
+"Germany";"Enjoyed life, how often past week";"Some of the time";28.3293798712301
+"Denmark";"Enjoyed life, how often past week";"Some of the time";19.2073170731707
+"Estonia";"Enjoyed life, how often past week";"Some of the time";25.688851208139
+"Spain";"Enjoyed life, how often past week";"Some of the time";31.3965884861407
+"Finland";"Enjoyed life, how often past week";"Some of the time";20.8866544789762
+"United Kingdom";"Enjoyed life, how often past week";"Some of the time";22.1832529592284
+"Ireland";"Enjoyed life, how often past week";"Some of the time";19.5121951219512
+"Israel";"Enjoyed life, how often past week";"Some of the time";29.7045730473493
+"Iceland";"Enjoyed life, how often past week";"Some of the time";18.048128342246
+"Netherlands";"Enjoyed life, how often past week";"Some of the time";15.3260869565217
+"Norway";"Enjoyed life, how often past week";"Some of the time";12.0049504950495
+"Poland";"Enjoyed life, how often past week";"Some of the time";19.8072805139186
+"Portugal";"Enjoyed life, how often past week";"Some of the time";37.5582479030755
+"Russian Federation";"Enjoyed life, how often past week";"Some of the time";31.0606060606061
+"Sweden";"Enjoyed life, how often past week";"Some of the time";24.9050461204558
+"Slovenia";"Enjoyed life, how often past week";"Some of the time";15.224358974359
+"Slovakia";"Enjoyed life, how often past week";"Some of the time";25.4228041462084
+"Kosovo";"Enjoyed life, how often past week";"Some of the time";40.0630914826498
+"Belgium";"Enjoyed life, how often past week";"Most of the time";48.2315112540193
+"Bulgaria";"Enjoyed life, how often past week";"Most of the time";36.4858807709547
+"Switzerland";"Enjoyed life, how often past week";"Most of the time";43.0965147453083
+"Cyprus";"Enjoyed life, how often past week";"Most of the time";37.3983739837398
+"Czech Republic";"Enjoyed life, how often past week";"Most of the time";39.9794450154162
+"Germany";"Enjoyed life, how often past week";"Most of the time";40.7997289054558
+"Denmark";"Enjoyed life, how often past week";"Most of the time";41.890243902439
+"Estonia";"Enjoyed life, how often past week";"Most of the time";50.2755404832556
+"Spain";"Enjoyed life, how often past week";"Most of the time";37.1535181236674
+"Finland";"Enjoyed life, how often past week";"Most of the time";50.7312614259598
+"United Kingdom";"Enjoyed life, how often past week";"Most of the time";43.0951337132836
+"Ireland";"Enjoyed life, how often past week";"Most of the time";43.9024390243902
+"Israel";"Enjoyed life, how often past week";"Most of the time";42.93808174828
+"Iceland";"Enjoyed life, how often past week";"Most of the time";45.9893048128342
+"Netherlands";"Enjoyed life, how often past week";"Most of the time";46.5217391304348
+"Norway";"Enjoyed life, how often past week";"Most of the time";42.2029702970297
+"Poland";"Enjoyed life, how often past week";"Most of the time";36.6702355460385
+"Portugal";"Enjoyed life, how often past week";"Most of the time";32.3392357875116
+"Russian Federation";"Enjoyed life, how often past week";"Most of the time";51.6414141414141
+"Sweden";"Enjoyed life, how often past week";"Most of the time";40.2061855670103
+"Slovenia";"Enjoyed life, how often past week";"Most of the time";55.6891025641026
+"Slovakia";"Enjoyed life, how often past week";"Most of the time";45.1172940534643
+"Kosovo";"Enjoyed life, how often past week";"Most of the time";39.4321766561514
+"Belgium";"Enjoyed life, how often past week";"All or almost all of the time";29.957127545552
+"Bulgaria";"Enjoyed life, how often past week";"All or almost all of the time";18.8256387270282
+"Switzerland";"Enjoyed life, how often past week";"All or almost all of the time";36.3270777479893
+"Cyprus";"Enjoyed life, how often past week";"All or almost all of the time";29.1779584462511
+"Czech Republic";"Enjoyed life, how often past week";"All or almost all of the time";21.0174717368962
+"Germany";"Enjoyed life, how often past week";"All or almost all of the time";24.2629617078956
+"Denmark";"Enjoyed life, how often past week";"All or almost all of the time";35.6707317073171
+"Estonia";"Enjoyed life, how often past week";"All or almost all of the time";18.3552352691819
+"Spain";"Enjoyed life, how often past week";"All or almost all of the time";21.6417910447761
+"Finland";"Enjoyed life, how often past week";"All or almost all of the time";25.1371115173675
+"United Kingdom";"Enjoyed life, how often past week";"All or almost all of the time";31.4335817623849
+"Ireland";"Enjoyed life, how often past week";"All or almost all of the time";33.5746951219512
+"Israel";"Enjoyed life, how often past week";"All or almost all of the time";21.0845811412384
+"Iceland";"Enjoyed life, how often past week";"All or almost all of the time";33.4224598930481
+"Netherlands";"Enjoyed life, how often past week";"All or almost all of the time";33.5326086956522
+"Norway";"Enjoyed life, how often past week";"All or almost all of the time";43.9975247524753
+"Poland";"Enjoyed life, how often past week";"All or almost all of the time";35.1713062098501
+"Portugal";"Enjoyed life, how often past week";"All or almost all of the time";20.5032618825722
+"Russian Federation";"Enjoyed life, how often past week";"All or almost all of the time";11.8686868686869
+"Sweden";"Enjoyed life, how often past week";"All or almost all of the time";29.8426478567553
+"Slovenia";"Enjoyed life, how often past week";"All or almost all of the time";27.2435897435897
+"Slovakia";"Enjoyed life, how often past week";"All or almost all of the time";26.0229132569558
+"Kosovo";"Enjoyed life, how often past week";"All or almost all of the time";11.6719242902208
+"Belgium";"Felt lonely, how often past week";"None or almost none of the time";70.3802892340653
+"Bulgaria";"Felt lonely, how often past week";"None or almost none of the time";53.9491298527443
+"Switzerland";"Felt lonely, how often past week";"None or almost none of the time";76.8456375838926
+"Cyprus";"Felt lonely, how often past week";"None or almost none of the time";65.1392632524708
+"Czech Republic";"Felt lonely, how often past week";"None or almost none of the time";52.6666666666667
+"Germany";"Felt lonely, how often past week";"None or almost none of the time";76.5243902439024
+"Denmark";"Felt lonely, how often past week";"None or almost none of the time";83.7887067395264
+"Estonia";"Felt lonely, how often past week";"None or almost none of the time";63.6286919831224
+"Spain";"Felt lonely, how often past week";"None or almost none of the time";67.8514588859416
+"Finland";"Felt lonely, how often past week";"None or almost none of the time";77.9398359161349
+"United Kingdom";"Felt lonely, how often past week";"None or almost none of the time";70.0262927256792
+"Ireland";"Felt lonely, how often past week";"None or almost none of the time";69.4158075601375
+"Israel";"Felt lonely, how often past week";"None or almost none of the time";70.4463208685163
+"Iceland";"Felt lonely, how often past week";"None or almost none of the time";77.807486631016
+"Netherlands";"Felt lonely, how often past week";"None or almost none of the time";74.1585233441911
+"Norway";"Felt lonely, how often past week";"None or almost none of the time";81.3967861557478
+"Poland";"Felt lonely, how often past week";"None or almost none of the time";70.6631299734748
+"Portugal";"Felt lonely, how often past week";"None or almost none of the time";65.1769087523277
+"Russian Federation";"Felt lonely, how often past week";"None or almost none of the time";49.6514965149651
+"Sweden";"Felt lonely, how often past week";"None or almost none of the time";75.3521126760563
+"Slovenia";"Felt lonely, how often past week";"None or almost none of the time";78.1673306772908
+"Slovakia";"Felt lonely, how often past week";"None or almost none of the time";52.645935624659
+"Kosovo";"Felt lonely, how often past week";"None or almost none of the time";51.0571652310102
+"Belgium";"Felt lonely, how often past week";"Some of the time";21.4247455811462
+"Bulgaria";"Felt lonely, how often past week";"Some of the time";30.1204819277108
+"Switzerland";"Felt lonely, how often past week";"Some of the time";19.5302013422819
+"Cyprus";"Felt lonely, how often past week";"Some of the time";24.2587601078167
+"Czech Republic";"Felt lonely, how often past week";"Some of the time";31.5384615384615
+"Germany";"Felt lonely, how often past week";"Some of the time";18.6991869918699
+"Denmark";"Felt lonely, how often past week";"Some of the time";13.2361870066788
+"Estonia";"Felt lonely, how often past week";"Some of the time";26.8776371308017
+"Spain";"Felt lonely, how often past week";"Some of the time";23.6074270557029
+"Finland";"Felt lonely, how often past week";"Some of the time";17.8213309024613
+"United Kingdom";"Felt lonely, how often past week";"Some of the time";22.874671340929
+"Ireland";"Felt lonely, how often past week";"Some of the time";25.5441008018328
+"Israel";"Felt lonely, how often past week";"Some of the time";21.5520707679936
+"Iceland";"Felt lonely, how often past week";"Some of the time";18.9839572192513
+"Netherlands";"Felt lonely, how often past week";"Some of the time";20.0868621064061
+"Norway";"Felt lonely, how often past week";"Some of the time";16.3782447466007
+"Poland";"Felt lonely, how often past week";"Some of the time";19.2042440318302
+"Portugal";"Felt lonely, how often past week";"Some of the time";24.4413407821229
+"Russian Federation";"Felt lonely, how often past week";"Some of the time";33.4563345633456
+"Sweden";"Felt lonely, how often past week";"Some of the time";19.9349945828819
+"Slovenia";"Felt lonely, how often past week";"Some of the time";16.0159362549801
+"Slovakia";"Felt lonely, how often past week";"Some of the time";36.9339879978178
+"Kosovo";"Felt lonely, how often past week";"Some of the time";39.5458104933438
+"Belgium";"Felt lonely, how often past week";"Most of the time";5.35618639528656
+"Bulgaria";"Felt lonely, how often past week";"Most of the time";9.90629183400268
+"Switzerland";"Felt lonely, how often past week";"Most of the time";2.68456375838926
+"Cyprus";"Felt lonely, how often past week";"Most of the time";6.55884995507637
+"Czech Republic";"Felt lonely, how often past week";"Most of the time";11.3333333333333
+"Germany";"Felt lonely, how often past week";"Most of the time";3.04878048780488
+"Denmark";"Felt lonely, how often past week";"Most of the time";1.88221007893139
+"Estonia";"Felt lonely, how often past week";"Most of the time";6.58227848101266
+"Spain";"Felt lonely, how often past week";"Most of the time";5.19893899204244
+"Finland";"Felt lonely, how often past week";"Most of the time";2.78030993618961
+"United Kingdom";"Felt lonely, how often past week";"Most of the time";4.9079754601227
+"Ireland";"Felt lonely, how often past week";"Most of the time";3.13096601756396
+"Israel";"Felt lonely, how often past week";"Most of the time";5.74989947728187
+"Iceland";"Felt lonely, how often past week";"Most of the time";2.67379679144385
+"Netherlands";"Felt lonely, how often past week";"Most of the time";4.18023887079262
+"Norway";"Felt lonely, how often past week";"Most of the time";1.48331273176761
+"Poland";"Felt lonely, how often past week";"Most of the time";5.94164456233422
+"Portugal";"Felt lonely, how often past week";"Most of the time";7.16945996275605
+"Russian Federation";"Felt lonely, how often past week";"Most of the time";13.9811398113981
+"Sweden";"Felt lonely, how often past week";"Most of the time";3.14192849404117
+"Slovenia";"Felt lonely, how often past week";"Most of the time";4.22310756972112
+"Slovakia";"Felt lonely, how often past week";"Most of the time";7.58319694489907
+"Kosovo";"Felt lonely, how often past week";"Most of the time";6.734534064213
+"Belgium";"Felt lonely, how often past week";"All or almost all of the time";2.83877878950187
+"Bulgaria";"Felt lonely, how often past week";"All or almost all of the time";6.02409638554217
+"Switzerland";"Felt lonely, how often past week";"All or almost all of the time";0.939597315436242
+"Cyprus";"Felt lonely, how often past week";"All or almost all of the time";4.04312668463612
+"Czech Republic";"Felt lonely, how often past week";"All or almost all of the time";4.46153846153846
+"Germany";"Felt lonely, how often past week";"All or almost all of the time";1.72764227642276
+"Denmark";"Felt lonely, how often past week";"All or almost all of the time";1.09289617486339
+"Estonia";"Felt lonely, how often past week";"All or almost all of the time";2.91139240506329
+"Spain";"Felt lonely, how often past week";"All or almost all of the time";3.342175066313
+"Finland";"Felt lonely, how often past week";"All or almost all of the time";1.45852324521422
+"United Kingdom";"Felt lonely, how often past week";"All or almost all of the time";2.19106047326906
+"Ireland";"Felt lonely, how often past week";"All or almost all of the time";1.90912562046583
+"Israel";"Felt lonely, how often past week";"All or almost all of the time";2.25170888620828
+"Iceland";"Felt lonely, how often past week";"All or almost all of the time";0.53475935828877
+"Netherlands";"Felt lonely, how often past week";"All or almost all of the time";1.57437567861021
+"Norway";"Felt lonely, how often past week";"All or almost all of the time";0.741656365883807
+"Poland";"Felt lonely, how often past week";"All or almost all of the time";4.19098143236074
+"Portugal";"Felt lonely, how often past week";"All or almost all of the time";3.2122905027933
+"Russian Federation";"Felt lonely, how often past week";"All or almost all of the time";2.9110291102911
+"Sweden";"Felt lonely, how often past week";"All or almost all of the time";1.57096424702058
+"Slovenia";"Felt lonely, how often past week";"All or almost all of the time";1.59362549800797
+"Slovakia";"Felt lonely, how often past week";"All or almost all of the time";2.83687943262411
+"Kosovo";"Felt lonely, how often past week";"All or almost all of the time";2.66249021143305
+"Belgium";"Were happy, how often past week";"None or almost none of the time";4.01929260450161
+"Bulgaria";"Were happy, how often past week";"None or almost none of the time";12.1621621621622
+"Switzerland";"Were happy, how often past week";"None or almost none of the time";2.35215053763441
+"Cyprus";"Were happy, how often past week";"None or almost none of the time";6.79347826086956
+"Czech Republic";"Were happy, how often past week";"None or almost none of the time";4.01854714064915
+"Germany";"Were happy, how often past week";"None or almost none of the time";4.07331975560081
+"Denmark";"Were happy, how often past week";"None or almost none of the time";4.40097799511002
+"Estonia";"Were happy, how often past week";"None or almost none of the time";7.75458031529612
+"Spain";"Were happy, how often past week";"None or almost none of the time";5.03711558854719
+"Finland";"Were happy, how often past week";"None or almost none of the time";4.1970802919708
+"United Kingdom";"Were happy, how often past week";"None or almost none of the time";2.54274441034634
+"Ireland";"Were happy, how often past week";"None or almost none of the time";2.89855072463768
+"Israel";"Were happy, how often past week";"None or almost none of the time";6.34343434343434
+"Iceland";"Were happy, how often past week";"None or almost none of the time";2.81501340482574
+"Netherlands";"Were happy, how often past week";"None or almost none of the time";3.75
+"Norway";"Were happy, how often past week";"None or almost none of the time";2.97397769516729
+"Poland";"Were happy, how often past week";"None or almost none of the time";8.70261612386546
+"Portugal";"Were happy, how often past week";"None or almost none of the time";6.99953336444237
+"Russian Federation";"Were happy, how often past week";"None or almost none of the time";5.16292848074482
+"Sweden";"Were happy, how often past week";"None or almost none of the time";3.53260869565217
+"Slovenia";"Were happy, how often past week";"None or almost none of the time";1.36108887109688
+"Slovakia";"Were happy, how often past week";"None or almost none of the time";3.9803707742639
+"Kosovo";"Were happy, how often past week";"None or almost none of the time";4.57719162141195
+"Belgium";"Were happy, how often past week";"Some of the time";16.5058949624866
+"Bulgaria";"Were happy, how often past week";"Some of the time";37.0720720720721
+"Switzerland";"Were happy, how often past week";"Some of the time";16.0618279569892
+"Cyprus";"Were happy, how often past week";"Some of the time";21.286231884058
+"Czech Republic";"Were happy, how often past week";"Some of the time";21.5352910870685
+"Germany";"Were happy, how often past week";"Some of the time";23.7270875763747
+"Denmark";"Were happy, how often past week";"Some of the time";21.5158924205379
+"Estonia";"Were happy, how often past week";"Some of the time";25.990626331487
+"Spain";"Were happy, how often past week";"Some of the time";26.5111346765642
+"Finland";"Were happy, how often past week";"Some of the time";22.2171532846715
+"United Kingdom";"Were happy, how often past week";"Some of the time";23.0600613765892
+"Ireland";"Were happy, how often past week";"Some of the time";18.0396643783371
+"Israel";"Were happy, how often past week";"Some of the time";29.4949494949495
+"Iceland";"Were happy, how often past week";"Some of the time";13.6729222520107
+"Netherlands";"Were happy, how often past week";"Some of the time";16.4673913043478
+"Norway";"Were happy, how often past week";"Some of the time";20.817843866171
+"Poland";"Were happy, how often past week";"Some of the time";23.7586759209824
+"Portugal";"Were happy, how often past week";"Some of the time";30.9846010265982
+"Russian Federation";"Were happy, how often past week";"Some of the time";25.7723233178163
+"Sweden";"Were happy, how often past week";"Some of the time";19.5652173913043
+"Slovenia";"Were happy, how often past week";"Some of the time";13.9311449159327
+"Slovakia";"Were happy, how often past week";"Some of the time";27.3718647764449
+"Kosovo";"Were happy, how often past week";"Some of the time";33.0488750969744
+"Belgium";"Were happy, how often past week";"Most of the time";50.3215434083601
+"Bulgaria";"Were happy, how often past week";"Most of the time";35.1801801801802
+"Switzerland";"Were happy, how often past week";"Most of the time";48.1854838709677
+"Cyprus";"Were happy, how often past week";"Most of the time";40.2173913043478
+"Czech Republic";"Were happy, how often past week";"Most of the time";49.613601236476
+"Germany";"Were happy, how often past week";"Most of the time";48.9137813985065
+"Denmark";"Were happy, how often past week";"Most of the time";47.0048899755501
+"Estonia";"Were happy, how often past week";"Most of the time";50.063911376225
+"Spain";"Were happy, how often past week";"Most of the time";42.5238600212089
+"Finland";"Were happy, how often past week";"Most of the time";54.6532846715328
+"United Kingdom";"Were happy, how often past week";"Most of the time";48.4436650591846
+"Ireland";"Were happy, how often past week";"Most of the time";45.0038138825324
+"Israel";"Were happy, how often past week";"Most of the time";44.1616161616162
+"Iceland";"Were happy, how often past week";"Most of the time";45.4423592493298
+"Netherlands";"Were happy, how often past week";"Most of the time";47.7717391304348
+"Norway";"Were happy, how often past week";"Most of the time";51.4869888475836
+"Poland";"Were happy, how often past week";"Most of the time";41.1105178857448
+"Portugal";"Were happy, how often past week";"Most of the time";35.6042930471302
+"Russian Federation";"Were happy, how often past week";"Most of the time";55.2687261955142
+"Sweden";"Were happy, how often past week";"Most of the time";44.2934782608696
+"Slovenia";"Were happy, how often past week";"Most of the time";58.2866293034428
+"Slovakia";"Were happy, how often past week";"Most of the time";46.8920392584515
+"Kosovo";"Were happy, how often past week";"Most of the time";46.0046547711404
+"Belgium";"Were happy, how often past week";"All or almost all of the time";29.1532690246517
+"Bulgaria";"Were happy, how often past week";"All or almost all of the time";15.5855855855856
+"Switzerland";"Were happy, how often past week";"All or almost all of the time";33.4005376344086
+"Cyprus";"Were happy, how often past week";"All or almost all of the time";31.7028985507246
+"Czech Republic";"Were happy, how often past week";"All or almost all of the time";24.8325605358063
+"Germany";"Were happy, how often past week";"All or almost all of the time";23.285811269518
+"Denmark";"Were happy, how often past week";"All or almost all of the time";27.078239608802
+"Estonia";"Were happy, how often past week";"All or almost all of the time";16.1908819769919
+"Spain";"Were happy, how often past week";"All or almost all of the time";25.9278897136797
+"Finland";"Were happy, how often past week";"All or almost all of the time";18.9324817518248
+"United Kingdom";"Were happy, how often past week";"All or almost all of the time";25.9535291538799
+"Ireland";"Were happy, how often past week";"All or almost all of the time";34.0579710144928
+"Israel";"Were happy, how often past week";"All or almost all of the time";20
+"Iceland";"Were happy, how often past week";"All or almost all of the time";38.0697050938338
+"Netherlands";"Were happy, how often past week";"All or almost all of the time";32.0108695652174
+"Norway";"Were happy, how often past week";"All or almost all of the time";24.7211895910781
+"Poland";"Were happy, how often past week";"All or almost all of the time";26.4281900694074
+"Portugal";"Were happy, how often past week";"All or almost all of the time";26.4115725618292
+"Russian Federation";"Were happy, how often past week";"All or almost all of the time";13.7960220059247
+"Sweden";"Were happy, how often past week";"All or almost all of the time";32.6086956521739
+"Slovenia";"Were happy, how often past week";"All or almost all of the time";26.4211369095276
+"Slovakia";"Were happy, how often past week";"All or almost all of the time";21.7557251908397
+"Kosovo";"Were happy, how often past week";"All or almost all of the time";16.3692785104732
+"Belgium";"Sleep was restless, how often past week";"None or almost none of the time";42.0235546038544
+"Bulgaria";"Sleep was restless, how often past week";"None or almost none of the time";37.0551601423488
+"Switzerland";"Sleep was restless, how often past week";"None or almost none of the time";49.1957104557641
+"Cyprus";"Sleep was restless, how often past week";"None or almost none of the time";48.692515779982
+"Czech Republic";"Sleep was restless, how often past week";"None or almost none of the time";44.4727457972491
+"Germany";"Sleep was restless, how often past week";"None or almost none of the time";43.1279620853081
+"Denmark";"Sleep was restless, how often past week";"None or almost none of the time";48.906439854192
+"Estonia";"Sleep was restless, how often past week";"None or almost none of the time";44.0656565656566
+"Spain";"Sleep was restless, how often past week";"None or almost none of the time";45.5702917771883
+"Finland";"Sleep was restless, how often past week";"None or almost none of the time";48.1076151390789
+"United Kingdom";"Sleep was restless, how often past week";"None or almost none of the time";40.5085488820693
+"Ireland";"Sleep was restless, how often past week";"None or almost none of the time";52.6536846124475
+"Israel";"Sleep was restless, how often past week";"None or almost none of the time";50.2808988764045
+"Iceland";"Sleep was restless, how often past week";"None or almost none of the time";48.2573726541555
+"Netherlands";"Sleep was restless, how often past week";"None or almost none of the time";45.0895279435703
+"Norway";"Sleep was restless, how often past week";"None or almost none of the time";53.3374536464771
+"Poland";"Sleep was restless, how often past week";"None or almost none of the time";56.627783669141
+"Portugal";"Sleep was restless, how often past week";"None or almost none of the time";50.6983240223464
+"Russian Federation";"Sleep was restless, how often past week";"None or almost none of the time";37.5153248876175
+"Sweden";"Sleep was restless, how often past week";"None or almost none of the time";57.6610720086627
+"Slovenia";"Sleep was restless, how often past week";"None or almost none of the time";51.4331210191083
+"Slovakia";"Sleep was restless, how often past week";"None or almost none of the time";36.5614798694233
+"Kosovo";"Sleep was restless, how often past week";"None or almost none of the time";35.9314107560405
+"Belgium";"Sleep was restless, how often past week";"Some of the time";37.9014989293362
+"Bulgaria";"Sleep was restless, how often past week";"Some of the time";45.8629893238434
+"Switzerland";"Sleep was restless, how often past week";"Some of the time";37.1313672922252
+"Cyprus";"Sleep was restless, how often past week";"Some of the time";31.9206492335437
+"Czech Republic";"Sleep was restless, how often past week";"Some of the time";38.0030565461029
+"Germany";"Sleep was restless, how often past week";"Some of the time";36.6283006093433
+"Denmark";"Sleep was restless, how often past week";"Some of the time";37.0595382746051
+"Estonia";"Sleep was restless, how often past week";"Some of the time";37.2053872053872
+"Spain";"Sleep was restless, how often past week";"Some of the time";38.5145888594164
+"Finland";"Sleep was restless, how often past week";"Some of the time";39.7628818969448
+"United Kingdom";"Sleep was restless, how often past week";"Some of the time";36.2560280578694
+"Ireland";"Sleep was restless, how often past week";"Some of the time";35.8151966399389
+"Israel";"Sleep was restless, how often past week";"Some of the time";35.1123595505618
+"Iceland";"Sleep was restless, how often past week";"Some of the time";38.0697050938338
+"Netherlands";"Sleep was restless, how often past week";"Some of the time";37.0048833423766
+"Norway";"Sleep was restless, how often past week";"Some of the time";36.6501854140915
+"Poland";"Sleep was restless, how often past week";"Some of the time";24.1781548250265
+"Portugal";"Sleep was restless, how often past week";"Some of the time";36.8715083798883
+"Russian Federation";"Sleep was restless, how often past week";"Some of the time";39.8447078054761
+"Sweden";"Sleep was restless, how often past week";"Some of the time";30.4818624796968
+"Slovenia";"Sleep was restless, how often past week";"Some of the time";32.8025477707006
+"Slovakia";"Sleep was restless, how often past week";"Some of the time";50
+"Kosovo";"Sleep was restless, how often past week";"Some of the time";46.6874512860483
+"Belgium";"Sleep was restless, how often past week";"Most of the time";14.4539614561028
+"Bulgaria";"Sleep was restless, how often past week";"Most of the time";12.6334519572954
+"Switzerland";"Sleep was restless, how often past week";"Most of the time";8.84718498659517
+"Cyprus";"Sleep was restless, how often past week";"Most of the time";13.5256988277728
+"Czech Republic";"Sleep was restless, how often past week";"Most of the time";12.5318390219052
+"Germany";"Sleep was restless, how often past week";"Most of the time";12.9654705484089
+"Denmark";"Sleep was restless, how often past week";"Most of the time";8.68772782503038
+"Estonia";"Sleep was restless, how often past week";"Most of the time";13.6363636363636
+"Spain";"Sleep was restless, how often past week";"Most of the time";11.4058355437666
+"Finland";"Sleep was restless, how often past week";"Most of the time";8.66393068855449
+"United Kingdom";"Sleep was restless, how often past week";"Most of the time";13.1521262604121
+"Ireland";"Sleep was restless, how often past week";"Most of the time";8.09469263077511
+"Israel";"Sleep was restless, how often past week";"Most of the time";10.2728731942215
+"Iceland";"Sleep was restless, how often past week";"Most of the time";9.6514745308311
+"Netherlands";"Sleep was restless, how often past week";"Most of the time";13.4020618556701
+"Norway";"Sleep was restless, how often past week";"Most of the time";6.61310259579728
+"Poland";"Sleep was restless, how often past week";"Most of the time";12.0890774125133
+"Portugal";"Sleep was restless, how often past week";"Most of the time";9.12476722532588
+"Russian Federation";"Sleep was restless, how often past week";"Most of the time";18.7985288107887
+"Sweden";"Sleep was restless, how often past week";"Most of the time";8.55441256090958
+"Slovenia";"Sleep was restless, how often past week";"Most of the time";11.9426751592357
+"Slovakia";"Sleep was restless, how often past week";"Most of the time";9.68443960826986
+"Kosovo";"Sleep was restless, how often past week";"Most of the time";13.717848791894
+"Belgium";"Sleep was restless, how often past week";"All or almost all of the time";5.62098501070664
+"Bulgaria";"Sleep was restless, how often past week";"All or almost all of the time";4.44839857651246
+"Switzerland";"Sleep was restless, how often past week";"All or almost all of the time";4.82573726541555
+"Cyprus";"Sleep was restless, how often past week";"All or almost all of the time";5.86113615870153
+"Czech Republic";"Sleep was restless, how often past week";"All or almost all of the time";4.99235863474274
+"Germany";"Sleep was restless, how often past week";"All or almost all of the time";7.27826675693974
+"Denmark";"Sleep was restless, how often past week";"All or almost all of the time";5.34629404617254
+"Estonia";"Sleep was restless, how often past week";"All or almost all of the time";5.09259259259259
+"Spain";"Sleep was restless, how often past week";"All or almost all of the time";4.50928381962865
+"Finland";"Sleep was restless, how often past week";"All or almost all of the time";3.4655722754218
+"United Kingdom";"Sleep was restless, how often past week";"All or almost all of the time";10.0832967996493
+"Ireland";"Sleep was restless, how often past week";"All or almost all of the time";3.43642611683849
+"Israel";"Sleep was restless, how often past week";"All or almost all of the time";4.3338683788122
+"Iceland";"Sleep was restless, how often past week";"All or almost all of the time";4.02144772117962
+"Netherlands";"Sleep was restless, how often past week";"All or almost all of the time";4.50352685838307
+"Norway";"Sleep was restless, how often past week";"All or almost all of the time";3.39925834363412
+"Poland";"Sleep was restless, how often past week";"All or almost all of the time";7.10498409331919
+"Portugal";"Sleep was restless, how often past week";"All or almost all of the time";3.30540037243948
+"Russian Federation";"Sleep was restless, how often past week";"All or almost all of the time";3.8414384961177
+"Sweden";"Sleep was restless, how often past week";"All or almost all of the time";3.30265295073092
+"Slovenia";"Sleep was restless, how often past week";"All or almost all of the time";3.82165605095541
+"Slovakia";"Sleep was restless, how often past week";"All or almost all of the time";3.75408052230686
+"Kosovo";"Sleep was restless, how often past week";"All or almost all of the time";3.66328916601715
+"Belgium";"Felt everything did as effort, how often past week";"None or almost none of the time";52.8403001071811
+"Bulgaria";"Felt everything did as effort, how often past week";"None or almost none of the time";42.2974176313446
+"Switzerland";"Felt everything did as effort, how often past week";"None or almost none of the time";45.8081824279007
+"Cyprus";"Felt everything did as effort, how often past week";"None or almost none of the time";60.252935862692
+"Czech Republic";"Felt everything did as effort, how often past week";"None or almost none of the time";37.0389344262295
+"Germany";"Felt everything did as effort, how often past week";"None or almost none of the time";35.8618354216052
+"Denmark";"Felt everything did as effort, how often past week";"None or almost none of the time";50.2439024390244
+"Estonia";"Felt everything did as effort, how often past week";"None or almost none of the time";33.3474218089603
+"Spain";"Felt everything did as effort, how often past week";"None or almost none of the time";51.5119363395225
+"Finland";"Felt everything did as effort, how often past week";"None or almost none of the time";61.9351894112278
+"United Kingdom";"Felt everything did as effort, how often past week";"None or almost none of the time";48.6178148310663
+"Ireland";"Felt everything did as effort, how often past week";"None or almost none of the time";53.9343009931245
+"Israel";"Felt everything did as effort, how often past week";"None or almost none of the time";46.3404771532552
+"Iceland";"Felt everything did as effort, how often past week";"None or almost none of the time";51.004016064257
+"Netherlands";"Felt everything did as effort, how often past week";"None or almost none of the time";58.0260303687636
+"Norway";"Felt everything did as effort, how often past week";"None or almost none of the time";65.4060756354619
+"Poland";"Felt everything did as effort, how often past week";"None or almost none of the time";51.7571884984025
+"Portugal";"Felt everything did as effort, how often past week";"None or almost none of the time";31.2208760484623
+"Russian Federation";"Felt everything did as effort, how often past week";"None or almost none of the time";33.1009023789992
+"Sweden";"Felt everything did as effort, how often past week";"None or almost none of the time";62.2222222222222
+"Slovenia";"Felt everything did as effort, how often past week";"None or almost none of the time";61.4525139664804
+"Slovakia";"Felt everything did as effort, how often past week";"None or almost none of the time";19.6399345335516
+"Kosovo";"Felt everything did as effort, how often past week";"None or almost none of the time";18.5509554140127
+"Belgium";"Felt everything did as effort, how often past week";"Some of the time";36.0128617363344
+"Bulgaria";"Felt everything did as effort, how often past week";"Some of the time";40.8726625111309
+"Switzerland";"Felt everything did as effort, how often past week";"Some of the time";42.186452045607
+"Cyprus";"Felt everything did as effort, how often past week";"Some of the time";30.0813008130081
+"Czech Republic";"Felt everything did as effort, how often past week";"Some of the time";42.7766393442623
+"Germany";"Felt everything did as effort, how often past week";"Some of the time";47.172367084321
+"Denmark";"Felt everything did as effort, how often past week";"Some of the time";40.2439024390244
+"Estonia";"Felt everything did as effort, how often past week";"Some of the time";43.7447168216399
+"Spain";"Felt everything did as effort, how often past week";"Some of the time";35.8620689655172
+"Finland";"Felt everything did as effort, how often past week";"Some of the time";30.5340027384756
+"United Kingdom";"Felt everything did as effort, how often past week";"Some of the time";36.682755594559
+"Ireland";"Felt everything did as effort, how often past week";"Some of the time";37.2803666921314
+"Israel";"Felt everything did as effort, how often past week";"Some of the time";35.4225636878285
+"Iceland";"Felt everything did as effort, how often past week";"Some of the time";39.2235609103079
+"Netherlands";"Felt everything did as effort, how often past week";"Some of the time";32.3752711496746
+"Norway";"Felt everything did as effort, how often past week";"Some of the time";30.1921884686919
+"Poland";"Felt everything did as effort, how often past week";"Some of the time";34.6645367412141
+"Portugal";"Felt everything did as effort, how often past week";"Some of the time";31.3606710158434
+"Russian Federation";"Felt everything did as effort, how often past week";"Some of the time";46.9647251845775
+"Sweden";"Felt everything did as effort, how often past week";"Some of the time";30.4607046070461
+"Slovenia";"Felt everything did as effort, how often past week";"Some of the time";29.9281723862729
+"Slovakia";"Felt everything did as effort, how often past week";"Some of the time";56.6284779050737
+"Kosovo";"Felt everything did as effort, how often past week";"Some of the time";50.3184713375796
+"Belgium";"Felt everything did as effort, how often past week";"Most of the time";8.62808145766345
+"Bulgaria";"Felt everything did as effort, how often past week";"Most of the time";11.7987533392698
+"Switzerland";"Felt everything did as effort, how often past week";"Most of the time";9.05432595573441
+"Cyprus";"Felt everything did as effort, how often past week";"Most of the time";7.22673893405601
+"Czech Republic";"Felt everything did as effort, how often past week";"Most of the time";16.2909836065574
+"Germany";"Felt everything did as effort, how often past week";"Most of the time";13.0037250253979
+"Denmark";"Felt everything did as effort, how often past week";"Most of the time";6.40243902439024
+"Estonia";"Felt everything did as effort, how often past week";"Most of the time";17.9628064243449
+"Spain";"Felt everything did as effort, how often past week";"Most of the time";8.48806366047745
+"Finland";"Felt everything did as effort, how often past week";"Most of the time";5.38566864445459
+"United Kingdom";"Felt everything did as effort, how often past week";"Most of the time";10.3554190434401
+"Ireland";"Felt everything did as effort, how often past week";"Most of the time";6.03514132925898
+"Israel";"Felt everything did as effort, how often past week";"Most of the time";13.5867367569753
+"Iceland";"Felt everything did as effort, how often past week";"Most of the time";8.70147255689424
+"Netherlands";"Felt everything did as effort, how often past week";"Most of the time";6.99566160520607
+"Norway";"Felt everything did as effort, how often past week";"Most of the time";3.59578425294482
+"Poland";"Felt everything did as effort, how often past week";"Most of the time";9.79765708200213
+"Portugal";"Felt everything did as effort, how often past week";"Most of the time";22.7865796831314
+"Russian Federation";"Felt everything did as effort, how often past week";"Most of the time";17.5143560295324
+"Sweden";"Felt everything did as effort, how often past week";"Most of the time";5.14905149051491
+"Slovenia";"Felt everything did as effort, how often past week";"Most of the time";6.62410215482841
+"Slovakia";"Felt everything did as effort, how often past week";"Most of the time";19.0398254228041
+"Kosovo";"Felt everything did as effort, how often past week";"Most of the time";23.9649681528662
+"Belgium";"Felt everything did as effort, how often past week";"All or almost all of the time";2.51875669882101
+"Bulgaria";"Felt everything did as effort, how often past week";"All or almost all of the time";5.03116651825467
+"Switzerland";"Felt everything did as effort, how often past week";"All or almost all of the time";2.95103957075788
+"Cyprus";"Felt everything did as effort, how often past week";"All or almost all of the time";2.4390243902439
+"Czech Republic";"Felt everything did as effort, how often past week";"All or almost all of the time";3.89344262295082
+"Germany";"Felt everything did as effort, how often past week";"All or almost all of the time";3.96207246867592
+"Denmark";"Felt everything did as effort, how often past week";"All or almost all of the time";3.10975609756098
+"Estonia";"Felt everything did as effort, how often past week";"All or almost all of the time";4.94505494505495
+"Spain";"Felt everything did as effort, how often past week";"All or almost all of the time";4.13793103448276
+"Finland";"Felt everything did as effort, how often past week";"All or almost all of the time";2.14513920584208
+"United Kingdom";"Felt everything did as effort, how often past week";"All or almost all of the time";4.34401053093462
+"Ireland";"Felt everything did as effort, how often past week";"All or almost all of the time";2.7501909854851
+"Israel";"Felt everything did as effort, how often past week";"All or almost all of the time";4.65022240194096
+"Iceland";"Felt everything did as effort, how often past week";"All or almost all of the time";1.07095046854083
+"Netherlands";"Felt everything did as effort, how often past week";"All or almost all of the time";2.60303687635575
+"Norway";"Felt everything did as effort, how often past week";"All or almost all of the time";0.805951642901426
+"Poland";"Felt everything did as effort, how often past week";"All or almost all of the time";3.78061767838126
+"Portugal";"Felt everything did as effort, how often past week";"All or almost all of the time";14.6318732525629
+"Russian Federation";"Felt everything did as effort, how often past week";"All or almost all of the time";2.42001640689089
+"Sweden";"Felt everything did as effort, how often past week";"All or almost all of the time";2.1680216802168
+"Slovenia";"Felt everything did as effort, how often past week";"All or almost all of the time";1.9952114924182
+"Slovakia";"Felt everything did as effort, how often past week";"All or almost all of the time";4.69176213857065
+"Kosovo";"Felt everything did as effort, how often past week";"All or almost all of the time";7.1656050955414
+"Belgium";"Felt depressed, how often past week";"None or almost none of the time";65.7020364415863
+"Bulgaria";"Felt depressed, how often past week";"None or almost none of the time";50.2463054187192
+"Switzerland";"Felt depressed, how often past week";"None or almost none of the time";65.0804289544236
+"Cyprus";"Felt depressed, how often past week";"None or almost none of the time";63.2286995515695
+"Czech Republic";"Felt depressed, how often past week";"None or almost none of the time";44.3932411674347
+"Germany";"Felt depressed, how often past week";"None or almost none of the time";63.0545208262784
+"Denmark";"Felt depressed, how often past week";"None or almost none of the time";79.7807551766139
+"Estonia";"Felt depressed, how often past week";"None or almost none of the time";50.6350550381033
+"Spain";"Felt depressed, how often past week";"None or almost none of the time";53.5069075451647
+"Finland";"Felt depressed, how often past week";"None or almost none of the time";80.5922551252847
+"United Kingdom";"Felt depressed, how often past week";"None or almost none of the time";67.4113009198423
+"Ireland";"Felt depressed, how often past week";"None or almost none of the time";71.1825487944891
+"Israel";"Felt depressed, how often past week";"None or almost none of the time";62.4949859606899
+"Iceland";"Felt depressed, how often past week";"None or almost none of the time";64.9193548387097
+"Netherlands";"Felt depressed, how often past week";"None or almost none of the time";69.3268186753529
+"Norway";"Felt depressed, how often past week";"None or almost none of the time";79.4808405438813
+"Poland";"Felt depressed, how often past week";"None or almost none of the time";54.9019607843137
+"Portugal";"Felt depressed, how often past week";"None or almost none of the time";56.9366852886406
+"Russian Federation";"Felt depressed, how often past week";"None or almost none of the time";45.391233101188
+"Sweden";"Felt depressed, how often past week";"None or almost none of the time";76.0021668472373
+"Slovenia";"Felt depressed, how often past week";"None or almost none of the time";70.7336523125997
+"Slovakia";"Felt depressed, how often past week";"None or almost none of the time";49.3456924754635
+"Kosovo";"Felt depressed, how often past week";"None or almost none of the time";33.5949764521193
+"Belgium";"Felt depressed, how often past week";"Some of the time";27.9206859592712
+"Bulgaria";"Felt depressed, how often past week";"Some of the time";37.6175548589342
+"Switzerland";"Felt depressed, how often past week";"Some of the time";31.1662198391421
+"Cyprus";"Felt depressed, how often past week";"Some of the time";27.7130044843049
+"Czech Republic";"Felt depressed, how often past week";"Some of the time";42.1915002560164
+"Germany";"Felt depressed, how often past week";"Some of the time";30.4436166610227
+"Denmark";"Felt depressed, how often past week";"Some of the time";17.1741778319123
+"Estonia";"Felt depressed, how often past week";"Some of the time";40.4741744284505
+"Spain";"Felt depressed, how often past week";"Some of the time";35.8129649309245
+"Finland";"Felt depressed, how often past week";"Some of the time";16.9020501138952
+"United Kingdom";"Felt depressed, how often past week";"Some of the time";25.2737625930793
+"Ireland";"Felt depressed, how often past week";"Some of the time";23.6892460773058
+"Israel";"Felt depressed, how often past week";"Some of the time";30.5655836341757
+"Iceland";"Felt depressed, how often past week";"Some of the time";29.7043010752688
+"Netherlands";"Felt depressed, how often past week";"Some of the time";26.1129207383279
+"Norway";"Felt depressed, how often past week";"Some of the time";17.9233621755253
+"Poland";"Felt depressed, how often past week";"Some of the time";34.181240063593
+"Portugal";"Felt depressed, how often past week";"Some of the time";32.4487895716946
+"Russian Federation";"Felt depressed, how often past week";"Some of the time";40.8439164276936
+"Sweden";"Felt depressed, how often past week";"Some of the time";19.7724810400867
+"Slovenia";"Felt depressed, how often past week";"Some of the time";24.5614035087719
+"Slovakia";"Felt depressed, how often past week";"Some of the time";43.7295528898582
+"Kosovo";"Felt depressed, how often past week";"Some of the time";55.4945054945055
+"Belgium";"Felt depressed, how often past week";"Most of the time";4.60878885316184
+"Bulgaria";"Felt depressed, how often past week";"Most of the time";8.3743842364532
+"Switzerland";"Felt depressed, how often past week";"Most of the time";2.61394101876676
+"Cyprus";"Felt depressed, how often past week";"Most of the time";5.73991031390134
+"Czech Republic";"Felt depressed, how often past week";"Most of the time";10.9062980030722
+"Germany";"Felt depressed, how often past week";"Most of the time";4.67321368100237
+"Denmark";"Felt depressed, how often past week";"Most of the time";1.52253349573691
+"Estonia";"Felt depressed, how often past week";"Most of the time";7.36663844199831
+"Spain";"Felt depressed, how often past week";"Most of the time";7.33262486716259
+"Finland";"Felt depressed, how often past week";"Most of the time";1.82232346241458
+"United Kingdom";"Felt depressed, how often past week";"Most of the time";4.90582566798073
+"Ireland";"Felt depressed, how often past week";"Most of the time";2.79372368924608
+"Israel";"Felt depressed, how often past week";"Most of the time";5.29482551143201
+"Iceland";"Felt depressed, how often past week";"Most of the time";3.49462365591398
+"Netherlands";"Felt depressed, how often past week";"Most of the time";3.42019543973941
+"Norway";"Felt depressed, how often past week";"Most of the time";2.03955500618047
+"Poland";"Felt depressed, how often past week";"Most of the time";7.63116057233704
+"Portugal";"Felt depressed, how often past week";"Most of the time";7.91433891992551
+"Russian Federation";"Felt depressed, how often past week";"Most of the time";12.0442441622286
+"Sweden";"Felt depressed, how often past week";"Most of the time";2.60021668472373
+"Slovenia";"Felt depressed, how often past week";"Most of the time";4.06698564593301
+"Slovakia";"Felt depressed, how often past week";"Most of the time";5.88876772082879
+"Kosovo";"Felt depressed, how often past week";"Most of the time";8.39874411302983
+"Belgium";"Felt depressed, how often past week";"All or almost all of the time";1.76848874598071
+"Bulgaria";"Felt depressed, how often past week";"All or almost all of the time";3.76175548589342
+"Switzerland";"Felt depressed, how often past week";"All or almost all of the time";1.13941018766756
+"Cyprus";"Felt depressed, how often past week";"All or almost all of the time";3.31838565022422
+"Czech Republic";"Felt depressed, how often past week";"All or almost all of the time";2.5089605734767
+"Germany";"Felt depressed, how often past week";"All or almost all of the time";1.82864883169658
+"Denmark";"Felt depressed, how often past week";"All or almost all of the time";1.52253349573691
+"Estonia";"Felt depressed, how often past week";"All or almost all of the time";1.52413209144793
+"Spain";"Felt depressed, how often past week";"All or almost all of the time";3.34750265674814
+"Finland";"Felt depressed, how often past week";"All or almost all of the time";0.683371298405467
+"United Kingdom";"Felt depressed, how often past week";"All or almost all of the time";2.40911081909768
+"Ireland";"Felt depressed, how often past week";"All or almost all of the time";2.33448143895905
+"Israel";"Felt depressed, how often past week";"All or almost all of the time";1.64460489370237
+"Iceland";"Felt depressed, how often past week";"All or almost all of the time";1.88172043010753
+"Netherlands";"Felt depressed, how often past week";"All or almost all of the time";1.1400651465798
+"Norway";"Felt depressed, how often past week";"All or almost all of the time";0.556242274412855
+"Poland";"Felt depressed, how often past week";"All or almost all of the time";3.28563857975623
+"Portugal";"Felt depressed, how often past week";"All or almost all of the time";2.70018621973929
+"Russian Federation";"Felt depressed, how often past week";"All or almost all of the time";1.7206063088898
+"Sweden";"Felt depressed, how often past week";"All or almost all of the time";1.62513542795233
+"Slovenia";"Felt depressed, how often past week";"All or almost all of the time";0.637958532695375
+"Slovakia";"Felt depressed, how often past week";"All or almost all of the time";1.03598691384951
+"Kosovo";"Felt depressed, how often past week";"All or almost all of the time";2.51177394034537

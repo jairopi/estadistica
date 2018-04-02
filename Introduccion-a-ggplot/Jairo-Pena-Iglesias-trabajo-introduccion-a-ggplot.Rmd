@@ -1,0 +1,271 @@
+Trabajo. Gráficas con ggplot2: consumo eléctrico de una vivienda..
+========================================================
+
+
+Nombre: Jairo Peña Iglesias
+
+En este trabajo, tenéis que completar algunos de los bloques de código para contestar a las preguntas que van apareciendo en el documento. 
+
+
+Empezaremos por cargar los paquetes "lubridate" (para manipular fechas), "dplyr"
+(para manipular data.frames) y "ggplot2" (para las gráficas).
+
+```{r, message = FALSE}
+## cargamos los paquetes "lubridate", "dplyr" y "ggplot2"
+library("lubridate")
+library("dplyr")
+library("ggplot2")
+
+```
+
+
+Usaremos en este trabajo  los datos que ya exploramos en el trabajo sobre dplyr. El fichero es [household-hourly-power-consumption.txt](https://aulavirtual.upct.es/mod/resource/view.php?id=93215), que se puede descargar del aula virtual.
+
+## Importamos los datos
+
+Lo importamos en un data.frame que llamaremos **vivienda**
+
+```{r}
+### insertar el código para importar (cargamos los datos):
+vivienda <- read.table(file = "data/household-hourly-power-consumption.txt",
+                       header=TRUE, 
+                       sep=";", 
+                       dec=".", 
+                       stringsAsFactors = FALSE)
+
+```
+La descripción del conjunto es la siguiente:
+
+*** 
+
+Attribute Information:
+
+1. DateHour: Date and hour in format yyyy-mm- dd hh:mm:ss 
+2. Global_active_power: household global minute-averaged active power (in kilowatt) 
+3. Global_reactive_power: household global minute-averaged reactive power (in kilowatt) 
+4. Voltage: minute-averaged voltage (in volt) 
+5. Global_intensity: household global minute-averaged current intensity (in ampere) 
+6. Sub_metering_1: energy sub-metering No. 1 (in watt-hour of active energy). It corresponds to the kitchen, containing mainly a dishwasher, an oven and a microwave (hot plates are not electric but gas powered). 
+7. Sub_metering_2: energy sub-metering No. 2 (in watt-hour of active energy). It corresponds to the laundry room, containing a washing-machine, a tumble-drier, a refrigerator and a light. 
+8. Sub_metering_3: energy sub-metering No. 3 (in watt-hour of active energy). It corresponds to an electric water-heater and an air-conditioner.
+
+*** 
+
+Contestar a la pregunta siguiente:
+
+¿De qué tipo es cada columna del conjunto vivienda después de haberlo importado?
+Character y dbl ¿?
+>
+>
+>
+
+Transformamos ahora la columna Date, que es de tipo "character" en un objeto de tipo Fecha, para poder extraer automáticamente de esta columna características como año, mes, día del mes y día de la semana (lunes, martes, etc..). Para ello usamos las funciones del paquete "lubridate".
+
+```{r, eval = exists("vivienda")}
+## nada que completar
+vivienda  <- vivienda %>%
+  mutate(DateHour = ymd_hms(DateHour),
+         anyo = year(DateHour),
+         mes = month(DateHour),
+         diames = day(DateHour),
+         diasemana = wday(DateHour, label=TRUE, abbr= FALSE),
+         diaanyo = yday(DateHour),
+         hora = hour(DateHour))
+```
+
+
+## Histograma de la potencia global activa
+Empezaremos por representar un histograma de la potencia global activa. Para ello usaremos el geom, *geom_histogram*.
+
+Indicación: par geom_histogram, es suficiente y necesario indicar la aestetic *x*. Cuál tiene que ser nuestra especificación de *x*?
+```{r}
+## completad aquí para conseguir un histograma de la potencia
+ggplot(data = vivienda, aes(x = Global_active_power)) + geom_histogram()
+
+```
+
+## Boxplots del voltaje según los años.
+Vamos a obtener ahora unos diagramas de cajabigotes del voltaje según cada año. Para ello usaremos el geom *geom_boxplot*. Necesitaremos especificar los "aesthetics" *x* e *y*.
+
+Indicación: para el aesthetics *x*, usaremos anyo transformado en factor, con *x = factor(anyo)*.
+
+```{r}
+ggplot(data = vivienda, aes(x = factor(anyo), y = Voltage)) + geom_boxplot()
+
+```
+
+
+## Gráficas para la potencia global activa
+
+Empezamos por representar la evolución temporal de la potencia global activa, usando ggplot.
+
+```{r}
+p <- ggplot(data = vivienda, aes(x = DateHour, y = Global_active_power)) + geom_line()
+p
+
+```
+
+Se observa algo destacable?
+La gráfica queda muy cercana a 0 en una pequeña franja entre los años 2008 y 2009, por lo que hemos de suponer que no hay consumo o ha habido algun problema en la medicion del mismo.
+
+
+### Pequeñas modificaciones de la gráfica:
+
+Realizad las modificaciones siguientes sobre la gráfica temporal:
+
+1. Cambiad las etiquetas de los ejes: en el eje Ox, ponemos "Fecha", mientras que en el eje poned "Potencia global activa (kW)".
+2. Añadid el título "Evolución temporal de la potencia global activa consumida, 2006-2012"
+3. Cambiad el color de la línea a azul.
+4. Guardad la gráfica en un fichero llamado potencia-global-activa-2006-2012.png en carpeta "figures" de vuestro directorio de trabajo para este trabajo. (podeís probar variar el ancho y el alto con width = y height =
+
+
+```{r}
+p + geom_line(colour = "blue") + 
+  labs(title = 'Evolución temporal de la potencia global activa consumida, 2006-2012',x = 'Fecha', y ='Potencia global activa (kW)')
+
+#Guardamos la gráfica
+ggsave(filename = "figures/potencia-global-activa-2006-2012.png", plot= last_plot(), width = 10, height = 7)
+
+```
+
+### Seleccionamos los meses de julio a diciembre de 2008
+
+Realizar la misma gráfica pero si nos limitamos a los meses de julio hasta diciembre de 2008
+
+```{r}
+viviendaJD2008 <- vivienda %>%
+filter(anyo==2008, between(mes, 07, 12))
+
+x <- ggplot (data = viviendaJD2008, aes (y = Global_active_power, x = DateHour)) + geom_line(colour = "blue") + labs(title = 'Evolución temporal de la potencia global activa consumida, 2006-2012' , x = 'Fecha' , y ='Potencia global activa (kW)') 
+
+x
+
+#Guardamos la gráfica
+ggsave(filename = "figures/potencia-global-activa-julio-diciembre-2008.png", plot= last_plot(), width = 10, height = 7)
+
+
+```
+
+Veís algo destacable? ¿Teneís alguna explicación?
+Parece ser que el consumo de potencia cae a practicamente 0 en periodo vacacional. Puede ser que los inquilinos se fueran de vacaciones.
+
+### Representamos los meses de agosto para los años 2007 a 2010.
+
+Queremos ahora representar *en una misma pantalla* los meses de julio, agosto y septiembre de los cuatro años de 2007 a 2010. Cada año
+debe aparecer  en un panel diferente (pista: usaremos facet_grid).
+
+```{r}
+viviendaVerano0710 <- vivienda %>%
+ filter(between(mes, 07, 09), between(anyo, 2007, 2010))
+
+y <- ggplot (data = viviendaVerano0710, aes (y = Global_active_power, x = DateHour)) + geom_line() + 
+  labs(title = 'Evolución temporal de la potencia global activa consumida en Verano, 2006-2012.' , x = 'Fecha' , y ='Potencia global activa (kW)') + 
+  facet_grid(anyo ~ .)
+y
+
+```
+
+¿Habéis conseguido el resultado que esperábais?
+No, quería el eje x con los meses y el eje y con los años.
+
+> Para mejorar esta gráfica, introducimos una columna que sea el resultado de restar a DateHour
+> el año asociado (tendremos entonces una fechatiempo "base" que pueda servir en la gráfica con
+> distintos años).
+
+Usad *mutate* para añadir a vivienda la columna DateHourBase que sea definida como *DateHour - years(anyo)*
+
+```{r}
+viviendaVerano <- vivienda %>%
+ filter(between(mes, 07, 09), between(anyo, 2007, 2010)) %>%
+ mutate(DateHourBase = DateHour - years(anyo))
+
+```
+
+Repetid la gráfica anterior usando *DateHourBase* en el eje Ox.
+
+```{r}
+q <- ggplot (data = viviendaVerano, aes (y = Global_active_power, x = DateHourBase)) +
+  geom_line() + 
+  labs(title = 'Evolución temporal de la potencia global activa consumida, 2006-2012.' , x = 'Fecha' , y ='Potencia global activa (kW)') + facet_grid(anyo ~ .)
+q
+
+```
+
+
+
+### Exploración del perfil horario de la potencia global consumida.
+
+
+Vamos a explorar el perfil de evolución horario de la potencia global consumida.
+
+Para ello, empezamos por construir usando los verbos de *dplyr* un conjunto que llamaremos *resumen.horario* y que
+contenga el valor promedio de la potencia global activa consumida por hora (el promedio se hará, por hora, sobre todo
+el conjunto *vivienda*).
+
+*resumen.horario* debe contener tres columas: hora, Global_active_power (el promedio buscado), y n (el número de datos utilizado
+para calcular la media en cada grupo)
+
+```{r}
+## completad aquí para obtener resumen.horario
+resumen.horario <- vivienda %>%
+group_by(hora) %>%
+summarise(Global_active_power = mean(Global_active_power, na.rm = TRUE),n = n())
+
+```
+Podemos ahora representar gráficamente el perfil de evolución horario usando *resumen.horario*
+(Global_active_power en función de hora). Queremos hacerlo con barras verticales. Usaremos para ello *geom_bar*.  
+Si obtenéis el error "Error : Mapping a variable to y and also using stat="bin"", tenéis que leer el mensaje de error completo
+para  ver qué argumento debéis usar en *geom_bar*.
+
+```{r}
+## completad aquí para obtener evolución horario de la potencia glocal activa
+z <- ggplot(data = resumen.horario, aes(x = hora, y = Global_active_power)) + 
+  geom_bar(stat = 'identity', fill = 'blue')
+z
+
+
+```
+
+***
+
+### Opcional:
+Podemos añadir el valor de la potencia calculada encima de cada barra en la gráfica. Para ello podemos usar
+el geom_text. Empezad por leer la ayuda de geom_text o ver en la [documentación online](http://docs.ggplot2.org/current/geom_text.html): 
+
+```{r}
+## completad aquí para añadir etiquetas encima de cada barra con el valor
+## de la potencia
+p + geom_text(aes(label = formatC(Global_active_power,3), vjust = 0))
+```
+
+
+
+***
+
+Vamos a ver si el perfil de evolución horaria es diferente según los días de la semana. Para ello,
+necesitamos crear un nuevo data.frame resumen, que se llamará *resumen.horario.dia*, y que contenga
+el promedio  de la potencia global activa consumida si desglosamos los datos por hora *y por día de la semana*.
+
+*resumen.horario* debe contener tres columas: hora, Global_active_power (el promedio buscado), y n (el número de datos utilizado
+para calcular la media en cada grupo)
+
+
+```{r}
+## Completad aquí para obtener resumen.horario.dia.
+resumen.horario.dia <- vivienda %>%
+group_by(hora,diasemana) %>%
+summarise(Global_active_power = mean(Global_active_power, na.rm = TRUE),n = n())
+```
+
+Ahora usaremos líneas (y no barras) para representar la evolución horaria de la potencia global consumida, queremos representar los distintos días en una misma gráfica, pero queremos usar una línea de un color diferente para cada día de la semana
+
+```{r}
+resumen.horario.dia %>%
+ggplot(aes(x = hora, y = Global_active_power,fill = diasemana)) +
+geom_line(stat = 'identity',aes(colour=diasemana))
+
+```
+
+
+¿Algún rasgo destacable?
+Mientras están dormidos los inquilinos de la casa hay poco consumo, y se dispara cuando se despiertan. El consumo vuelve a bajar durante el horario de trabajo y al llegar la noche vuelve a haber una subida. Suponemos que los inquilinos no trabajan el sabado ni el domingo, ya que sus consumos son distintos.

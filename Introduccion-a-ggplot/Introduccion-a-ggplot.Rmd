@@ -1,0 +1,250 @@
+---
+title: "introduccion-a-ggplot"
+author: "Jairo Peña Iglesias"
+date: "13 de marzo de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Introducción a ggplot
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+## Cuaderno de introducción
+
+
+### Primeros pasos
+
+####Importamos la libreria ggplot2:
+```{r, message = FALSE}
+## completar aquí: empezamos por cargar el paquete "ggplot2"
+library(ggplot2)
+```
+
+```{r pressure, echo=FALSE}
+
+df = data.frame(col1 = c(3, 1, 5),
+col2 = c(2, 4, 6),
+col3 = c("a", "b", "c"),
+col4 = c("Hombre", "Mujer", "Hombre"),
+col5 = c(100, 300, 200))
+
+ggplot(data = df, aes(x = col1, y = col2)) +
+geom_point()
+
+ggplot(data = df, aes(x = col1, y = col2, color = col4)) +
+geom_point()
+
+ggplot(data = df,aes(x = col1, y = col2, color = col4, shape = col4)) +
+geom_point()
+
+ggplot(data = df, aes(x = col1, y = col2, color = col4, size = col5)) +
+geom_point()
+
+ggplot(data = df, aes(x = col1, y = col2, color = col4)) +
+geom_point(size = 5)
+
+```
+
+
+```{r, echo = FALSE}
+p <- ggplot(data = df, aes(x = col1, y = col2))
+
+```
+
+Probamos otros geoms
+
+```{r, echo = FALSE}
+p + geom_area()
+
+```
+
+```{r, echo = FALSE}
+p + geom_polygon()
+
+```
+
+```{r, echo = FALSE}
+p + geom_line()
+
+```
+
+```{r, echo = FALSE}
+p + geom_path()
+
+```
+
+```{r, echo = FALSE}
+p + geom_bar(stat="identity")
+
+```
+
+####Cambiamos los rangos de valores representados en 0x y 0y:
+```{r, echo = FALSE}
+#establecemos los limites de x e y
+p + geom_point() + xlim(0, 8) + ylim(0, 9)
+p <- p + xlim(0, 8)+ ylim(0, 9)
+
+```
+
+####Para cambiar ejes e incluir título:
+```{r, echo = FALSE}
+p + geom_point() +
+labs(title = 'Mi primera grafica con ggplot2', x = 'Primera columna', y = 'Segunda columna')
+```
+
+
+```{r, echo = FALSE}
+p + geom_point() + labs(title = 'Mi primera grafica con ggplot2', x= 'Primera columna', y= 'Segunda columna') + theme(plot.title = element_text(lineheight=.8, face = "bold"))
+
+```
+
+####Ejemplo:
+
+```{r}
+##Cargamos los datos 
+happiness <- read.table(file="data/happy-ESS-2002-2012.csv", header = TRUE,
+                     sep = ";",
+                     dec = ".",
+                     stringsAsFactors = FALSE)
+View(happiness)
+```
+
+
+Gráfica de la evolucion temporal de la percepcion de felicidad en España
+```{r, echo = FALSE}
+library("dplyr") #♦importamos el paquete a utilizar
+happiness %>% 
+filter(Country=="Spain") %>%
+ggplot(aes(x = year, y = mean)) +
+geom_line()
+
+
+# Mejoramos la grafica anteriora añadiendo puntos, cambiando los
+# limites del eje Oy y cambiando el color de las lineas y de los
+# puntos
+happiness %>%
+filter(Country=="Spain") %>%
+ggplot(aes(x = year, y = mean)) + geom_line(color = "red") + xlim(2002, 2012) + ylim(0, 10) + geom_point(color ="green")+
+labs(title = 'Mi segunda grafica con ggplot2', x = 'Años', y = 'Felicidad')
+```
+
+####Comparamos España con varios paises
+```{r, echo = FALSE}
+gghappiness <- happiness %>%
+filter(Country %in% c("Germany","France","Spain","Total","United Kingdom")) %>%
+ggplot(aes(x = year, y = mean)) +
+geom_line()
+# Observamos que la grafica obtenida no es lo que esperabamos.
+
+# Necesitamos especificar un "aesthetic" que este asociado a Country, para poder
+# visualizar las diferencias entre paises
+gghappiness2 <- happiness %>%
+filter(Country %in% c("Germany","France","Spain","Total","United Kingdom")) %>%
+ggplot(aes(x = year, y = mean, colour = Country)) +
+geom_line()+ geom_point(size = 3, aes(shape = Country))+
+labs(title = 'Gráfica de felicidad', x = 'Años', y = 'Felicidad')
+# He añadido a al grafica puntos con diferentes formas dependiendo de la columna pais
+
+#Guardo la ultima grafica
+ggsave("figures/gghappiness.png", width = 10, height = 5)
+
+```
+
+####Queremos añadir márgenes de error
+Unas barras verticales pueden reflejar el margen de error
+asociado a la estimación de cada punto.
+
+```{r}
+gghappiness + 
+geom_errorbar(aes(ymax = mean + qt(0.975, df = n-1) * se,
+ymin=mean - qt(0.975, df = n-1) * se))
+
+```
+
+####Más ejemplos de gráficas:
+
+```{r}
+##Cargamos los datos de several-questions-ESS-2012.csv
+datos <- read.table(file="data/several-questions-ESS-2012.csv", header = TRUE,
+                     sep = ";",
+                     dec = ".",
+                     stringsAsFactors = FALSE)
+View(datos)
+```
+
+Definimos la variable Respuesta como un factor, ordenando sus niveles (posibles valores)
+```{r}
+datos <- datos %>%
+mutate(Respuesta = factor(Respuesta,
+levels = c("None or almost none of the time",
+           "Some of the time",
+           "Most of the time",
+           "All or almost all of the time")))
+
+```
+
+####Para España
+Creamos un data.frame específico para España que además responda a la pregunta
+```{r}
+datosSPsleep <- datos %>%
+filter(Pregunta=="Sleep was restless, how often past week")
+View(datosSPsleep)
+
+```
+
+####Primera gráfica de barras
+
+```{r}
+p <- ggplot(datosSPsleep, aes(x = Respuesta, y = Porcentaje)) + 
+  geom_bar(stat = 'identity')
+p
+
+#Cambiar el color de relleno a azul con una trasparencia alpha 0.3
+p <- ggplot(datosSPsleep, aes(x = Respuesta, y = Porcentaje)) + 
+  geom_bar(stat='identity', fill = "blue", alpha = "0.3")
+p + coord_flip() #Intercambiamos los ejes 0x y 0y. Para cambiar las cordenadas x e y haciendo asi que la figura este girada
+#ponemos el argumento 'identity' porque en el dataframe la columna stat ya contiene 
+#el valor que determinará la altura de las barras
+
+ggplot(datosSPsleep, aes(x = Respuesta)) + geom_bar()
+#por defecto, geom_bar tiene stat='bin', lo que hace es un recuento de las frecuencias 
+#de los valores de x
+```
+
+####Visualización de todas las preguntas a la vez
+Todas las preguntas en una sola gráfica. Usaremos una barra para cada pregunta y representaremos cada respuesta con colores diferentes dentro de cada barra.
+```{r}
+#añadimos aesthetics fill en ggplot y especificamos el argumento position en geom_bar:
+#Todas las respuestas de España.
+p <- datos %>%
+filter(Pais== 'Spain') %>%
+ggplot(aes(x = Pregunta, y = Porcentaje, fill = Respuesta)) + 
+  geom_bar(stat = 'identity', position = 'fill')
+
+p + coord_flip() + xlab('') + ylab('')
+```
+####Comparamos 2 paises con graficas contiguas
+```{r}
+#comparamos los resultados de la grafica anterior con otra para Alemania,
+#con el comando facet_grid
+datos %>% filter(Pais %in% c('Spain', 'Germany')) %>%
+ggplot(aes(x = Pregunta, y = Porcentaje, fill = Respuesta)) + 
+  geom_bar(stat = 'identity') + 
+  coord_flip() + 
+  facet_grid(.~ Pais) #como queremos una unica columna, usamos "punto" para la variable
+#correspondiente en facet_grid
+
+```
+
+
+
