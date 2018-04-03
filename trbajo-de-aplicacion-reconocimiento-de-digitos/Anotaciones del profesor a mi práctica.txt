@@ -1,9 +1,0 @@
-Jairo, tienes un error a la hora de crear el conjunto de test. 
-En la línea 140, defines las posiciones como la diferencia entre el vector 1:200 y 
-las posiciones del test de validación. Esto está mal. 
-Lo que deberías de hacer es ver las diferencias entre 1:500 y 
-los test de validación y entrenamiento. 
-Tal y como tú lo has hecho, hay filas que puede que no te aparecen en ninguno de los sets. 
-Por ejemplo, si la fila 300 no estuviera en el conjunto de training ni test, 
-no te aparecería en el de validación. Es por esto que al hacer la validación, 
-sólo te aparecen los dígitos 1, 2, 3 y 10.
